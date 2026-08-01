@@ -89,11 +89,6 @@ export const DistributionSimulator: React.FC = () => {
         if (!samples || samples.length === 0) return null;
 
         // Find min/max for scaling (this is very rough without SVG viewBox knowledge)
-        // We'll assume the plot is roughly centered or has standard ranges
-        // For visualization purposes, let's just show the first 200 samples to avoid SVG bloat
-        const displayedSamples = samples.slice(0, 500);
-
-        // This is a placeholder for actual SVG coordinate transformation.
         // We will try to prepend this to the plotSvg in a real scenario or just display separately.
         // For now, let's just show a summary below.
         return (

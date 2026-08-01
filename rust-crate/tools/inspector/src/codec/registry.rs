@@ -322,7 +322,11 @@ impl CodecRegistry {
         }
     }
 
-    fn classify_string_key_map(&self, ty: &RustType, path: &super::type_model::RustPathType) -> CodecPlan {
+    fn classify_string_key_map(
+        &self,
+        ty: &RustType,
+        path: &super::type_model::RustPathType,
+    ) -> CodecPlan {
         let Some(key) = path.args.first() else {
             return unsupported(ty, "map requires key and value type parameters");
         };
@@ -344,12 +348,16 @@ impl CodecRegistry {
         match ty.without_reference() {
             RustType::Unit | RustType::String | RustType::Str | RustType::Primitive(_) => true,
             RustType::Path(path) if matches!(path.last_segment(), Some("HashMap" | "BTreeMap")) => {
-                matches!(self.classify_string_key_map(ty.without_reference(), path), CodecPlan::Supported(_))
+                matches!(
+                    self.classify_string_key_map(ty.without_reference(), path),
+                    CodecPlan::Supported(_)
+                )
             }
             RustType::Path(_) => self.is_dto_supported(ty),
-            RustType::Vec(inner) | RustType::Slice(inner) | RustType::Option(inner) | RustType::Array { inner, .. } => {
-                self.is_serde_dto_capable(inner)
-            }
+            RustType::Vec(inner)
+            | RustType::Slice(inner)
+            | RustType::Option(inner)
+            | RustType::Array { inner, .. } => self.is_serde_dto_capable(inner),
             RustType::Tuple(items) => items.iter().all(|item| self.is_serde_dto_capable(item)),
             RustType::Result { ok, .. } => self.is_serde_dto_capable(ok),
             RustType::Reference { inner, .. } => self.is_serde_dto_capable(inner),
@@ -448,7 +456,8 @@ fn unsupported_recommendation(ty: &RustType, reason: &str) -> String {
         return "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade".to_string();
     }
     if reason.contains("map") {
-        return "model the map as a serde DTO (or a Vec of key/value DTOs) before exposing it".to_string();
+        return "model the map as a serde DTO (or a Vec of key/value DTOs) before exposing it"
+            .to_string();
     }
     if matches!(ty, RustType::Unknown(_)) {
         return "replace the boundary type with a supported primitive, Vec, string facade, or serde DTO".to_string();
@@ -538,9 +547,8 @@ mod tests {
     #[test]
     fn explicit_dto_type_uses_jsvalue_for_nested_vectors_and_options() {
         let registry = CodecRegistry::with_dto_types(["Point"], ["Point"]);
-        let codec = supported_codec(
-            registry.classify_arg(&RustType::parse_str("Option<Vec<Point>>")),
-        );
+        let codec =
+            supported_codec(registry.classify_arg(&RustType::parse_str("Option<Vec<Point>>")));
         assert_eq!(codec.mode, BoundaryMode::Dto);
         assert_eq!(codec.wasm_arg_type, "JsValue");
         assert_eq!(codec.ts_input_type, "unknown[] | null");
@@ -565,7 +573,10 @@ mod tests {
     fn rejects_non_string_map_keys_and_result_arguments() {
         let registry = CodecRegistry::with_dto_types(["Point"], ["Point"]);
         let map = registry.classify_arg(&RustType::parse_str("BTreeMap<i32, Point>"));
-        assert!(map.unsupported_reason().expect("map reason").contains("String keys"));
+        assert!(map
+            .unsupported_reason()
+            .expect("map reason")
+            .contains("String keys"));
 
         let result = registry.classify_arg(&RustType::parse_str("Result<Point, AppError>"));
         assert!(result

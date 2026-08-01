@@ -10,9 +10,11 @@ use signal_processing::*;
 use std::collections::{BTreeMap, HashMap};
 use std::str::FromStr;
 
-
 fn vec_to_csv<T: ToString>(v: &[T]) -> String {
-    v.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",")
+    v.iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<_>>()
+        .join(",")
 }
 
 pub fn run_dynamic_test(func_key: &str, inputs: &[String]) -> std::result::Result<String, String> {
@@ -41,7 +43,7 @@ pub fn run_dynamic_test(func_key: &str, inputs: &[String]) -> std::result::Resul
 
             let result = SignalProcessingApi::conv_simple_f64(arg0, arg1);
             Ok(vec_to_csv(&result))
-        },
+        }
         "SignalProcessingApi::decimate" => {
             let raw = inputs[0].trim();
             let raw = raw.trim_start_matches('[').trim_end_matches(']');
@@ -53,11 +55,13 @@ pub fn run_dynamic_test(func_key: &str, inputs: &[String]) -> std::result::Resul
                     .collect::<std::result::Result<Vec<_>, _>>()
                     .map_err(|e| format!("Parse arg0 Vec error: {}", e))?
             };
-            let arg1 = inputs[1].parse::<usize>().map_err(|e| format!("Parse arg1 error: {}", e))?;
+            let arg1 = inputs[1]
+                .parse::<usize>()
+                .map_err(|e| format!("Parse arg1 error: {}", e))?;
 
             let result = SignalProcessingApi::decimate(arg0, arg1);
             Ok(vec_to_csv(&result))
-        },
+        }
         "SignalProcessingApi::expand" => {
             let raw = inputs[0].trim();
             let raw = raw.trim_start_matches('[').trim_end_matches(']');
@@ -69,11 +73,13 @@ pub fn run_dynamic_test(func_key: &str, inputs: &[String]) -> std::result::Resul
                     .collect::<std::result::Result<Vec<_>, _>>()
                     .map_err(|e| format!("Parse arg0 Vec error: {}", e))?
             };
-            let arg1 = inputs[1].parse::<usize>().map_err(|e| format!("Parse arg1 error: {}", e))?;
+            let arg1 = inputs[1]
+                .parse::<usize>()
+                .map_err(|e| format!("Parse arg1 error: {}", e))?;
 
             let result = SignalProcessingApi::expand(arg0, arg1);
             Ok(vec_to_csv(&result))
-        },
+        }
         _ => Err(format!("Unknown function: {}", func_key)),
     }
 }

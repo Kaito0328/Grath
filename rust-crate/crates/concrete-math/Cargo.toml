@@ -21,4 +21,9 @@ num-bigint = "0.4"
 common = { path = "../common" }
 
 [features]
-serde = ["dep:serde", "algebraic/serde", "polynomial/serde", "number-theory/serde"]
+serde = [
+    "dep:serde",
+    "algebraic/serde",
+    "polynomial/serde",
+    "number-theory/serde",
+]

@@ -1,4 +1,4 @@
-use ::common::prelude::{AppError, ToAppError};
+use common::prelude::{AppError, ToAppError};
 use special_functions::prelude::*;
 use wasm_bindgen::prelude::*;
 

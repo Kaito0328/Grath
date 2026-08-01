@@ -7,7 +7,6 @@ import { Markdown } from "../../../design/baseComponents/Markdown";
 import { Button } from "../../../design/baseComponents/Button";
 import { PlusIcon, MinusIcon, HelpCircle } from "lucide-react";
 import { View } from "../../../design/primitives/View";
-import { PolynomialInput } from "../../algebraic/types/PolynomialInput";
 import { IconButton } from "../../../design/baseComponents/IconButton";
 import { Copy as CopyIcon, Save as SaveIcon } from 'lucide-react';
 import { VariablePickerIconButton } from "../../../shared/variable-manager/VariablePickerIconButton";

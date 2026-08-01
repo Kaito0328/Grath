@@ -143,7 +143,9 @@ fn main() {
                     }
                     Err(e) => {
                         if let Some(expected_error) = &case.expected_error {
-                            if e.contains(&expected_error.code) && e.contains(&expected_error.message) {
+                            if e.contains(&expected_error.code)
+                                && e.contains(&expected_error.message)
+                            {
                                 ("PASS", String::new())
                             } else {
                                 (

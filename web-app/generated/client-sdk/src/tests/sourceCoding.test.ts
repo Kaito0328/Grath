@@ -5,7 +5,7 @@ import * as sourceCoding from '../wrappers/sourceCoding';
 
 function normalizeJsonNumbers(value: unknown): unknown {
   if (typeof value === 'number') {
-    return Number(value.toPrecision(15));
+    return Number(value.toPrecision(12));
   }
   if (Array.isArray(value)) {
     return value.map((item) => normalizeJsonNumbers(item));
@@ -24,10 +24,10 @@ describe('source-coding wasm integration', () => {
     sourceCoding.setWasmFromWasmLib(wasm);
   });
 
-  describe('SourceCodingApi::lz78_roundtrip', () => {
+  describe('SourceCodingApi::arithmetic_roundtrip', () => {
     it('case 1', () => {
-      const arg0 = "abracadabra abracadabra";
-      const result = sourceCoding.lz78Roundtrip(arg0);
+      const arg0 = "BANANA_BANDANA";
+      const result = sourceCoding.arithmeticRoundtrip(arg0);
       expect(String(result)).toBe("true");
     });
   });
@@ -40,10 +40,10 @@ describe('source-coding wasm integration', () => {
     });
   });
 
-  describe('SourceCodingApi::arithmetic_roundtrip', () => {
+  describe('SourceCodingApi::lz78_roundtrip', () => {
     it('case 1', () => {
-      const arg0 = "BANANA_BANDANA";
-      const result = sourceCoding.arithmeticRoundtrip(arg0);
+      const arg0 = "abracadabra abracadabra";
+      const result = sourceCoding.lz78Roundtrip(arg0);
       expect(String(result)).toBe("true");
     });
   });

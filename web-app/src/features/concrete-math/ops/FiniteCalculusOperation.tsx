@@ -21,7 +21,6 @@ import type { VariableKind } from "../../../stores/variableManager/types";
 
 export const FiniteCalculusOperation = () => {
     const [coeffs, setCoeffs] = useState<string[]>(["0", "0", "1"]); // n^2
-    const [resultArr, setResultArr] = useState<string[] | null>(null);
     const [resultLatex, setResultLatex] = useState<string | null>(null);
     const [resultStr, setResultStr] = useState<string | null>(null);
     const [operation, setOperation] = useState<"diff" | "sum" | "gen" | null>(null);
@@ -33,13 +32,13 @@ export const FiniteCalculusOperation = () => {
 
     const generateLatex = (arr: string[]) => {
         if (arr.length === 0) return "0";
-        let parts = [];
+        const parts = [];
         for (let i = arr.length - 1; i >= 0; i--) {
             if (arr[i] === "0" && i !== 0) continue;
-            let termStr = arr[i];
+            const termStr = arr[i];
             let termLatex = termStr;
-            let isNegative = termStr.startsWith("-");
-            let absTerm = isNegative ? termStr.substring(1) : termStr;
+            const isNegative = termStr.startsWith("-");
+            const absTerm = isNegative ? termStr.substring(1) : termStr;
 
             if (absTerm.includes("/")) {
                 const [num, den] = absTerm.split("/");
@@ -88,7 +87,6 @@ export const FiniteCalculusOperation = () => {
             }
 
             const resStrs = res.map(c => parseFloat(c.re.toFixed(10)).toString());
-            setResultArr(resStrs);
             setResultLatex(generateLatex(resStrs));
             setResultStr(resStrs.join(", "));
         } catch (e: any) {
@@ -110,7 +108,6 @@ export const FiniteCalculusOperation = () => {
             else res = await ConcreteMathHelper.cmBinomPoly(specialM);
 
             const resStrs = res.map(c => parseFloat(c.re.toFixed(10)).toString());
-            setResultArr(resStrs);
             setResultLatex(generateLatex(resStrs));
             setResultStr(resStrs.join(", "));
         } catch (e: any) {

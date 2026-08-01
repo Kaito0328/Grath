@@ -8,7 +8,7 @@ import { Button } from "../../../design/baseComponents/Button";
 import { NumberInput } from "../../../design/baseComponents/NumberInput";
 import { Input } from "../../../design/baseComponents/Input";
 import { Flex } from "../../../design/primitives/Flex";
-import { PlusCircle, Trash2, Settings2, CheckCircle2, FlaskConical } from "lucide-react";
+import { PlusCircle, Trash2, CheckCircle2, FlaskConical } from "lucide-react";
 import {
     ConcreteMathHelper,
     ClosedFormDto,

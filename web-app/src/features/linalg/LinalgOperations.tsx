@@ -41,7 +41,7 @@ const operationsByGroup: Record<
 	],
 };
 
-const getGroupButtons = (coeffType: LinalgCoeffType) => [
+const getGroupButtons = () => [
     { key: "unary", labelMarkdown: "単項演算 ($A^{-1}$, $\\det$など)", disabled: false },
     { key: "binary", labelMarkdown: "二項演算 ($A \\circ B$)", disabled: false },
 	{ key: "vector", labelMarkdown: "ベクトル演算 ($Av$, $Ax=b$)", disabled: false },
@@ -95,7 +95,7 @@ export const LinalgOperations = ({ forcedGroup }: LinalgOperationsProps) => {
                 <View className="mt-4 flex flex-col gap-2 md:flex-row md:items-start">
                     <Text className="md:min-w-[180px] md:pt-1">・入力構成</Text>
                     <Stack direction="row" gap={"sm"} className="flex-wrap md:flex-1">
-                        {getGroupButtons(coeffType).map((button) => {
+                        {getGroupButtons().map((button) => {
                             if (button.disabled) return null;
                             const isSelected = activeGroup === button.key;
                             return (

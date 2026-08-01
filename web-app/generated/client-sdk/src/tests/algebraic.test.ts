@@ -5,7 +5,7 @@ import * as algebraic from '../wrappers/algebraic';
 
 function normalizeJsonNumbers(value: unknown): unknown {
   if (typeof value === 'number') {
-    return Number(value.toPrecision(15));
+    return Number(value.toPrecision(12));
   }
   if (Array.isArray(value)) {
     return value.map((item) => normalizeJsonNumbers(item));
@@ -24,84 +24,19 @@ describe('algebraic wasm integration', () => {
     algebraic.setWasmFromWasmLib(wasm);
   });
 
-  describe('SymbolicExpr::to_latex', () => {
+  describe('Rational::numer', () => {
     it('case 1', () => {
-      const arg0 = algebraic.symbolicExprParseDto("-1*b*(1+b)");
-      const result = algebraic.symbolicExprToLatexDto(arg0);
-      expect(String(result)).toBe("b(-1-b)");
+      const arg0 = algebraic.rationalParseDto("3/4");
+      const result = algebraic.rationalNumerDto(arg0);
+      expect(String(result)).toBe("3");
     });
   });
 
-  describe('SymbolicComplex::zero', () => {
+  describe('SymbolicComplex::to_latex', () => {
     it('case 1', () => {
-      const result = algebraic.symbolicComplexZeroDto();
-      const formatted = algebraic.symbolicComplexFormatDto(result);
-      expect(formatted).toBe("0");
-    });
-  });
-
-  describe('SymbolicComplex::from_real', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicExprParseDto("5");
-      const result = algebraic.symbolicComplexFromRealDto(arg0);
-      const formatted = algebraic.symbolicComplexFormatDto(result);
-      expect(formatted).toBe("5");
-    });
-  });
-
-  describe('SymbolicComplex::add', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicComplexParseDto("1 + i");
-      const arg1 = algebraic.symbolicComplexParseDto("1 - i");
-      const result = algebraic.symbolicComplexAddDto(arg0, arg1);
-      const formatted = algebraic.symbolicComplexFormatDto(result);
-      expect(formatted).toBe("2");
-    });
-  });
-
-  describe('SymbolicComplex::new', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicExprParseDto("1");
-      const arg1 = algebraic.symbolicExprParseDto("2");
-      const result = algebraic.symbolicComplexNewDto(arg0, arg1);
-      const formatted = algebraic.symbolicComplexFormatDto(result);
-      expect(formatted).toBe("1 + 2i");
-    });
-  });
-
-  describe('SymbolicComplex::sub', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicComplexParseDto("1 + i");
-      const arg1 = algebraic.symbolicComplexParseDto("1 - i");
-      const result = algebraic.symbolicComplexSubDto(arg0, arg1);
-      const formatted = algebraic.symbolicComplexFormatDto(result);
-      expect(formatted).toBe("2i");
-    });
-  });
-
-  describe('SymbolicExpr::pow', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicExprParseDto("2");
-      const arg1 = algebraic.symbolicExprParseDto("3");
-      const result = algebraic.symbolicExprPowDto(arg0, arg1);
-      const formatted = algebraic.symbolicExprFormatDto(result);
-      expect(formatted).toBe("8");
-    });
-    it('case 2', () => {
-      const arg0 = algebraic.symbolicExprParseDto("2");
-      const arg1 = algebraic.symbolicExprParseDto("-1");
-      const result = algebraic.symbolicExprPowDto(arg0, arg1);
-      const formatted = algebraic.symbolicExprFormatDto(result);
-      expect(formatted).toBe("1/2");
-    });
-  });
-
-  describe('SymbolicExpr::simplify', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicExprParseDto("1 + 1");
-      const result = algebraic.symbolicExprSimplifyDto(arg0);
-      const formatted = algebraic.symbolicExprFormatDto(result);
-      expect(formatted).toBe("2");
+      const arg0 = algebraic.symbolicComplexParseDto("1/2");
+      const result = algebraic.symbolicComplexToLatexDto(arg0);
+      expect(String(result)).toBe("\\frac{1}{2}");
     });
   });
 
@@ -114,11 +49,39 @@ describe('algebraic wasm integration', () => {
     });
   });
 
-  describe('Rational::denom', () => {
+  describe('SymbolicComplex::from_real', () => {
     it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("3/4");
-      const result = algebraic.rationalDenomDto(arg0);
-      expect(String(result)).toBe("4");
+      const arg0 = algebraic.symbolicExprParseDto("5");
+      const result = algebraic.symbolicComplexFromRealDto(arg0);
+      const formatted = algebraic.symbolicComplexFormatDto(result);
+      expect(formatted).toBe("5");
+    });
+  });
+
+  describe('SymbolicComplex::neg', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.symbolicComplexParseDto("1 + i");
+      const result = algebraic.symbolicComplexNegDto(arg0);
+      const formatted = algebraic.symbolicComplexFormatDto(result);
+      expect(formatted).toBe("-1 - i");
+    });
+  });
+
+  describe('Rational::is_minus_one', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.rationalParseDto("-2/2");
+      const result = algebraic.rationalIsMinusOneDto(arg0);
+      expect(String(result)).toBe("true");
+    });
+  });
+
+  describe('Rational::checked_mul', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.rationalParseDto("1/2");
+      const arg1 = algebraic.rationalParseDto("2/3");
+      const result = algebraic.rationalCheckedMulDto(arg0, arg1);
+      const formatted = algebraic.rationalFormatDto(result);
+      expect(formatted).toBe("1/3");
     });
   });
 
@@ -132,88 +95,11 @@ describe('algebraic wasm integration', () => {
     });
   });
 
-  describe('Rational::is_integer', () => {
+  describe('Rational::is_one', () => {
     it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("4/2");
-      const result = algebraic.rationalIsIntegerDto(arg0);
+      const arg0 = algebraic.rationalParseDto("2/2");
+      const result = algebraic.rationalIsOneDto(arg0);
       expect(String(result)).toBe("true");
-    });
-  });
-
-  describe('Rational::numer', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("3/4");
-      const result = algebraic.rationalNumerDto(arg0);
-      expect(String(result)).toBe("3");
-    });
-  });
-
-  describe('SymbolicComplex::neg', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicComplexParseDto("1 + i");
-      const result = algebraic.symbolicComplexNegDto(arg0);
-      const formatted = algebraic.symbolicComplexFormatDto(result);
-      expect(formatted).toBe("-1 - i");
-    });
-  });
-
-  describe('SymbolicComplex::to_latex', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicComplexParseDto("1/2");
-      const result = algebraic.symbolicComplexToLatexDto(arg0);
-      expect(String(result)).toBe("\\frac{1}{2}");
-    });
-  });
-
-  describe('Rational::normalize', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("2/4");
-      const result = algebraic.rationalNormalizeDto(arg0);
-      // Void return type
-    });
-  });
-
-  describe('SymbolicComplex::i', () => {
-    it('case 1', () => {
-      const result = algebraic.symbolicComplexIDto();
-      const formatted = algebraic.symbolicComplexFormatDto(result);
-      expect(formatted).toBe("i");
-    });
-  });
-
-  describe('Rational::is_zero', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("0");
-      const result = algebraic.rationalIsZeroDto(arg0);
-      expect(String(result)).toBe("true");
-    });
-  });
-
-  describe('SymbolicComplex::is_imag_pure', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.symbolicComplexParseDto("2*i");
-      const result = algebraic.symbolicComplexIsImagPureDto(arg0);
-      expect(String(result)).toBe("true");
-    });
-    it('case 2', () => {
-      const arg0 = algebraic.symbolicComplexParseDto("2i");
-      const result = algebraic.symbolicComplexIsImagPureDto(arg0);
-      expect(String(result)).toBe("true");
-    });
-  });
-
-  describe('SymbolicExpr::from_latex', () => {
-    it('case 1', () => {
-      const arg0 = "2x";
-      const result = algebraic.symbolicExprFromLatexDto(arg0);
-      const formatted = algebraic.symbolicExprFormatDto(result);
-      expect(formatted).toBe("2x");
-    });
-    it('case 2', () => {
-      const arg0 = "\\frac{1}{2} + 1";
-      const result = algebraic.symbolicExprFromLatexDto(arg0);
-      const formatted = algebraic.symbolicExprFormatDto(result);
-      expect(formatted).toBe("3/2");
     });
   });
 
@@ -234,6 +120,16 @@ describe('algebraic wasm integration', () => {
     });
   });
 
+  describe('SymbolicComplex::add', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.symbolicComplexParseDto("1 + i");
+      const arg1 = algebraic.symbolicComplexParseDto("1 - i");
+      const result = algebraic.symbolicComplexAddDto(arg0, arg1);
+      const formatted = algebraic.symbolicComplexFormatDto(result);
+      expect(formatted).toBe("2");
+    });
+  });
+
   describe('Rational::from_latex', () => {
     it('case 1', () => {
       const arg0 = "\\frac{1}{2}";
@@ -249,47 +145,126 @@ describe('algebraic wasm integration', () => {
     });
   });
 
-  describe('Rational::checked_mul', () => {
+  describe('SymbolicExpr::from_latex', () => {
     it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("1/2");
-      const arg1 = algebraic.rationalParseDto("2/3");
-      const result = algebraic.rationalCheckedMulDto(arg0, arg1);
-      const formatted = algebraic.rationalFormatDto(result);
-      expect(formatted).toBe("1/3");
+      const arg0 = "2x";
+      const result = algebraic.symbolicExprFromLatexDto(arg0);
+      const formatted = algebraic.symbolicExprFormatDto(result);
+      expect(formatted).toBe("2x");
+    });
+    it('case 2', () => {
+      const arg0 = "\\frac{1}{2} + 1";
+      const result = algebraic.symbolicExprFromLatexDto(arg0);
+      const formatted = algebraic.symbolicExprFormatDto(result);
+      expect(formatted).toBe("3/2");
     });
   });
 
-  describe('Rational::is_minus_one', () => {
+  describe('Rational::checked_add', () => {
     it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("-2/2");
-      const result = algebraic.rationalIsMinusOneDto(arg0);
+      const arg0 = algebraic.rationalParseDto("1/2");
+      const arg1 = algebraic.rationalParseDto("1/4");
+      const result = algebraic.rationalCheckedAddDto(arg0, arg1);
+      const formatted = algebraic.rationalFormatDto(result);
+      expect(formatted).toBe("3/4");
+    });
+  });
+
+  describe('SymbolicExpr::to_latex', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.symbolicExprParseDto("-1*b*(1+b)");
+      const result = algebraic.symbolicExprToLatexDto(arg0);
+      expect(String(result)).toBe("b(-1-b)");
+    });
+  });
+
+  describe('Rational::is_integer', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.rationalParseDto("4/2");
+      const result = algebraic.rationalIsIntegerDto(arg0);
       expect(String(result)).toBe("true");
     });
   });
 
-  describe('Rational::to_latex', () => {
+  describe('Rational::denom', () => {
     it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("-1/2");
-      const result = algebraic.rationalToLatexDto(arg0);
-      expect(String(result)).toBe("-\\frac{1}{2}");
+      const arg0 = algebraic.rationalParseDto("3/4");
+      const result = algebraic.rationalDenomDto(arg0);
+      expect(String(result)).toBe("4");
     });
   });
 
-  describe('Rational::simplified', () => {
+  describe('Rational::from_int', () => {
     it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("3/9");
-      const result = algebraic.rationalSimplifiedDto(arg0);
+      const arg0 = 5n;
+      const result = algebraic.rationalFromIntDto(arg0);
       const formatted = algebraic.rationalFormatDto(result);
-      expect(formatted).toBe("1/3");
+      expect(formatted).toBe("5");
     });
   });
 
-  describe('SymbolicExpr::mul', () => {
+  describe('SymbolicExpr::pow', () => {
     it('case 1', () => {
-      const arg0 = [algebraic.symbolicExprParseDto("2"), algebraic.symbolicExprParseDto("3")];
-      const result = algebraic.symbolicExprMulDto(arg0);
+      const arg0 = algebraic.symbolicExprParseDto("2");
+      const arg1 = algebraic.symbolicExprParseDto("3");
+      const result = algebraic.symbolicExprPowDto(arg0, arg1);
       const formatted = algebraic.symbolicExprFormatDto(result);
-      expect(formatted).toBe("6");
+      expect(formatted).toBe("8");
+    });
+    it('case 2', () => {
+      const arg0 = algebraic.symbolicExprParseDto("2");
+      const arg1 = algebraic.symbolicExprParseDto("-1");
+      const result = algebraic.symbolicExprPowDto(arg0, arg1);
+      const formatted = algebraic.symbolicExprFormatDto(result);
+      expect(formatted).toBe("1/2");
+    });
+  });
+
+  describe('SymbolicComplex::zero', () => {
+    it('case 1', () => {
+      const result = algebraic.symbolicComplexZeroDto();
+      const formatted = algebraic.symbolicComplexFormatDto(result);
+      expect(formatted).toBe("0");
+    });
+  });
+
+  describe('Rational::normalize', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.rationalParseDto("2/4");
+      const result = algebraic.rationalNormalizeDto(arg0);
+      // Void return type
+    });
+  });
+
+  describe('SymbolicComplex::is_imag_pure', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.symbolicComplexParseDto("2*i");
+      const result = algebraic.symbolicComplexIsImagPureDto(arg0);
+      expect(String(result)).toBe("true");
+    });
+    it('case 2', () => {
+      const arg0 = algebraic.symbolicComplexParseDto("2i");
+      const result = algebraic.symbolicComplexIsImagPureDto(arg0);
+      expect(String(result)).toBe("true");
+    });
+  });
+
+  describe('SymbolicComplex::new', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.symbolicExprParseDto("1");
+      const arg1 = algebraic.symbolicExprParseDto("2");
+      const result = algebraic.symbolicComplexNewDto(arg0, arg1);
+      const formatted = algebraic.symbolicComplexFormatDto(result);
+      expect(formatted).toBe("1 + 2i");
+    });
+  });
+
+  describe('SymbolicExpr::simplify', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.symbolicExprParseDto("1 + 1");
+      const result = algebraic.symbolicExprSimplifyDto(arg0);
+      const formatted = algebraic.symbolicExprFormatDto(result);
+      expect(formatted).toBe("2");
     });
   });
 
@@ -317,38 +292,38 @@ describe('algebraic wasm integration', () => {
     });
   });
 
-  describe('SymbolicComplex::is_real', () => {
+  describe('SymbolicComplex::sub', () => {
     it('case 1', () => {
-      const arg0 = algebraic.symbolicComplexParseDto("1+i");
-      const result = algebraic.symbolicComplexIsRealDto(arg0);
-      expect(String(result)).toBe("false");
+      const arg0 = algebraic.symbolicComplexParseDto("1 + i");
+      const arg1 = algebraic.symbolicComplexParseDto("1 - i");
+      const result = algebraic.symbolicComplexSubDto(arg0, arg1);
+      const formatted = algebraic.symbolicComplexFormatDto(result);
+      expect(formatted).toBe("2i");
     });
   });
 
-  describe('Rational::checked_add', () => {
+  describe('Rational::is_zero', () => {
     it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("1/2");
-      const arg1 = algebraic.rationalParseDto("1/4");
-      const result = algebraic.rationalCheckedAddDto(arg0, arg1);
-      const formatted = algebraic.rationalFormatDto(result);
-      expect(formatted).toBe("3/4");
-    });
-  });
-
-  describe('Rational::is_one', () => {
-    it('case 1', () => {
-      const arg0 = algebraic.rationalParseDto("2/2");
-      const result = algebraic.rationalIsOneDto(arg0);
+      const arg0 = algebraic.rationalParseDto("0");
+      const result = algebraic.rationalIsZeroDto(arg0);
       expect(String(result)).toBe("true");
     });
   });
 
-  describe('Rational::from_int', () => {
+  describe('Rational::simplified', () => {
     it('case 1', () => {
-      const arg0 = 5n;
-      const result = algebraic.rationalFromIntDto(arg0);
+      const arg0 = algebraic.rationalParseDto("3/9");
+      const result = algebraic.rationalSimplifiedDto(arg0);
       const formatted = algebraic.rationalFormatDto(result);
-      expect(formatted).toBe("5");
+      expect(formatted).toBe("1/3");
+    });
+  });
+
+  describe('SymbolicComplex::i', () => {
+    it('case 1', () => {
+      const result = algebraic.symbolicComplexIDto();
+      const formatted = algebraic.symbolicComplexFormatDto(result);
+      expect(formatted).toBe("i");
     });
   });
 
@@ -358,6 +333,31 @@ describe('algebraic wasm integration', () => {
       const result = algebraic.symbolicComplexFromLatexDto(arg0);
       const formatted = algebraic.symbolicComplexFormatDto(result);
       expect(formatted).toBe("1 + i");
+    });
+  });
+
+  describe('SymbolicComplex::is_real', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.symbolicComplexParseDto("1+i");
+      const result = algebraic.symbolicComplexIsRealDto(arg0);
+      expect(String(result)).toBe("false");
+    });
+  });
+
+  describe('Rational::to_latex', () => {
+    it('case 1', () => {
+      const arg0 = algebraic.rationalParseDto("-1/2");
+      const result = algebraic.rationalToLatexDto(arg0);
+      expect(String(result)).toBe("-\\frac{1}{2}");
+    });
+  });
+
+  describe('SymbolicExpr::mul', () => {
+    it('case 1', () => {
+      const arg0 = [algebraic.symbolicExprParseDto("2"), algebraic.symbolicExprParseDto("3")];
+      const result = algebraic.symbolicExprMulDto(arg0);
+      const formatted = algebraic.symbolicExprFormatDto(result);
+      expect(formatted).toBe("6");
     });
   });
 

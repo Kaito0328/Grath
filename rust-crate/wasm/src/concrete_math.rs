@@ -2,24 +2,25 @@
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
 
-use wasm_bindgen::prelude::*;
 use std::collections::{BTreeMap, HashMap};
-use ::common::prelude::*;
+use wasm_bindgen::prelude::*;
+extern crate common as grath_common;
 use concrete_math::prelude::*;
 use concrete_math::*;
+use grath_common::prelude::*;
 
 fn js_error_from_app_error(app: AppError) -> JsError {
-let json = serde_json::to_string(&app)
-.unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
-JsError::new(&json)
+    let json =
+        serde_json::to_string(&app).unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
+    JsError::new(&json)
 }
 
 fn js_error_from_code_message(code: &str, message: String, details: Option<String>) -> JsError {
-js_error_from_app_error(AppError::new(code.to_string(), message, details))
+    js_error_from_app_error(AppError::new(code.to_string(), message, details))
 }
 
 fn js_error_from_to_app_error<E: ToAppError>(e: E, details: Option<String>) -> JsError {
-js_error_from_app_error(e.to_app_error(details))
+    js_error_from_app_error(e.to_app_error(details))
 }
 
 use std::str::FromStr;
@@ -44,7 +45,10 @@ fn vec_to_csv<T>(v: Vec<T>) -> String
 where
     T: ToString,
 {
-    v.into_iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",")
+    v.into_iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<_>>()
+        .join(",")
 }
 
 fn parse_from_str<T>(s: &str) -> std::result::Result<T, JsError>
@@ -66,7 +70,9 @@ where
 pub struct WasmClosedForm(pub(crate) ClosedForm);
 
 impl WasmClosedForm {
-    pub fn inner(&self) -> &ClosedForm { &self.0 }
+    pub fn inner(&self) -> &ClosedForm {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -81,7 +87,9 @@ impl WasmClosedForm {
 pub struct WasmRecurrenceRelation(pub(crate) RecurrenceRelation);
 
 impl WasmRecurrenceRelation {
-    pub fn inner(&self) -> &RecurrenceRelation { &self.0 }
+    pub fn inner(&self) -> &RecurrenceRelation {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -96,7 +104,9 @@ impl WasmRecurrenceRelation {
 pub struct WasmConcreteMathApi(pub(crate) ConcreteMathApi);
 
 impl WasmConcreteMathApi {
-    pub fn inner(&self) -> &ConcreteMathApi { &self.0 }
+    pub fn inner(&self) -> &ConcreteMathApi {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -184,4 +194,3 @@ impl WasmConcreteMathApi {
         ConcreteMathApi::sf_regularized_gamma(s, x)
     }
 }
-

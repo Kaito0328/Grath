@@ -9,17 +9,7 @@ import { Button } from "../../../design/baseComponents/Button";
 import { Slider } from "../../../design/baseComponents/Slider";
 import { UnaryOperationLayout } from "../../../shared/layouts/UnaryOperationLayout";
 import { SaveVariableModal } from "../../variable-manager/ui/SaveVariableModal";
-import { 
-    Activity, 
-    Save, 
-    Trash2, 
-    Zap, 
-    MousePointer2, 
-    LineChart,
-    TrendingUp,
-    Info,
-    RefreshCw
-} from "lucide-react";
+import { Save, Trash2, Zap, RefreshCw } from "lucide-react";
 
 export const CorrelationLab: React.FC = () => {
     const [sampleSize, setSampleSize] = useState(50);

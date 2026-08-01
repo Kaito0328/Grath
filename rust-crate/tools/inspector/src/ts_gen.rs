@@ -1,6 +1,6 @@
 use crate::codec::{
-    is_type_api_target, type_api_export_name, BoundaryKind, BoundaryMode, CodecPlan, CodecRegistry, RustPrimitive,
-    RustType,
+    is_type_api_target, type_api_export_name, BoundaryKind, BoundaryMode, CodecPlan, CodecRegistry,
+    RustPrimitive, RustType,
 };
 use crate::types::{ApiReport, EnumVariantFields, FunctionInfo, StructInfo, TypeApiInfo};
 use anyhow::Result;
@@ -218,7 +218,11 @@ fn generate_ts_type_def(s: &StructInfo, known_structs: &HashSet<String>) -> Stri
                 EnumVariantFields::Named(fields) => {
                     out.push_str(&format!("  | {{ kind: \"{}\";", variant.name));
                     for field in fields {
-                        out.push_str(&format!(" {}: {};", field.name, dto_ts_type(&field.rust_type)));
+                        out.push_str(&format!(
+                            " {}: {};",
+                            field.name,
+                            dto_ts_type(&field.rust_type)
+                        ));
                     }
                     out.push_str(" }\n");
                 }
@@ -742,12 +746,18 @@ fn render_type_api_class(api: &TypeApiInfo, registry: &CodecRegistry) -> String 
         .unwrap_or_else(|| dto_ts_name(&api.ts_name));
     code.push_str(&format!("export class {} {{\n", api.ts_name));
     if target_is_dto {
-        code.push_str(&format!("    private constructor(private readonly raw: {}) {{}}\n\n", dto_type));
+        code.push_str(&format!(
+            "    private constructor(private readonly raw: {}) {{}}\n\n",
+            dto_type
+        ));
         code.push_str(&format!(
             "    static fromDto(value: {}): {} {{\n        return new {}(value);\n    }}\n\n",
             dto_type, api.ts_name, api.ts_name
         ));
-        code.push_str(&format!("    toDto(): {} {{\n        return this.raw;\n    }}\n\n", dto_type));
+        code.push_str(&format!(
+            "    toDto(): {} {{\n        return this.raw;\n    }}\n\n",
+            dto_type
+        ));
     } else {
         code.push_str("    private constructor(private readonly raw: string) {}\n\n");
         code.push_str(&format!(
@@ -857,9 +867,17 @@ fn render_type_api_method(
     ));
     match wrap_return {
         TypeApiReturnWrap::Class => {
-            let factory = if target_is_dto { "fromDto" } else { "fromString" };
+            let factory = if target_is_dto {
+                "fromDto"
+            } else {
+                "fromString"
+            };
             let value = if dto_return {
-                format!("normalizeDtoValue(getTypeApiWasm().{}({}))", wasm_func, call_args.join(", "))
+                format!(
+                    "normalizeDtoValue(getTypeApiWasm().{}({}))",
+                    wasm_func,
+                    call_args.join(", ")
+                )
             } else {
                 format!("getTypeApiWasm().{}({})", wasm_func, call_args.join(", "))
             };
@@ -929,11 +947,12 @@ fn type_api_ts_return(
             CodecPlan::Supported(codec) if matches!(codec.kind, BoundaryKind::StringBoundary) => {
                 Some(("string".to_string(), TypeApiReturnWrap::String))
             }
-            CodecPlan::Supported(codec) => {
-                Some((type_api_public_ts_type(ty, &codec, false), TypeApiReturnWrap::Native))
-            }
+            CodecPlan::Supported(codec) => Some((
+                type_api_public_ts_type(ty, &codec, false),
+                TypeApiReturnWrap::Native,
+            )),
             CodecPlan::Unsupported(_) => None,
-        }
+        },
     }
 }
 
@@ -958,7 +977,9 @@ fn dto_ts_type(ty: &RustType) -> String {
     match ty.without_reference() {
         RustType::Unit => "void".to_string(),
         RustType::Primitive(RustPrimitive::Bool) => "boolean".to_string(),
-        RustType::Primitive(RustPrimitive::I64 | RustPrimitive::U64) => "number | bigint".to_string(),
+        RustType::Primitive(RustPrimitive::I64 | RustPrimitive::U64) => {
+            "number | bigint".to_string()
+        }
         RustType::Primitive(_) => "number".to_string(),
         RustType::String | RustType::Str => "string".to_string(),
         RustType::Option(inner) => format!("{} | null", dto_ts_type(inner)),
@@ -974,11 +995,11 @@ fn dto_ts_type(ty: &RustType) -> String {
             .first()
             .map(dto_ts_type)
             .unwrap_or_else(|| "unknown".to_string()),
-        RustType::Path(path) if matches!(path.last_segment(), Some("HashMap" | "BTreeMap")) => {
-            path.args.get(1)
-                .map(|value| format!("Record<string, {}>", dto_ts_type(value)))
-                .unwrap_or_else(|| "Record<string, unknown>".to_string())
-        }
+        RustType::Path(path) if matches!(path.last_segment(), Some("HashMap" | "BTreeMap")) => path
+            .args
+            .get(1)
+            .map(|value| format!("Record<string, {}>", dto_ts_type(value)))
+            .unwrap_or_else(|| "Record<string, unknown>".to_string()),
         RustType::Path(path) => path
             .last_segment()
             .map(dto_ts_name)

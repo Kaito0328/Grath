@@ -3,14 +3,12 @@ import { Stack } from "../../../../design/primitives/Stack";
 import { useState } from "react";
 import { Text } from "../../../../design/baseComponents/Text";
 import { Markdown } from "../../../../design/baseComponents/Markdown";
-import { Switch } from "../../../../design/baseComponents/Switch";
 import { Button } from "../../../../design/baseComponents/Button";
 import { View } from "../../../../design/primitives/View";
 import { NumberInput } from "../../../../design/baseComponents/NumberInput";
 import { SaveVariableModal } from "../../../variable-manager/ui/SaveVariableModal";
 import type { VariableKind } from "../../../../stores/variableManager/types";
 import { PolynomialSolverHelper } from "@my-project/client-sdk/api/polynomialSolver";
-import { SymbolicExpr } from "@my-project/client-sdk/api/algebraicApi";
 import { algebraicErrorToDisplayMessage } from "../../config/errorCodeMessages";
 import { SymbolicComplexOutput } from "../../types/SymbolicComplexOutput";
 import { PolynomialInput } from "../../types/PolynomialInput";
@@ -59,14 +57,14 @@ export const PolynomialSolverOperation = ({ mode, coeffType, startIndex = 1 }: P
     // Generate latex for polynomial from string array
     const generateLatex = (arr: string[], prec?: number) => {
         if (arr.length === 0) return "0";
-        let parts = [];
+        const parts = [];
         for (let i = arr.length - 1; i >= 0; i--) {
             if (arr[i] === "0" && i !== 0) continue;
-            let termStr = prec !== undefined ? parseFloat(parseFloat(arr[i]).toPrecision(prec)).toString() : arr[i];
+            const termStr = prec !== undefined ? parseFloat(parseFloat(arr[i]).toPrecision(prec)).toString() : arr[i];
 
             let termLatex = termStr;
-            let isNegative = termStr.startsWith("-");
-            let absTerm = isNegative ? termStr.substring(1) : termStr;
+            const isNegative = termStr.startsWith("-");
+            const absTerm = isNegative ? termStr.substring(1) : termStr;
 
             if (absTerm.includes("/")) {
                 const [num, den] = absTerm.split("/");
@@ -103,7 +101,6 @@ export const PolynomialSolverOperation = ({ mode, coeffType, startIndex = 1 }: P
                     }
                     coeffs = next;
                 }
-                const formattedCoeffs = coeffs.map(c => c.re.toString());
                 const leadingOriginal = parseFloat(coeffsA[coeffsA.length - 1] || "1");
                 const scaledCoeffs = coeffs.map(c => (c.re * leadingOriginal).toString());
                 setVerificationLatex(generateLatex(scaledCoeffs, precision));
@@ -151,7 +148,6 @@ export const PolynomialSolverOperation = ({ mode, coeffType, startIndex = 1 }: P
                     const res = await PolynomialSolverHelper.solveNumeric(toNumberArray(coeffsA));
                     const rootsWithLatex = res.map((r: any) => {
                         const reStr = r.re.toPrecision(precision);
-                        const imStr = r.im.toPrecision(precision);
                         let text = "";
                         if (Math.abs(r.im) < 1e-10) {
                             text = reStr;

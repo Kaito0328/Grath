@@ -9,16 +9,7 @@ import { Button } from "../../../design/baseComponents/Button";
 import { Slider } from "../../../design/baseComponents/Slider";
 import { UnaryOperationLayout } from "../../../shared/layouts/UnaryOperationLayout";
 import { SaveVariableModal } from "../../variable-manager/ui/SaveVariableModal";
-import { 
-    Save, 
-    Trash2, 
-    Zap, 
-    RefreshCw,
-    TrendingUp,
-    LineChart,
-    PlusCircle,
-    Binary
-} from "lucide-react";
+import { Save, Trash2, Zap, RefreshCw } from "lucide-react";
 
 export const RegressionLab: React.FC = () => {
     const [sampleSize, setSampleSize] = useState(60);

@@ -2,23 +2,24 @@
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
 
-use wasm_bindgen::prelude::*;
 use std::collections::{BTreeMap, HashMap};
-use ::common::prelude::*;
+use wasm_bindgen::prelude::*;
+extern crate common as grath_common;
+use grath_common::prelude::*;
 use source_coding::*;
 
 fn js_error_from_app_error(app: AppError) -> JsError {
-let json = serde_json::to_string(&app)
-.unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
-JsError::new(&json)
+    let json =
+        serde_json::to_string(&app).unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
+    JsError::new(&json)
 }
 
 fn js_error_from_code_message(code: &str, message: String, details: Option<String>) -> JsError {
-js_error_from_app_error(AppError::new(code.to_string(), message, details))
+    js_error_from_app_error(AppError::new(code.to_string(), message, details))
 }
 
 fn js_error_from_to_app_error<E: ToAppError>(e: E, details: Option<String>) -> JsError {
-js_error_from_app_error(e.to_app_error(details))
+    js_error_from_app_error(e.to_app_error(details))
 }
 
 use std::str::FromStr;
@@ -43,7 +44,10 @@ fn vec_to_csv<T>(v: Vec<T>) -> String
 where
     T: ToString,
 {
-    v.into_iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",")
+    v.into_iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<_>>()
+        .join(",")
 }
 
 fn parse_from_str<T>(s: &str) -> std::result::Result<T, JsError>
@@ -65,7 +69,9 @@ where
 pub struct WasmJonesCode(pub(crate) JonesCode);
 
 impl WasmJonesCode {
-    pub fn inner(&self) -> &JonesCode { &self.0 }
+    pub fn inner(&self) -> &JonesCode {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -80,7 +86,9 @@ impl WasmJonesCode {
 pub struct WasmArithmeticCode(pub(crate) ArithmeticCode);
 
 impl WasmArithmeticCode {
-    pub fn inner(&self) -> &ArithmeticCode { &self.0 }
+    pub fn inner(&self) -> &ArithmeticCode {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -95,7 +103,9 @@ impl WasmArithmeticCode {
 pub struct WasmMarkov(pub(crate) Markov);
 
 impl WasmMarkov {
-    pub fn inner(&self) -> &Markov { &self.0 }
+    pub fn inner(&self) -> &Markov {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -110,7 +120,9 @@ impl WasmMarkov {
 pub struct WasmHuffmanCode(pub(crate) HuffmanCode);
 
 impl WasmHuffmanCode {
-    pub fn inner(&self) -> &HuffmanCode { &self.0 }
+    pub fn inner(&self) -> &HuffmanCode {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -125,7 +137,9 @@ impl WasmHuffmanCode {
 pub struct WasmLz78Code(pub(crate) Lz78Code);
 
 impl WasmLz78Code {
-    pub fn inner(&self) -> &Lz78Code { &self.0 }
+    pub fn inner(&self) -> &Lz78Code {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -140,7 +154,9 @@ impl WasmLz78Code {
 pub struct WasmSourceCodingApi(pub(crate) SourceCodingApi);
 
 impl WasmSourceCodingApi {
-    pub fn inner(&self) -> &SourceCodingApi { &self.0 }
+    pub fn inner(&self) -> &SourceCodingApi {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -155,7 +171,9 @@ impl WasmSourceCodingApi {
 pub struct WasmBlockHuffmanTree(pub(crate) BlockHuffmanTree);
 
 impl WasmBlockHuffmanTree {
-    pub fn inner(&self) -> &BlockHuffmanTree { &self.0 }
+    pub fn inner(&self) -> &BlockHuffmanTree {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -175,7 +193,8 @@ impl WasmSourceCodingApi {
         SourceCodingApi::lz78_roundtrip(input).map_err(|e| js_error_from_to_app_error(e, None))
     }
     pub fn arithmetic_roundtrip(input: String) -> std::result::Result<bool, JsError> {
-        SourceCodingApi::arithmetic_roundtrip(input).map_err(|e| js_error_from_to_app_error(e, None))
+        SourceCodingApi::arithmetic_roundtrip(input)
+            .map_err(|e| js_error_from_to_app_error(e, None))
     }
     pub fn huffman_encode_hex(input: String) -> std::result::Result<String, JsError> {
         SourceCodingApi::huffman_encode_hex(input).map_err(|e| JsError::new(&format!("{:?}", e)))
@@ -196,4 +215,3 @@ impl WasmSourceCodingApi {
         SourceCodingApi::arithmetic_decode_hex(hex).map_err(|e| JsError::new(&format!("{:?}", e)))
     }
 }
-

@@ -9,7 +9,7 @@ import { BreadcrumbTitle } from "../../shared/ui/BreadcrumbTitle";
 import { routes } from "../../config/routes";
 import { featureLabels } from "../../config/featureLabels";
 import { FeatureLinkCard } from "../../shared/ui/FeatureLinkCard";
-import { Calculator, FunctionSquare, Infinity, ListOrdered, Sigma } from "lucide-react";
+import { Calculator, FunctionSquare, Infinity as InfinityIcon, ListOrdered, Sigma } from "lucide-react";
 
 export default function ConcreteMathHomePage() {
     return (
@@ -38,7 +38,7 @@ export default function ConcreteMathHomePage() {
                         href={routes.concreteMath.summation}
                         title="総和"
                         description="等差・等比・特殊数列の和を記号的に計算します。"
-                        icon={<Infinity size={28} className="text-indigo-500" />}
+                        icon={<InfinityIcon size={28} className="text-indigo-500" />}
                     />
                     <FeatureLinkCard
                         href={routes.concreteMath.numberTheory}

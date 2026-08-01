@@ -64,7 +64,7 @@ export const NumberTheoryOperation = () => {
             try {
                 const inv = await ConcreteMathHelper.ntModInverse(modBase, modM);
                 setModInvRes(inv);
-            } catch (e) {
+            } catch {
                 setModInvRes("N/A (not coprime)");
             }
         } catch (e) {
@@ -103,7 +103,7 @@ export const NumberTheoryOperation = () => {
                                     <Text variant="h2" weight="bold" color="primary" className="text-right overflow-hidden text-ellipsis">{gcdRes.lcm}</Text>
                                 </Flex>
                                 <View className="mt-2 pt-2 border-t">
-                                    <Text variant="detail" color="secondary">ベズーの等式 (Bézout's identity)</Text>
+                                    <Text variant="detail" color="secondary">ベズーの等式 (Bézout&apos;s identity)</Text>
                                     <View className="bg-slate-50 dark:bg-slate-900 p-2 rounded mt-1 font-mono text-sm overflow-x-auto">
                                         {gcdA}({gcdRes.x}) + {gcdB}({gcdRes.y}) = {gcdRes.gcd}
                                     </View>

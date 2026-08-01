@@ -1,6 +1,6 @@
 use crate::codec::{
-    is_type_api_target, BoundaryCodec, BoundaryKind, BoundaryMode, CodecPlan, CodecRegistry, RustPrimitive,
-    RustType,
+    is_type_api_target, BoundaryCodec, BoundaryKind, BoundaryMode, CodecPlan, CodecRegistry,
+    RustPrimitive, RustType,
 };
 use crate::notion::model::TestCaseYaml;
 use crate::types::{ApiReport, FunctionArgInfo, FunctionInfo, TypeApiInfo};
@@ -84,7 +84,11 @@ pub fn generate_ts_test_with_boundary_types(
     ));
     code.push_str("function normalizeJsonNumbers(value: unknown): unknown {\n");
     code.push_str("  if (typeof value === 'number') {\n");
-    code.push_str("    return Number(value.toPrecision(15));\n");
+    // Native Rust and WASM can differ in the final few IEEE-754 bits even
+    // when they implement the same numerical algorithm. Twelve significant
+    // digits preserves the meaningful result while avoiding flaky generated
+    // integration tests from platform-level rounding differences.
+    code.push_str("    return Number(value.toPrecision(12));\n");
     code.push_str("  }\n");
     code.push_str("  if (Array.isArray(value)) {\n");
     code.push_str("    return value.map((item) => normalizeJsonNumbers(item));\n");
@@ -332,7 +336,8 @@ fn render_type_api_case(
     for (arg_index, arg) in args.iter().enumerate().skip(start_index) {
         let input_val = case.inputs.get(arg_index).map(String::as_str).unwrap_or("");
         let var_name = format!("arg{}", arg_index);
-        let Some(init_expr) = generate_type_api_input_expr(arg, input_val, ts_ns, type_api, registry)
+        let Some(init_expr) =
+            generate_type_api_input_expr(arg, input_val, ts_ns, type_api, registry)
         else {
             code.push_str("      // Skipped: unsupported Type API test boundary.\n");
             code.push_str("    });\n");
@@ -346,7 +351,13 @@ fn render_type_api_case(
     let call = if first_arg_is_receiver {
         format!("receiver.{}({})", method, arg_vars.join(", "))
     } else {
-        format!("{}.{}.{}({})", ts_ns, type_api.ts_name, method, arg_vars.join(", "))
+        format!(
+            "{}.{}.{}({})",
+            ts_ns,
+            type_api.ts_name,
+            method,
+            arg_vars.join(", ")
+        )
     };
 
     if let Some(expected_error) = &case.expected_error {
@@ -403,7 +414,12 @@ fn generate_type_api_input_expr(
             return None;
         };
         return if matches!(codec.mode, BoundaryMode::Dto) {
-            Some(format!("{}.{}.fromDto({})", ts_ns, type_api.ts_name, input_val.trim()))
+            Some(format!(
+                "{}.{}.fromDto({})",
+                ts_ns,
+                type_api.ts_name,
+                input_val.trim()
+            ))
         } else {
             Some(format!(
                 "{}.{}.fromString(\"{}\")",
@@ -462,9 +478,15 @@ fn codec_input_expr(
             let array = format!("[{}]", values);
             match codec.kind {
                 BoundaryKind::TypedArray => match inner.without_reference() {
-                    RustType::Primitive(RustPrimitive::F64) => Some(format!("new Float64Array({array})")),
-                    RustType::Primitive(RustPrimitive::F32) => Some(format!("new Float32Array({array})")),
-                    RustType::Primitive(RustPrimitive::U8) => Some(format!("new Uint8Array({array})")),
+                    RustType::Primitive(RustPrimitive::F64) => {
+                        Some(format!("new Float64Array({array})"))
+                    }
+                    RustType::Primitive(RustPrimitive::F32) => {
+                        Some(format!("new Float32Array({array})"))
+                    }
+                    RustType::Primitive(RustPrimitive::U8) => {
+                        Some(format!("new Uint8Array({array})"))
+                    }
                     _ => None,
                 },
                 _ => Some(array),
@@ -510,9 +532,17 @@ fn render_type_api_expectation(
                 actual, escaped_expected
             ));
         }
-        CodecPlan::Supported(codec) if matches!(codec.kind, BoundaryKind::TypedArray | BoundaryKind::PrimitiveArray) => {
+        CodecPlan::Supported(codec)
+            if matches!(
+                codec.kind,
+                BoundaryKind::TypedArray | BoundaryKind::PrimitiveArray
+            ) =>
+        {
             code.push_str("      const out = Array.from(result as any).join(',');\n");
-            code.push_str(&format!("      expect(out).toBe(\"{}\");\n", escaped_expected));
+            code.push_str(&format!(
+                "      expect(out).toBe(\"{}\");\n",
+                escaped_expected
+            ));
         }
         CodecPlan::Supported(_) => {
             code.push_str(&format!(

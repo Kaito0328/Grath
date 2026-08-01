@@ -1,6 +1,6 @@
 use crate::algebraic_dto::{symbolic_complex_to_dto, NumericComplexDto};
-use ::common::prelude::{AppError, ToAppError};
 use algebraic::rational::Rational;
+use common::prelude::{AppError, ToAppError};
 use polynomial::prelude::*;
 use wasm_bindgen::prelude::*;
 

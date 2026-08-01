@@ -2,24 +2,25 @@
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
 
-use wasm_bindgen::prelude::*;
 use std::collections::{BTreeMap, HashMap};
-use ::common::prelude::*;
+use wasm_bindgen::prelude::*;
+extern crate common as grath_common;
 use algebraic::prelude::*;
 use algebraic::*;
+use grath_common::prelude::*;
 
 fn js_error_from_app_error(app: AppError) -> JsError {
-let json = serde_json::to_string(&app)
-.unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
-JsError::new(&json)
+    let json =
+        serde_json::to_string(&app).unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
+    JsError::new(&json)
 }
 
 fn js_error_from_code_message(code: &str, message: String, details: Option<String>) -> JsError {
-js_error_from_app_error(AppError::new(code.to_string(), message, details))
+    js_error_from_app_error(AppError::new(code.to_string(), message, details))
 }
 
 fn js_error_from_to_app_error<E: ToAppError>(e: E, details: Option<String>) -> JsError {
-js_error_from_app_error(e.to_app_error(details))
+    js_error_from_app_error(e.to_app_error(details))
 }
 
 use std::str::FromStr;
@@ -44,7 +45,10 @@ fn vec_to_csv<T>(v: Vec<T>) -> String
 where
     T: ToString,
 {
-    v.into_iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",")
+    v.into_iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<_>>()
+        .join(",")
 }
 
 fn parse_from_str<T>(s: &str) -> std::result::Result<T, JsError>
@@ -66,7 +70,9 @@ where
 pub struct WasmRational(pub(crate) Rational);
 
 impl WasmRational {
-    pub fn inner(&self) -> &Rational { &self.0 }
+    pub fn inner(&self) -> &Rational {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -81,7 +87,9 @@ impl WasmRational {
 pub struct WasmSymbolicExpr(pub(crate) SymbolicExpr);
 
 impl WasmSymbolicExpr {
-    pub fn inner(&self) -> &SymbolicExpr { &self.0 }
+    pub fn inner(&self) -> &SymbolicExpr {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -96,7 +104,9 @@ impl WasmSymbolicExpr {
 pub struct WasmSymbolicComplex(pub(crate) SymbolicComplex);
 
 impl WasmSymbolicComplex {
-    pub fn inner(&self) -> &SymbolicComplex { &self.0 }
+    pub fn inner(&self) -> &SymbolicComplex {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -110,7 +120,9 @@ impl WasmSymbolicComplex {
 #[wasm_bindgen]
 impl WasmRational {
     pub fn try_new(numer: i64, denom: i64) -> std::result::Result<WasmRational, JsError> {
-        Rational::try_new(numer, denom).map(WasmRational).map_err(|e| JsError::new(&format!("{:?}", e)))
+        Rational::try_new(numer, denom)
+            .map(WasmRational)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
     pub fn new(numer: i64, denom: i64) -> WasmRational {
         WasmRational(Rational::new(numer, denom))
@@ -119,7 +131,9 @@ impl WasmRational {
         self.0.to_latex()
     }
     pub fn from_latex(latex: &str) -> std::result::Result<WasmRational, JsError> {
-        Rational::from_latex(latex).map(WasmRational).map_err(|e| JsError::new(&format!("{:?}", e)))
+        Rational::from_latex(latex)
+            .map(WasmRational)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
     pub fn from_int(n: i64) -> WasmRational {
         WasmRational(Rational::from_int(n))
@@ -149,13 +163,22 @@ impl WasmRational {
         WasmRational(self.0.simplified())
     }
     pub fn checked_add(self, rhs: WasmRational) -> std::result::Result<WasmRational, JsError> {
-        self.0.checked_add(rhs.0).map(WasmRational).map_err(|e| JsError::new(&format!("{:?}", e)))
+        self.0
+            .checked_add(rhs.0)
+            .map(WasmRational)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
     pub fn checked_mul(self, rhs: WasmRational) -> std::result::Result<WasmRational, JsError> {
-        self.0.checked_mul(rhs.0).map(WasmRational).map_err(|e| JsError::new(&format!("{:?}", e)))
+        self.0
+            .checked_mul(rhs.0)
+            .map(WasmRational)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
     pub fn checked_div(self, rhs: WasmRational) -> std::result::Result<WasmRational, JsError> {
-        self.0.checked_div(rhs.0).map(WasmRational).map_err(|e| JsError::new(&format!("{:?}", e)))
+        self.0
+            .checked_div(rhs.0)
+            .map(WasmRational)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
 }
 
@@ -169,7 +192,9 @@ impl WasmSymbolicExpr {
 #[wasm_bindgen]
 impl WasmSymbolicExpr {
     pub fn from_latex(latex: &str) -> std::result::Result<WasmSymbolicExpr, JsError> {
-        SymbolicExpr::from_latex(latex).map(WasmSymbolicExpr).map_err(|e| JsError::new(&format!("{:?}", e)))
+        SymbolicExpr::from_latex(latex)
+            .map(WasmSymbolicExpr)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
     pub fn rational(n: i64, d: i64) -> WasmSymbolicExpr {
         WasmSymbolicExpr(SymbolicExpr::rational(n, d))
@@ -208,7 +233,9 @@ impl WasmSymbolicExpr {
 #[wasm_bindgen]
 impl WasmSymbolicComplex {
     pub fn from_latex(latex: &str) -> std::result::Result<WasmSymbolicComplex, JsError> {
-        SymbolicComplex::from_latex(latex).map(WasmSymbolicComplex).map_err(|e| JsError::new(&format!("{:?}", e)))
+        SymbolicComplex::from_latex(latex)
+            .map(WasmSymbolicComplex)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
     pub fn to_latex(&self) -> String {
         self.0.to_latex()
@@ -260,4 +287,3 @@ impl WasmSymbolicComplex {
         WasmSymbolicComplex(self.0.expand())
     }
 }
-

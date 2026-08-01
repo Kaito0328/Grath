@@ -138,7 +138,9 @@ impl RationalMatrixDtoApi {
     pub fn transpose(
         value: RationalMatrixValue,
     ) -> std::result::Result<RationalMatrixValue, LinalgError> {
-        Ok(RationalMatrixValue::from_matrix(value.into_matrix()?.transpose()))
+        Ok(RationalMatrixValue::from_matrix(
+            value.into_matrix()?.transpose(),
+        ))
     }
 }
 

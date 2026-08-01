@@ -12,7 +12,11 @@ pub mod runner_signal_processing;
 pub mod runner_source_coding;
 pub mod runner_statistics;
 
-pub fn dispatch_test(crate_name: &str, func_key: &str, inputs: &[String]) -> std::result::Result<String, String> {
+pub fn dispatch_test(
+    crate_name: &str,
+    func_key: &str,
+    inputs: &[String],
+) -> std::result::Result<String, String> {
     match crate_name {
         "algebraic" => runner_algebraic::run_dynamic_test(func_key, inputs),
         "coding" => runner_coding::run_dynamic_test(func_key, inputs),
@@ -30,7 +34,7 @@ pub fn dispatch_test(crate_name: &str, func_key: &str, inputs: &[String]) -> std
             } else {
                 Err(format!("Invalid combined function key: {}", func_key))
             }
-        },
+        }
         _ => Err(format!("Unknown crate: {}", crate_name)),
     }
 }

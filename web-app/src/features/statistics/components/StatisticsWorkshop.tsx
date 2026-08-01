@@ -16,12 +16,9 @@ import {
     Save, 
     CheckCircle2, 
     AlertCircle,
-    ArrowRightLeft,
     Layers,
     FlaskConical,
-    Play,
     Info,
-    History,
     Dice5
 } from "lucide-react";
 

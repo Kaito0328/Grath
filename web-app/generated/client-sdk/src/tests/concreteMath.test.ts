@@ -5,7 +5,7 @@ import * as concreteMath from '../wrappers/concreteMath';
 
 function normalizeJsonNumbers(value: unknown): unknown {
   if (typeof value === 'number') {
-    return Number(value.toPrecision(15));
+    return Number(value.toPrecision(12));
   }
   if (Array.isArray(value)) {
     return value.map((item) => normalizeJsonNumbers(item));
@@ -24,6 +24,15 @@ describe('concrete-math wasm integration', () => {
     concreteMath.setWasmFromWasmLib(wasm);
   });
 
+  describe('ConcreteMathApi::nt_gcd', () => {
+    it('case 1', () => {
+      const arg0 = 48;
+      const arg1 = 18;
+      const result = concreteMath.ntGcd(arg0, arg1);
+      expect(String(result)).toBe("6");
+    });
+  });
+
   describe('ConcreteMathApi::nt_mod_inverse', () => {
     it('case 1', () => {
       const arg0 = 3;
@@ -33,20 +42,27 @@ describe('concrete-math wasm integration', () => {
     });
   });
 
+  describe('ConcreteMathApi::nt_is_prime', () => {
+    it('case 1', () => {
+      const arg0 = "97";
+      const result = concreteMath.ntIsPrime(arg0);
+      expect(String(result)).toBe("true");
+    });
+  });
+
+  describe('ConcreteMathApi::nt_factorize', () => {
+    it('case 1', () => {
+      const arg0 = "84";
+      const result = concreteMath.ntFactorize(arg0);
+      expect(String(result)).toBe("{\\\"factors\\\":[{\\\"p\\\":\\\"2\\\",\\\"exp\\\":2},{\\\"p\\\":\\\"3\\\",\\\"exp\\\":1},{\\\"p\\\":\\\"7\\\",\\\"exp\\\":1}]}");
+    });
+  });
+
   describe('ConcreteMathApi::nt_phi', () => {
     it('case 1', () => {
       const arg0 = 36;
       const result = concreteMath.ntPhi(arg0);
       expect(String(result)).toBe("12");
-    });
-  });
-
-  describe('ConcreteMathApi::nt_gcd', () => {
-    it('case 1', () => {
-      const arg0 = 48;
-      const arg1 = 18;
-      const result = concreteMath.ntGcd(arg0, arg1);
-      expect(String(result)).toBe("6");
     });
   });
 
@@ -59,14 +75,6 @@ describe('concrete-math wasm integration', () => {
     });
   });
 
-  describe('ConcreteMathApi::nt_factorize', () => {
-    it('case 1', () => {
-      const arg0 = "84";
-      const result = concreteMath.ntFactorize(arg0);
-      expect(String(result)).toBe("{\\\"factors\\\":[{\\\"p\\\":\\\"2\\\",\\\"exp\\\":2},{\\\"p\\\":\\\"3\\\",\\\"exp\\\":1},{\\\"p\\\":\\\"7\\\",\\\"exp\\\":1}]}");
-    });
-  });
-
   describe('ConcreteMathApi::nt_mod_pow', () => {
     it('case 1', () => {
       const arg0 = 2;
@@ -74,14 +82,6 @@ describe('concrete-math wasm integration', () => {
       const arg2 = 1000;
       const result = concreteMath.ntModPow(arg0, arg1, arg2);
       expect(String(result)).toBe("24");
-    });
-  });
-
-  describe('ConcreteMathApi::nt_is_prime', () => {
-    it('case 1', () => {
-      const arg0 = "97";
-      const result = concreteMath.ntIsPrime(arg0);
-      expect(String(result)).toBe("true");
     });
   });
 

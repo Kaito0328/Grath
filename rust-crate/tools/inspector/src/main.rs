@@ -4,10 +4,10 @@ use convert_case::Casing;
 use dotenv::dotenv;
 use inspector_lib::types::ApiReport;
 use inspector_lib::{
-    discover_targets, error_message_gen, known_boundary_types_from_specs, known_dto_types_from_specs, load_config, notion, parser,
-    resolve_targets, test_gen, to_rust_ident, to_ts_ident, ts_api_gen, ts_gen, ts_test_gen,
-    wasm_dto_gen, wasm_gen, DEFAULT_CRATES_DIR, DEFAULT_RUNNER_DIR, DEFAULT_SPECS_DIR,
-    DEFAULT_TEST_CASES_DIR,
+    discover_targets, error_message_gen, known_boundary_types_from_specs,
+    known_dto_types_from_specs, load_config, notion, parser, resolve_targets, test_gen,
+    to_rust_ident, to_ts_ident, ts_api_gen, ts_gen, ts_test_gen, wasm_dto_gen, wasm_gen,
+    DEFAULT_CRATES_DIR, DEFAULT_RUNNER_DIR, DEFAULT_SPECS_DIR, DEFAULT_TEST_CASES_DIR,
 };
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -137,6 +137,27 @@ enum Commands {
     },
 }
 
+/// Formats files fully owned by Inspector after generation.
+///
+/// Keeping generated Rust source rustfmt-formatted is required for two
+/// reasons: `cargo fmt -- --check` must pass on a fresh checkout, and a second
+/// Inspector run must not recreate a formatting-only Git diff.
+fn format_generated_rust_files(paths: impl IntoIterator<Item = PathBuf>) -> Result<()> {
+    let mut paths: Vec<PathBuf> = paths.into_iter().filter(|path| path.is_file()).collect();
+    paths.sort();
+    paths.dedup();
+
+    if paths.is_empty() {
+        return Ok(());
+    }
+
+    let status = Command::new("rustfmt").args(&paths).status()?;
+    if !status.success() {
+        anyhow::bail!("rustfmt failed for Inspector-generated Rust files");
+    }
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenv().ok();
@@ -225,6 +246,13 @@ async fn main() -> Result<()> {
                 }
             }
             test_gen::generate_dispatcher(&output_dir, &dispatcher_targets)?;
+            let runner_paths = targets
+                .iter()
+                .map(|target| {
+                    Path::new(&output_dir).join(format!("runner_{}.rs", to_rust_ident(target)))
+                })
+                .chain(std::iter::once(Path::new(&output_dir).join("mod.rs")));
+            format_generated_rust_files(runner_paths)?;
         }
         Commands::FetchTests { output_dir } => {
             let syncer = notion::NotionSyncer::new().await?;
@@ -293,6 +321,11 @@ async fn main() -> Result<()> {
 
             existing.push_str(&to_append.concat());
             fs::write(lib_rs_path, existing)?;
+            let wasm_paths = targets
+                .iter()
+                .map(|target| Path::new(&output_dir).join(format!("{}.rs", to_rust_ident(target))))
+                .chain(std::iter::once(Path::new(&output_dir).join("lib.rs")));
+            format_generated_rust_files(wasm_paths)?;
         }
 
         // --- 修正コマンド ---
@@ -314,7 +347,8 @@ async fn main() -> Result<()> {
                         .and_then(|p| p.wasm_output_dir.clone())
                 })
                 .unwrap_or_else(|| "../web-app/generated/client-sdk/wasm-pkg".to_string());
-            let rust_crate_root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+            let rust_crate_root =
+                std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
             let final_out_dir = {
                 let path = std::path::PathBuf::from(final_out_dir);
                 if path.is_absolute() {
@@ -552,7 +586,12 @@ fn replace_generated_block(content: &str, begin: &str, end: &str, body: &str) ->
         .find(end)
         .ok_or_else(|| anyhow::anyhow!("generated ownership marker is missing: {end}"))?;
     let finish = after_begin + end_offset;
-    Ok(format!("{}{}{}", &content[..after_begin], body, &content[finish..]))
+    Ok(format!(
+        "{}{}{}",
+        &content[..after_begin],
+        body,
+        &content[finish..]
+    ))
 }
 
 /// Synchronize only inspector-owned dependency entries. Existing hand-written
@@ -567,7 +606,9 @@ fn sync_wasm_crate_dependencies(targets: &[String]) -> Result<()> {
         if target == "test-cases" {
             continue;
         }
-        let manifest = Path::new(DEFAULT_CRATES_DIR).join(target).join("Cargo.toml");
+        let manifest = Path::new(DEFAULT_CRATES_DIR)
+            .join(target)
+            .join("Cargo.toml");
         if !manifest.exists() {
             anyhow::bail!("crate '{}' is not present at {:?}", target, manifest);
         }
@@ -584,8 +625,12 @@ fn sync_wasm_crate_dependencies(targets: &[String]) -> Result<()> {
         return Ok(());
     }
     let updated = if content.contains(GENERATED_DEPS_BEGIN) {
-        let start = content.find(GENERATED_DEPS_BEGIN).expect("marker checked") + GENERATED_DEPS_BEGIN.len();
-        let end = start + content[start..].find(GENERATED_DEPS_END).expect("marker checked");
+        let start = content.find(GENERATED_DEPS_BEGIN).expect("marker checked")
+            + GENERATED_DEPS_BEGIN.len();
+        let end = start
+            + content[start..]
+                .find(GENERATED_DEPS_END)
+                .expect("marker checked");
         let existing_entries = content[start..end].trim();
         let additions = missing
             .iter()
@@ -627,14 +672,21 @@ fn sync_sdk_wasm_bindings(sdk_root: &Path) -> Result<()> {
     let content = fs::read_to_string(&path)?;
     let wrappers_dir = sdk_root.join("src/wrappers");
     let mut targets = discover_targets(DEFAULT_CRATES_DIR, &[]);
-    targets.retain(|target| wrappers_dir.join(format!("{}.ts", to_ts_ident(target))).exists());
+    targets.retain(|target| {
+        wrappers_dir
+            .join(format!("{}.ts", to_ts_ident(target)))
+            .exists()
+    });
 
     let exports = targets
         .iter()
         .map(|target| {
             let ts = to_ts_ident(target);
             let name = ts.to_case(convert_case::Case::Pascal);
-            format!("export {{ setWasmFromWasmLib as set{}Wasm }} from \"./wrappers/{}\";", name, ts)
+            format!(
+                "export {{ setWasmFromWasmLib as set{}Wasm }} from \"./wrappers/{}\";",
+                name, ts
+            )
         })
         .collect::<Vec<_>>()
         .join("\n");
@@ -643,7 +695,10 @@ fn sync_sdk_wasm_bindings(sdk_root: &Path) -> Result<()> {
         .map(|target| {
             let ts = to_ts_ident(target);
             let name = ts.to_case(convert_case::Case::Pascal);
-            format!("import {{ setWasmFromWasmLib as set{}WasmFromWasmLib }} from \"./wrappers/{}\";", name, ts)
+            format!(
+                "import {{ setWasmFromWasmLib as set{}WasmFromWasmLib }} from \"./wrappers/{}\";",
+                name, ts
+            )
         })
         .collect::<Vec<_>>()
         .join("\n");
@@ -681,7 +736,11 @@ fn sync_sdk_type_api_exports(sdk_root: &Path) -> Result<()> {
     let content = fs::read_to_string(&path)?;
     let wrappers_dir = sdk_root.join("src/wrappers");
     let mut targets = discover_targets(DEFAULT_CRATES_DIR, &[]);
-    targets.retain(|target| wrappers_dir.join(format!("{}.ts", to_ts_ident(target))).exists());
+    targets.retain(|target| {
+        wrappers_dir
+            .join(format!("{}.ts", to_ts_ident(target)))
+            .exists()
+    });
 
     let mut exports = Vec::new();
     let mut seen_classes = std::collections::HashSet::new();
@@ -788,7 +847,10 @@ async fn run_pipeline(
         // rather than producing an apparently successful set of empty files.
         if targets.len() == 1
             && target != "test-cases"
-            && Path::new(DEFAULT_CRATES_DIR).join(target).join("Cargo.toml").exists()
+            && Path::new(DEFAULT_CRATES_DIR)
+                .join(target)
+                .join("Cargo.toml")
+                .exists()
         {
             let report: ApiReport = serde_json::from_str(&fs::read_to_string(&output_path)?)?;
             if report.crate_apis.is_empty() && report.type_apis.is_empty() {
@@ -845,9 +907,16 @@ async fn run_pipeline(
         }
     }
     test_gen::generate_dispatcher(runner_dir, dispatcher_targets)?;
+    let runner_paths = targets
+        .iter()
+        .filter(|target| is_real_crate(target))
+        .map(|target| Path::new(runner_dir).join(format!("runner_{}.rs", to_rust_ident(target))))
+        .chain(std::iter::once(Path::new(runner_dir).join("mod.rs")));
+    format_generated_rust_files(runner_paths)?;
 
     // --- 3) wasm source gen ---
     println!("\n--- Step 3: Generate Wasm Source (rust-crate/wasm/src) ---");
+    let mut generated_wasm_paths = Vec::new();
     {
         let output_dir = "wasm/src";
         fs::create_dir_all(output_dir)?;
@@ -865,6 +934,7 @@ async fn run_pipeline(
                 let content = fs::read_to_string(&json_path)?;
                 let report: ApiReport = serde_json::from_str(&content)?;
                 wasm_gen::generate_wasm_lib(&report, rs_path.to_str().unwrap(), config, target)?;
+                generated_wasm_paths.push(rs_path);
                 wasm_targets.push(target.clone());
 
                 // Generate DTO-only wasm exports (pure DTO boundary) when supported.
@@ -881,6 +951,7 @@ async fn run_pipeline(
                         &dto_exports_path,
                         target,
                     )?;
+                    generated_wasm_paths.push(PathBuf::from(dto_exports_path));
                     dto_targets.push(target_ident);
                 }
             }
@@ -916,8 +987,10 @@ async fn run_pipeline(
         }
 
         existing.push_str(&to_append.concat());
-        fs::write(lib_rs_path, existing)?;
+        fs::write(&lib_rs_path, existing)?;
+        generated_wasm_paths.push(lib_rs_path);
     }
+    format_generated_rust_files(generated_wasm_paths)?;
 
     // --- 4) wasm build ---
     println!("\n--- Step 4: Build Wasm Package (wasm-pack) ---");

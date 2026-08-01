@@ -104,6 +104,8 @@ jobs:
 
       - name: Setup Rust (for wasm-pack)
         uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
 
       - name: Rust Cache
         uses: Swatinem/rust-cache@v2

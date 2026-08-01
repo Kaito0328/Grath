@@ -2,6 +2,7 @@
 
 [workspace]
 members = ["crates/*", "tools/inspector", "integration-tests", "wasm"]
+resolver = "2"
 
 [workspace.dependencies]
 serde = { version = "1.0", features = ["derive"] } # derive機能は必須

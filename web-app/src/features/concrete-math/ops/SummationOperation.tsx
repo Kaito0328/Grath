@@ -1,8 +1,7 @@
 "use client";
 import { Stack } from "../../../design/primitives/Stack";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Text } from "../../../design/baseComponents/Text";
-import { Markdown } from "../../../design/baseComponents/Markdown";
 import { View } from "../../../design/primitives/View";
 import { Button } from "../../../design/baseComponents/Button";
 import { NumberInput } from "../../../design/baseComponents/NumberInput";

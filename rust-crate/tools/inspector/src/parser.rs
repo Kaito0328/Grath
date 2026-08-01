@@ -732,7 +732,8 @@ fn collect_unsupported_items(
                     position: "signature".to_string(),
                     rust_type: RustType::Unknown(func.args.join(", ")),
                     reason: "could not recover structured argument metadata".to_string(),
-                    recommendation: "regenerate the API spec from the current Rust source".to_string(),
+                    recommendation: "regenerate the API spec from the current Rust source"
+                        .to_string(),
                 });
             }
             if type_api_structs.contains(block.target_struct.as_str())

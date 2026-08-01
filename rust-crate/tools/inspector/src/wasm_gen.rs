@@ -1,6 +1,6 @@
 use crate::codec::{
-    is_matrix_type, rust_string_boundary_encoder, type_api_export_name,
-    BoundaryMode, CodecPlan, CodecRegistry, RustType,
+    is_matrix_type, rust_string_boundary_encoder, type_api_export_name, BoundaryMode, CodecPlan,
+    CodecRegistry, RustType,
 };
 use crate::to_rust_ident;
 use crate::types::{ApiReport, FunctionInfo, InspectorConfig, TypeApiInfo};
@@ -34,8 +34,11 @@ pub fn generate_wasm_lib(
     // both standard map types here so generated signatures do not depend on
     // a crate re-exporting its own collection imports.
     code.push_str("use std::collections::{BTreeMap, HashMap};\n");
-    // For structured errors (code/message/details)
-    code.push_str("use ::common::prelude::*;\n");
+    // For structured errors (code/message/details).  A target crate can also
+    // export a module named `common` (for example, statistics), so bind the
+    // external crate under a collision-free name before importing its prelude.
+    code.push_str("extern crate common as grath_common;\n");
+    code.push_str("use grath_common::prelude::*;\n");
     // Prelude が存在する場合だけ import する（全クレートに存在するとは限らない）
     let prelude_exists = {
         let base = Path::new("crates").join(target_crate).join("src");

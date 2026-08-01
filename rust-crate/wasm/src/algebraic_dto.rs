@@ -1,6 +1,6 @@
-use ::common::prelude::{AppError, ToAppError};
 use algebraic::error::AlgebraicError;
 use algebraic::prelude::*;
+use common::prelude::{AppError, ToAppError};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 

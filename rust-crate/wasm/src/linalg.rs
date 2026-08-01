@@ -2,23 +2,24 @@
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
 
-use wasm_bindgen::prelude::*;
 use std::collections::{BTreeMap, HashMap};
-use ::common::prelude::*;
+use wasm_bindgen::prelude::*;
+extern crate common as grath_common;
+use grath_common::prelude::*;
 use linalg::*;
 
 fn js_error_from_app_error(app: AppError) -> JsError {
-let json = serde_json::to_string(&app)
-.unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
-JsError::new(&json)
+    let json =
+        serde_json::to_string(&app).unwrap_or_else(|_| format!("{}: {}", app.code, app.message));
+    JsError::new(&json)
 }
 
 fn js_error_from_code_message(code: &str, message: String, details: Option<String>) -> JsError {
-js_error_from_app_error(AppError::new(code.to_string(), message, details))
+    js_error_from_app_error(AppError::new(code.to_string(), message, details))
 }
 
 fn js_error_from_to_app_error<E: ToAppError>(e: E, details: Option<String>) -> JsError {
-js_error_from_app_error(e.to_app_error(details))
+    js_error_from_app_error(e.to_app_error(details))
 }
 
 use std::str::FromStr;
@@ -43,7 +44,10 @@ fn vec_to_csv<T>(v: Vec<T>) -> String
 where
     T: ToString,
 {
-    v.into_iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",")
+    v.into_iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<_>>()
+        .join(",")
 }
 
 fn parse_from_str<T>(s: &str) -> std::result::Result<T, JsError>
@@ -65,7 +69,9 @@ where
 pub struct WasmSvd(pub(crate) Svd);
 
 impl WasmSvd {
-    pub fn inner(&self) -> &Svd { &self.0 }
+    pub fn inner(&self) -> &Svd {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -80,7 +86,9 @@ impl WasmSvd {
 pub struct WasmLinalgApi(pub(crate) LinalgApi);
 
 impl WasmLinalgApi {
-    pub fn inner(&self) -> &LinalgApi { &self.0 }
+    pub fn inner(&self) -> &LinalgApi {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -95,7 +103,9 @@ impl WasmLinalgApi {
 pub struct WasmRationalMatrixApi(pub(crate) RationalMatrixApi);
 
 impl WasmRationalMatrixApi {
-    pub fn inner(&self) -> &RationalMatrixApi { &self.0 }
+    pub fn inner(&self) -> &RationalMatrixApi {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -110,7 +120,9 @@ impl WasmRationalMatrixApi {
 pub struct WasmRationalMatrixDtoApi(pub(crate) RationalMatrixDtoApi);
 
 impl WasmRationalMatrixDtoApi {
-    pub fn inner(&self) -> &RationalMatrixDtoApi { &self.0 }
+    pub fn inner(&self) -> &RationalMatrixDtoApi {
+        &self.0
+    }
 }
 
 #[wasm_bindgen]
@@ -205,23 +217,46 @@ impl WasmLinalgApi {
     pub fn eigenvalues_symbolic(_a: String) -> std::result::Result<String, JsError> {
         LinalgApi::eigenvalues_symbolic(_a).map_err(|e| js_error_from_to_app_error(e, None))
     }
-    pub fn mul_vector_numeric(a_csv: String, v_csv: String) -> std::result::Result<String, JsError> {
+    pub fn mul_vector_numeric(
+        a_csv: String,
+        v_csv: String,
+    ) -> std::result::Result<String, JsError> {
         LinalgApi::mul_vector_numeric(a_csv, v_csv).map_err(|e| js_error_from_to_app_error(e, None))
     }
-    pub fn mul_vector_rational(a_csv: String, v_csv: String) -> std::result::Result<String, JsError> {
-        LinalgApi::mul_vector_rational(a_csv, v_csv).map_err(|e| js_error_from_to_app_error(e, None))
+    pub fn mul_vector_rational(
+        a_csv: String,
+        v_csv: String,
+    ) -> std::result::Result<String, JsError> {
+        LinalgApi::mul_vector_rational(a_csv, v_csv)
+            .map_err(|e| js_error_from_to_app_error(e, None))
     }
-    pub fn mul_vector_symbolic(a_csv: String, v_csv: String) -> std::result::Result<String, JsError> {
-        LinalgApi::mul_vector_symbolic(a_csv, v_csv).map_err(|e| js_error_from_to_app_error(e, None))
+    pub fn mul_vector_symbolic(
+        a_csv: String,
+        v_csv: String,
+    ) -> std::result::Result<String, JsError> {
+        LinalgApi::mul_vector_symbolic(a_csv, v_csv)
+            .map_err(|e| js_error_from_to_app_error(e, None))
     }
-    pub fn solve_vector_numeric(a_csv: String, b_csv: String) -> std::result::Result<String, JsError> {
-        LinalgApi::solve_vector_numeric(a_csv, b_csv).map_err(|e| js_error_from_to_app_error(e, None))
+    pub fn solve_vector_numeric(
+        a_csv: String,
+        b_csv: String,
+    ) -> std::result::Result<String, JsError> {
+        LinalgApi::solve_vector_numeric(a_csv, b_csv)
+            .map_err(|e| js_error_from_to_app_error(e, None))
     }
-    pub fn solve_vector_rational(a_csv: String, b_csv: String) -> std::result::Result<String, JsError> {
-        LinalgApi::solve_vector_rational(a_csv, b_csv).map_err(|e| js_error_from_to_app_error(e, None))
+    pub fn solve_vector_rational(
+        a_csv: String,
+        b_csv: String,
+    ) -> std::result::Result<String, JsError> {
+        LinalgApi::solve_vector_rational(a_csv, b_csv)
+            .map_err(|e| js_error_from_to_app_error(e, None))
     }
-    pub fn solve_vector_symbolic(a_csv: String, b_csv: String) -> std::result::Result<String, JsError> {
-        LinalgApi::solve_vector_symbolic(a_csv, b_csv).map_err(|e| js_error_from_to_app_error(e, None))
+    pub fn solve_vector_symbolic(
+        a_csv: String,
+        b_csv: String,
+    ) -> std::result::Result<String, JsError> {
+        LinalgApi::solve_vector_symbolic(a_csv, b_csv)
+            .map_err(|e| js_error_from_to_app_error(e, None))
     }
     pub fn mul_symbolic_complex(a: String, b: String) -> std::result::Result<String, JsError> {
         LinalgApi::mul_symbolic_complex(a, b).map_err(|e| js_error_from_to_app_error(e, None))
@@ -249,7 +284,9 @@ where
 
 #[wasm_bindgen]
 pub fn rational_matrix_zeros(rows: usize, cols: usize) -> std::result::Result<String, JsError> {
-    Ok(encode_matrix_to_string(RationalMatrixApi::zeros(rows, cols)))
+    Ok(encode_matrix_to_string(RationalMatrixApi::zeros(
+        rows, cols,
+    )))
 }
 
 #[wasm_bindgen]
@@ -267,7 +304,8 @@ pub fn rational_matrix_first(a: &str) -> std::result::Result<String, JsError> {
 #[wasm_bindgen]
 pub fn rational_matrix_inverse(a: &str) -> std::result::Result<String, JsError> {
     let a_value: Matrix<Rational> = parse_from_str(a)?;
-    let out = RationalMatrixApi::inverse(a_value).map_err(|e| js_error_from_to_app_error(e, None))?;
+    let out =
+        RationalMatrixApi::inverse(a_value).map_err(|e| js_error_from_to_app_error(e, None))?;
     Ok(encode_matrix_to_string(out))
 }
 
@@ -275,7 +313,8 @@ pub fn rational_matrix_inverse(a: &str) -> std::result::Result<String, JsError> 
 pub fn rational_matrix_add(a: &str, b: &str) -> std::result::Result<String, JsError> {
     let a_value: Matrix<Rational> = parse_from_str(a)?;
     let b_value: Matrix<Rational> = parse_from_str(b)?;
-    let out = RationalMatrixApi::add(a_value, b_value).map_err(|e| js_error_from_to_app_error(e, None))?;
+    let out = RationalMatrixApi::add(a_value, b_value)
+        .map_err(|e| js_error_from_to_app_error(e, None))?;
     Ok(encode_matrix_to_string(out))
 }
 
@@ -283,54 +322,79 @@ pub fn rational_matrix_add(a: &str, b: &str) -> std::result::Result<String, JsEr
 pub fn rational_matrix_mul(a: &str, b: &str) -> std::result::Result<String, JsError> {
     let a_value: Matrix<Rational> = parse_from_str(a)?;
     let b_value: Matrix<Rational> = parse_from_str(b)?;
-    let out = RationalMatrixApi::mul(a_value, b_value).map_err(|e| js_error_from_to_app_error(e, None))?;
+    let out = RationalMatrixApi::mul(a_value, b_value)
+        .map_err(|e| js_error_from_to_app_error(e, None))?;
     Ok(encode_matrix_to_string(out))
 }
 
 #[wasm_bindgen]
 pub fn rational_matrix_transpose(a: &str) -> std::result::Result<String, JsError> {
     let a_value: Matrix<Rational> = parse_from_str(a)?;
-    Ok(encode_matrix_to_string(RationalMatrixApi::transpose(a_value)))
+    Ok(encode_matrix_to_string(RationalMatrixApi::transpose(
+        a_value,
+    )))
 }
 
 #[wasm_bindgen]
-pub fn rational_matrix_dto_zeros(rows: usize, cols: usize) -> std::result::Result<JsValue, JsError> {
-    serde_wasm_bindgen::to_value(&RationalMatrixDtoApi::zeros(rows, cols)).map_err(|e| JsError::new(&e.to_string()))
+pub fn rational_matrix_dto_zeros(
+    rows: usize,
+    cols: usize,
+) -> std::result::Result<JsValue, JsError> {
+    serde_wasm_bindgen::to_value(&RationalMatrixDtoApi::zeros(rows, cols))
+        .map_err(|e| JsError::new(&e.to_string()))
 }
 
 #[wasm_bindgen]
 pub fn rational_matrix_dto_rows(value_value: JsValue) -> std::result::Result<usize, JsError> {
-    let value: RationalMatrixValue = serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
+    let value: RationalMatrixValue =
+        serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
     Ok(RationalMatrixDtoApi::rows(value))
 }
 
 #[wasm_bindgen]
 pub fn rational_matrix_dto_inverse(value_value: JsValue) -> std::result::Result<JsValue, JsError> {
-    let value: RationalMatrixValue = serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
-    let out = RationalMatrixDtoApi::inverse(value).map_err(|e| js_error_from_to_app_error(e, None))?;
+    let value: RationalMatrixValue =
+        serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
+    let out =
+        RationalMatrixDtoApi::inverse(value).map_err(|e| js_error_from_to_app_error(e, None))?;
     serde_wasm_bindgen::to_value(&out).map_err(|e| JsError::new(&e.to_string()))
 }
 
 #[wasm_bindgen]
-pub fn rational_matrix_dto_add(value_value: JsValue, b_value: JsValue) -> std::result::Result<JsValue, JsError> {
-    let value: RationalMatrixValue = serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
-    let b: RationalMatrixValue = serde_wasm_bindgen::from_value(b_value).map_err(|e| JsError::new(&e.to_string()))?;
-    let out = RationalMatrixDtoApi::add(value, b).map_err(|e| js_error_from_to_app_error(e, None))?;
+pub fn rational_matrix_dto_add(
+    value_value: JsValue,
+    b_value: JsValue,
+) -> std::result::Result<JsValue, JsError> {
+    let value: RationalMatrixValue =
+        serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
+    let b: RationalMatrixValue =
+        serde_wasm_bindgen::from_value(b_value).map_err(|e| JsError::new(&e.to_string()))?;
+    let out =
+        RationalMatrixDtoApi::add(value, b).map_err(|e| js_error_from_to_app_error(e, None))?;
     serde_wasm_bindgen::to_value(&out).map_err(|e| JsError::new(&e.to_string()))
 }
 
 #[wasm_bindgen]
-pub fn rational_matrix_dto_mul(value_value: JsValue, b_value: JsValue) -> std::result::Result<JsValue, JsError> {
-    let value: RationalMatrixValue = serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
-    let b: RationalMatrixValue = serde_wasm_bindgen::from_value(b_value).map_err(|e| JsError::new(&e.to_string()))?;
-    let out = RationalMatrixDtoApi::mul(value, b).map_err(|e| js_error_from_to_app_error(e, None))?;
+pub fn rational_matrix_dto_mul(
+    value_value: JsValue,
+    b_value: JsValue,
+) -> std::result::Result<JsValue, JsError> {
+    let value: RationalMatrixValue =
+        serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
+    let b: RationalMatrixValue =
+        serde_wasm_bindgen::from_value(b_value).map_err(|e| JsError::new(&e.to_string()))?;
+    let out =
+        RationalMatrixDtoApi::mul(value, b).map_err(|e| js_error_from_to_app_error(e, None))?;
     serde_wasm_bindgen::to_value(&out).map_err(|e| JsError::new(&e.to_string()))
 }
 
 #[wasm_bindgen]
-pub fn rational_matrix_dto_transpose(value_value: JsValue) -> std::result::Result<JsValue, JsError> {
-    let value: RationalMatrixValue = serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
-    let out = RationalMatrixDtoApi::transpose(value).map_err(|e| js_error_from_to_app_error(e, None))?;
+pub fn rational_matrix_dto_transpose(
+    value_value: JsValue,
+) -> std::result::Result<JsValue, JsError> {
+    let value: RationalMatrixValue =
+        serde_wasm_bindgen::from_value(value_value).map_err(|e| JsError::new(&e.to_string()))?;
+    let out =
+        RationalMatrixDtoApi::transpose(value).map_err(|e| js_error_from_to_app_error(e, None))?;
     serde_wasm_bindgen::to_value(&out).map_err(|e| JsError::new(&e.to_string()))
 }
-

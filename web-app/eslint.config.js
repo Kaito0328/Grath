@@ -12,7 +12,14 @@ const compat = new FlatCompat({
 
 export default tseslint.config([
   {
-  ignores: ['.next/**', 'node_modules/**', 'dist/**', 'src/wasm-pkg/**', 'src/wasm/**'],
+  ignores: [
+    '.next/**',
+    'node_modules/**',
+    'dist/**',
+    'generated/client-sdk/**',
+    'src/wasm-pkg/**',
+    'src/wasm/**',
+  ],
   },
   {
     files: ['**/*.{ts,tsx}'],

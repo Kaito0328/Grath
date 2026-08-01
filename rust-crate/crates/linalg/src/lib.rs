@@ -18,7 +18,9 @@ pub mod vector;
 pub use error::{LinalgError, Result};
 
 pub use algebraic::prelude::Rational;
-pub use api::{LinalgApi, RationalMatrixApi, RationalMatrixDtoApi, RationalMatrixValue, RationalValue};
+pub use api::{
+    LinalgApi, RationalMatrixApi, RationalMatrixDtoApi, RationalMatrixValue, RationalValue,
+};
 
 // 主要なデータ構造
 pub use matrix::{Direction, Matrix};

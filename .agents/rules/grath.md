@@ -9,7 +9,21 @@ Grathは、**「数学を直感的に、かつ厳密に扱う」**ことを目�
 - **バックエンド (Rust)**: 計算の正確性と速度の両立。WASM（WebAssembly）としてビルドされ、フロントエンドからシームレスに呼び出されます。
 - **フロントエンド (Next.js)**: 数式を美しく表示し（LaTeX）、直感的な操作を可能にするプレミアムなUIを提供します。
 
-## 2. ディレクトリ構成
+## 2. 旧プロジェクト (`grath-old`) の参照について
+現在のプロジェクトは、以前の実装である `/workspaces/Grath/grath-old` をベースにリファクタリングおよび再構築を行っています。開発にあたっては、以下の指針で `grath-old` を参照してください。
+
+- **基本的な考え方**:
+  - `grath-old` には既に多くの計算ロジックやUIのプロトタイプが存在します。これらを積極的に参考にしてください。
+  - ただし、旧実装にバグや不備がある場合は、そのままコピーするのではなく、都度修正・改善を行ってください。
+
+- **バックエンド (`grath-old/rust-crate`)**:
+  - アルゴリズムやデータ構造の多くはそのまま参考にできます。
+  - プロジェクト構成や依存関係を現在の `rust-crate/` に合わせて調整してください。
+
+- **フロントエンド (`grath-old/web-app`)**:
+  - **構成の変更**: 現在のプロジェクトは、保守性を高めるために「機能単位のディレクトリ構成（`src/features/`）」を採用しています。フォルダ構造が大きく異なるため、**単純なファイルのコピーは困難**です。
+  - **コンポーネントの移行**: ロジックやレイアウトは参考にできますが、必ず後述の「固定ルール」に従い、`BaseComponent` を用いて書き直してください。
+## 3. ディレクトリ構成
 - `rust-crate/`: Rustによる計算エンジン（バックエンド）
   - `crates/algebraic/`: 基本的な数式処理（有理数、記号式、簡約化など）
   - `crates/linalg/`: 線形代数演算（行列分解、逆行列など）
@@ -17,33 +31,33 @@ Grathは、**「数学を直感的に、かつ厳密に扱う」**ことを目�
   - `src/features/`: 機能ごとのモジュール（`algebraic`, `linalg` など）
   - `src/design/`: デザインシステム、基本コンポーネント（`BaseComponent`）
   - `src/shared/`: 共通ユーティリティ（変数管理、クリップボードなど）
-- `web-app/generated/client-sdk/`: Inspector が生成する TypeScript SDK と WASM パッケージの正本
+- `packages/client-sdk/`: バックエンドと通信するためのTypeScript SDK
 
-## 3. 固定ルール（原則変更禁止）
+## 4. 固定ルール（原則変更禁止）
 
-### 3.1 コミュニケーションと報告
+### 4.1 コミュニケーションと報告
 - 実装計画の提示（`implementation_plan.md`）、進捗状況（`task.md`）、結果報告（`walkthrough.md`）を含む**全てのアーティファクト、およびユーザーへの報告は必ず日本語で行うこと。**
 
-### 3.2 開発環境とコマンド実行
+### 4.2 開発環境とコマンド実行
 - `run_command` などのツールを使用してコマンド（特に `cargo test` など）を実行する際、プロセスの終了判定がフリーズする場合がある。これを防ぐため、必ず **`bash -c "コマンド"`** の形式で実行し、プロセスが確実に終了するようにすること。
 
-### 3.3 フロントエンド実装
+### 4.3 フロントエンド実装
 - 素のHTMLタグ（`div`, `span`, `input`, `button` など）を直接使用せず、必ずデザインシステムの **`BaseComponent`**（`Stack`, `Flex`, `View`, `Text`, `Input`, `Button` など）を使用すること。
 - コンポーネントは可能な限り細かく分割し、単一責任の原則に従って保守性を高めること。
 
-### 3.4 テストと検証
+### 4.4 テストと検証
 - バックエンド（Rust）の実装が完了した際は、必ず `test_cases.yml` を追加し、バックエンド・フロントエンド両方のテストコードが正常に実行・通過することを確認すること。
 
 ---
 
-## 4. 自動化システム（Inspector パイプライン）
+## 5. 自動化システム（Inspector パイプライン）
 
-### 4.1 概要
+### 5.1 概要
 
-`rust-crate/tools/inspector` は、Rust の crate から WASM・TypeScript・テストを一気通貫で自動生成するコード生成エンジンです。  
+`rust-crate/tools/inspector` は、Rust の crate から WASM・TypeScript・テストを一気通貫で自動生成するコード生成エンジンです。
 `cargo run -p inspector -- dev` を実行するだけで、以下の 7 ステップが順番に実行されます。
 
-### 4.2 パイプライン全体像
+### 5.2 パイプライン全体像
 
 ```
 Rust crates/
@@ -74,9 +88,9 @@ Rust crates/
 | 5.5. TS safe API | `inspector ts-api` | spec JSON | `api/<crate>Api.ts` | 型安全ラッパー + エラーハンドリング |
 | 6. TS tests | `inspector ts-test` | spec JSON + YAML | `tests/<crate>.test.ts` | YAML が必須、なければ SKIP |
 
-### 4.3 テストケース YAML 仕様
+### 5.3 テストケース YAML 仕様
 
-テストケースは `rust-crate/integration-tests/test_cases/<crate>.yml` に置く。  
+テストケースは `rust-crate/integration-tests/test_cases/<crate>.yml` に置く。
 形式は以下のとおり。`function` は `StructName::method_name` 形式で指定する。
 
 ```yaml
@@ -93,7 +107,7 @@ Rust crates/
 - `expected`: 文字列比較。JSON を返す関数は JSON 文字列をそのまま書く
 - **YAML 追加後は必ず `cargo run -p inspector -- runner` を実行**して runner_*.rs を更新すること
 
-### 4.4 新規 crate 追加チェックリスト
+### 5.4 新規 crate 追加チェックリスト
 
 新しい crate を追加する際、手動で行う作業は以下だけ：
 
@@ -107,14 +121,14 @@ Rust crates/
 
 その後 `cargo run -p inspector -- dev` を実行すると上記 7 ステップが全自動で走る。
 
-### 4.5 注意事項・既知の制約
+### 5.5 注意事項・既知の制約
 
 - **対象は `pub impl` のみ**: フリー関数（`pub fn`）は自動生成の対象外。フロントから使いたい API は必ず `*Api` struct の impl にラップすること。
 - **手動ファイルは上書きされない**: `wasm/src/<crate>_manual.rs` など `_manual` サフィックスのファイルは自動生成の対象外。`lib.rs` への mod 追記は inspector が行う。
 - **i64/u64 の TS 型**: wasm-bindgen は i64/u64 を `bigint` として生成するが、`ts_gen` が `Number(...)` で正規化して `number` として公開する。
 - **TS テスト実行**: 生成された `tests/<crate>.test.ts` は vitest の include 対象に入っている必要がある（下記参照）。
 
-### 4.6 フロントエンド TS テストの実行
+### 5.6 フロントエンド TS テストの実行
 
 生成された `web-app/generated/client-sdk/src/tests/*.test.ts` を vitest で実行するには、`web-app/vitest.config.ts` の `include` に以下を追加する：
 
@@ -128,7 +142,7 @@ include: [
 
 wasm の bundler target は Vite が `.wasm` ファイルを処理するため、`optimizeDeps.exclude: ['wasm-lib']` で事前バンドルを除外しておく。
 
-### 4.7 現在の自動化カバレッジ
+### 5.7 現在の自動化カバレッジ
 
 | crate | api.rs | YAML | Rust test | TS test 生成 | TS test 実行 |
 |---|---|---|---|---|---|
@@ -146,7 +160,7 @@ concrete-math / statistics は `inspector dev` の再実行で TS test を生成
 
 ---
 
-## 5. 現在の実装状況と個別ルール（随時更新）
+## 6. 現在の実装状況と個別ルール（随時更新）
 
 ### 現在のフェーズ
 - 線形代数（linalg）機能の独立したフィーチャー化とUIリファクタリングの完了。

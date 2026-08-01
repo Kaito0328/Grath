@@ -40,15 +40,24 @@ fn is_dto_json_type(raw: &str, dto_types: &HashSet<String>) -> bool {
     };
     let mut current = ty;
     loop {
-        if let Some(inner) = current.strip_prefix("Vec<").and_then(|v| v.strip_suffix('>')) {
+        if let Some(inner) = current
+            .strip_prefix("Vec<")
+            .and_then(|v| v.strip_suffix('>'))
+        {
             current = inner;
             continue;
         }
-        if let Some(inner) = current.strip_prefix("Option<").and_then(|v| v.strip_suffix('>')) {
+        if let Some(inner) = current
+            .strip_prefix("Option<")
+            .and_then(|v| v.strip_suffix('>'))
+        {
             current = inner;
             continue;
         }
-        if let Some(inner) = current.strip_prefix('[').and_then(|v| v.split_once(';').map(|(inner, _)| inner)) {
+        if let Some(inner) = current
+            .strip_prefix('[')
+            .and_then(|v| v.split_once(';').map(|(inner, _)| inner))
+        {
             current = inner;
             continue;
         }

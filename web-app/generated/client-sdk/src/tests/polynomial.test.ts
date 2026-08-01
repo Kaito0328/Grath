@@ -5,7 +5,7 @@ import * as polynomial from '../wrappers/polynomial';
 
 function normalizeJsonNumbers(value: unknown): unknown {
   if (typeof value === 'number') {
-    return Number(value.toPrecision(15));
+    return Number(value.toPrecision(12));
   }
   if (Array.isArray(value)) {
     return value.map((item) => normalizeJsonNumbers(item));
