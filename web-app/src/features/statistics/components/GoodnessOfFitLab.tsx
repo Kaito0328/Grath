@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StatisticsApi, TestResult } from "@my-project/client-sdk";
 import { Stack } from "../../../design/primitives/Stack";
 import { View } from "../../../design/primitives/View";
@@ -28,7 +28,7 @@ export const GoodnessOfFitLab: React.FC = () => {
     const [busy, setBusy] = useState(false);
     const [pendingSave, setPendingSave] = useState<{ value: string; kind: string } | null>(null);
 
-    const generateData = async () => {
+    const generateData = useCallback(async () => {
         setBusy(true);
         try {
             let data: number[] = [];
@@ -73,11 +73,11 @@ export const GoodnessOfFitLab: React.FC = () => {
         } finally {
             setBusy(false);
         }
-    };
+    }, [distType, params, sampleSize]);
 
     useEffect(() => {
-        generateData();
-    }, [distType]);
+        void generateData();
+    }, [generateData]);
 
     const settingBlock = (
         <Stack gap="sm">
@@ -103,7 +103,7 @@ export const GoodnessOfFitLab: React.FC = () => {
                     <Text variant="xs" color="secondary">ターゲット分布</Text>
                     <Select
                         value={distType}
-                        onChange={(e) => setDistType(e.target.value as any)}
+                        onChange={(e) => setDistType(e.target.value as typeof distType)}
                         options={[
                             { label: "正規分布 (Normal)", value: "normal" },
                             { label: "ポアソン分布 (Poisson)", value: "poisson" },

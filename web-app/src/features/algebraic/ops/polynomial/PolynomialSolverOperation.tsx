@@ -26,6 +26,11 @@ interface RootItem {
     latex: string;
 }
 
+interface NumericRoot {
+    re: number;
+    im: number;
+}
+
 interface PolynomialSolverOperationProps {
     mode: PolyOpMode;
     coeffType: PolyCoeffType;
@@ -145,8 +150,10 @@ export const PolynomialSolverOperation = ({ mode, coeffType, startIndex = 1 }: P
                     setRoots(rootsWithLatex);
                     await verifyRoots(rootsWithLatex);
                 } else {
-                    const res = await PolynomialSolverHelper.solveNumeric(toNumberArray(coeffsA));
-                    const rootsWithLatex = res.map((r: any) => {
+                    const res = (await PolynomialSolverHelper.solveNumeric(
+                        toNumberArray(coeffsA)
+                    )) as NumericRoot[];
+                    const rootsWithLatex = res.map((r) => {
                         const reStr = r.re.toPrecision(precision);
                         let text = "";
                         if (Math.abs(r.im) < 1e-10) {
@@ -157,7 +164,7 @@ export const PolynomialSolverOperation = ({ mode, coeffType, startIndex = 1 }: P
                         return { text, latex: text };
                     });
                     setRoots(rootsWithLatex);
-                    await verifyRoots(rootsWithLatex, res.map((r: any) => ({ re: r.re, im: r.im })));
+                    await verifyRoots(rootsWithLatex, res.map(({ re, im }) => ({ re, im })));
                 }
             } else {
                 let resCsv = "";
@@ -191,7 +198,7 @@ export const PolynomialSolverOperation = ({ mode, coeffType, startIndex = 1 }: P
                 setPolyResult(resArr.join(", "));
                 setPolyLatex(generateLatex(resArr));
             }
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error(e);
             setError(algebraicErrorToDisplayMessage(e));
         } finally {

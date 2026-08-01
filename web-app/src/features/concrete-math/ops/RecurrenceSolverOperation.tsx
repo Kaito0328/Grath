@@ -122,7 +122,7 @@ export const RecurrenceSolverOperation = () => {
                 setNumericDto(resDto);
                 setResult(resStr);
             }
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error(e);
             setError(algebraicErrorToDisplayMessage(e));
         } finally {
@@ -139,7 +139,7 @@ export const RecurrenceSolverOperation = () => {
             } else if (symbolicResult) {
                 setEvalRes("記号的解の評価は現在サポートされていません");
             }
-        } catch (e: any) {
+        } catch (e: unknown) {
             setError(algebraicErrorToDisplayMessage(e));
         }
     }
@@ -161,7 +161,7 @@ export const RecurrenceSolverOperation = () => {
             }));
             const resIter = await ConcreteMathHelper.evalRecurrenceIterative(cArr, iArr, verifyN, nhDtos);
             setVerifyIter(formatComplex(resIter, precision));
-        } catch (e: any) {
+        } catch (e: unknown) {
             setError(algebraicErrorToDisplayMessage(e));
         } finally {
             setVerifying(false);

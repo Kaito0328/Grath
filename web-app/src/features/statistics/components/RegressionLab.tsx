@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { StatisticsApi, RegressionResult } from "@my-project/client-sdk";
 import { Stack } from "../../../design/primitives/Stack";
 import { View } from "../../../design/primitives/View";
@@ -24,7 +24,7 @@ export const RegressionLab: React.FC = () => {
     const [busy, setBusy] = useState(false);
     const [pendingSave, setPendingSave] = useState<{ value: string; kind: string } | null>(null);
 
-    const generateData = async () => {
+    const generateData = useCallback(async () => {
         setBusy(true);
         try {
             // Generate X data (Uniform distribution for better spread in regression visual)
@@ -33,11 +33,11 @@ export const RegressionLab: React.FC = () => {
             
             // Calculate base Y = intercept + slope * x
             const yBase = Array.from(x).map(xv => trueIntercept + trueSlope * xv);
-            let yArray = new Float64Array(yBase);
+            let yArray = yBase;
             
             // Add Gaussian noise
             if (noiseStd > 0) {
-                yArray = await StatisticsApi.addGaussianNoise(yArray, noiseStd) as any;
+                yArray = await StatisticsApi.addGaussianNoise(yArray, noiseStd);
             }
             
             // Add Outliers
@@ -45,7 +45,7 @@ export const RegressionLab: React.FC = () => {
                 // Outliers in a wide range
                 const minY = Math.min(...Array.from(yArray));
                 const maxY = Math.max(...Array.from(yArray));
-                yArray = await StatisticsApi.addOutliers(yArray, outlierCount, minY - 5, maxY + 5) as any;
+                yArray = await StatisticsApi.addOutliers(yArray, outlierCount, minY - 5, maxY + 5);
             }
 
             const points = Array.from(x).map((xv, i) => ({ x: xv, y: yArray[i] }));
@@ -59,11 +59,11 @@ export const RegressionLab: React.FC = () => {
         } finally {
             setBusy(false);
         }
-    };
+    }, [noiseStd, outlierCount, sampleSize, trueIntercept, trueSlope]);
 
     useEffect(() => {
-        generateData();
-    }, []);
+        void generateData();
+    }, [generateData]);
 
     const chartConfig = useMemo(() => {
         if (data.length === 0) return null;
@@ -198,9 +198,9 @@ export const RegressionLab: React.FC = () => {
                 </Button>
                 <Button variant="outline" size="sm" onClick={() => setPendingSave({
                     value: JSON.stringify({
-                        slope: (regressionResult?.toDTO() as any)?.slope,
-                        intercept: (regressionResult?.toDTO() as any)?.intercept,
-                        r_squared: (regressionResult?.toDTO() as any)?.r_squared
+                        slope: regressionResult?.slope,
+                        intercept: regressionResult?.intercept,
+                        r_squared: regressionResult?.rSquared,
                     }),
                     kind: "statistics.regression_model"
                 })}>

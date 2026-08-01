@@ -24,16 +24,6 @@ describe('signal-processing wasm integration', () => {
     signalProcessing.setWasmFromWasmLib(wasm);
   });
 
-  describe('SignalProcessingApi::expand', () => {
-    it('case 1', () => {
-      const arg0 = new Float64Array([1, 2, 3]);
-      const arg1 = 2;
-      const result = signalProcessing.expand(arg0, arg1);
-      const out = Array.from(result as any).join(',');
-      expect(out).toBe("1,0,2,0,3,0");
-    });
-  });
-
   describe('SignalProcessingApi::conv_simple_f64', () => {
     it('case 1', () => {
       const arg0 = new Float64Array([1, 2, 3]);
@@ -51,6 +41,16 @@ describe('signal-processing wasm integration', () => {
       const result = signalProcessing.decimate(arg0, arg1);
       const out = Array.from(result as any).join(',');
       expect(out).toBe("1,3,5");
+    });
+  });
+
+  describe('SignalProcessingApi::expand', () => {
+    it('case 1', () => {
+      const arg0 = new Float64Array([1, 2, 3]);
+      const arg1 = 2;
+      const result = signalProcessing.expand(arg0, arg1);
+      const out = Array.from(result as any).join(',');
+      expect(out).toBe("1,0,2,0,3,0");
     });
   });
 

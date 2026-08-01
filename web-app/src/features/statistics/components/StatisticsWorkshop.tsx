@@ -114,17 +114,15 @@ export const StatisticsWorkshop: React.FC = () => {
     // Initial resets when mode or dist changes
     useEffect(() => {
         if (mode === "single") {
-            setConfigs([configs[0]]);
-            setDataList([dataList[0]]);
-        } else if (configs.length < 2) {
-            setConfigs([
-                configs[0],
-                { ...configs[0], mean: configs[0].mean + 0.5 }
-            ]);
-            setDataList([
-                dataList[0],
-                { clean: null, noisy: null, noiseStd: 0.2, outlierCount: 0 }
-            ]);
+            setConfigs((previous) => [previous[0]]);
+            setDataList((previous) => [previous[0]]);
+        } else {
+            setConfigs((previous) => previous.length < 2
+                ? [previous[0], { ...previous[0], mean: previous[0].mean + 0.5 }]
+                : previous);
+            setDataList((previous) => previous.length < 2
+                ? [previous[0], { clean: null, noisy: null, noiseStd: 0.2, outlierCount: 0 }]
+                : previous);
         }
         setTestResult(null);
     }, [mode]);
@@ -305,7 +303,7 @@ export const StatisticsWorkshop: React.FC = () => {
                 </Stack>
             </View>
         );
-    }, [dataList, mode]);
+    }, [dataList]);
 
     const settingBlock = (
         <Stack gap="sm">

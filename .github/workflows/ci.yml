@@ -84,6 +84,8 @@ jobs:
             git diff -- web-app/src/features web-app/src/shared/errors/commonErrorCodeMessages.generated.ts || true
             exit 1
           }
+          # A non-matching grep is expected when generated files are current.
+          true
 
   web-app-check:
     name: web-app (test/build)

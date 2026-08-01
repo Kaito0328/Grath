@@ -18,7 +18,7 @@ export const SectionHeader = ({
 }: SectionHeaderProps) => {
 	return (
 		<View className={cn("border-b border-slate-300 dark:border-slate-700 pb-3 mb-4 w-full", className)}>
-			<Text variant={size as any} weight="semibold" className="text-slate-700 dark:text-slate-300">
+			<Text variant={size} weight="semibold" className="text-slate-700 dark:text-slate-300">
 				{title}
 			</Text>
 		</View>

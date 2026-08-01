@@ -6,7 +6,7 @@ use crate::notion::model::TestCaseYaml;
 use crate::types::{ApiReport, FunctionArgInfo, FunctionInfo, TypeApiInfo};
 use anyhow::Result;
 use convert_case::{Case, Casing};
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use std::fs;
 use std::path::Path;
 
@@ -53,7 +53,10 @@ pub fn generate_ts_test_with_boundary_types(
     let yaml_content = fs::read_to_string(yaml_path)?;
     let test_cases: Vec<TestCaseYaml> = serde_yaml::from_str(&yaml_content)?;
 
-    let mut cases_by_func: HashMap<String, Vec<TestCaseYaml>> = HashMap::new();
+    // Keep generated test files stable across processes and platforms. HashMap
+    // iteration order is randomized, which previously made CI re-order tests
+    // even when the input YAML had not changed.
+    let mut cases_by_func: BTreeMap<String, Vec<TestCaseYaml>> = BTreeMap::new();
     for case in test_cases {
         cases_by_func
             .entry(case.function.clone())

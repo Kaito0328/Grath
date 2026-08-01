@@ -24,14 +24,6 @@ describe('finite-field wasm integration', () => {
     finiteField.setWasmFromWasmLib(wasm);
   });
 
-  describe('FiniteFieldApi::gfp5_inv', () => {
-    it('case 1', () => {
-      const arg0 = "2";
-      const result = finiteField.gfp5Inv(arg0);
-      expect(String(result)).toBe("3");
-    });
-  });
-
   describe('FiniteFieldApi::gf256_inv_check', () => {
     it('case 1', () => {
       const arg0 = "0x53";
@@ -40,12 +32,12 @@ describe('finite-field wasm integration', () => {
     });
   });
 
-  describe('FiniteFieldApi::gfp5_mul', () => {
+  describe('FiniteFieldApi::gf256_mul', () => {
     it('case 1', () => {
-      const arg0 = "2";
-      const arg1 = "4";
-      const result = finiteField.gfp5Mul(arg0, arg1);
-      expect(String(result)).toBe("3");
+      const arg0 = "0x57";
+      const arg1 = "0x83";
+      const result = finiteField.gf256Mul(arg0, arg1);
+      expect(String(result)).toBe("193");
     });
   });
 
@@ -58,12 +50,20 @@ describe('finite-field wasm integration', () => {
     });
   });
 
-  describe('FiniteFieldApi::gf256_mul', () => {
+  describe('FiniteFieldApi::gfp5_inv', () => {
     it('case 1', () => {
-      const arg0 = "0x57";
-      const arg1 = "0x83";
-      const result = finiteField.gf256Mul(arg0, arg1);
-      expect(String(result)).toBe("193");
+      const arg0 = "2";
+      const result = finiteField.gfp5Inv(arg0);
+      expect(String(result)).toBe("3");
+    });
+  });
+
+  describe('FiniteFieldApi::gfp5_mul', () => {
+    it('case 1', () => {
+      const arg0 = "2";
+      const arg1 = "4";
+      const result = finiteField.gfp5Mul(arg0, arg1);
+      expect(String(result)).toBe("3");
     });
   });
 

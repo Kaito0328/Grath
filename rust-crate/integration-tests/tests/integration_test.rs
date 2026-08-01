@@ -23,6 +23,51 @@ struct ExpectedError {
     message: String,
 }
 
+/// Compare JSON results while accepting insignificant IEEE-754 differences
+/// between native and CI builds. Non-JSON values remain exact matches.
+fn results_match(expected: &str, actual: &str) -> bool {
+    if expected == actual {
+        return true;
+    }
+
+    let (Ok(expected), Ok(actual)) = (
+        serde_json::from_str::<serde_json::Value>(expected),
+        serde_json::from_str::<serde_json::Value>(actual),
+    ) else {
+        return false;
+    };
+
+    json_values_match(&expected, &actual)
+}
+
+fn json_values_match(expected: &serde_json::Value, actual: &serde_json::Value) -> bool {
+    match (expected, actual) {
+        (serde_json::Value::Number(expected), serde_json::Value::Number(actual)) => {
+            let (Some(expected), Some(actual)) = (expected.as_f64(), actual.as_f64()) else {
+                return expected == actual;
+            };
+            let tolerance = 1e-12 * expected.abs().max(actual.abs()).max(1.0);
+            (expected - actual).abs() <= tolerance
+        }
+        (serde_json::Value::Array(expected), serde_json::Value::Array(actual)) => {
+            expected.len() == actual.len()
+                && expected
+                    .iter()
+                    .zip(actual)
+                    .all(|(expected, actual)| json_values_match(expected, actual))
+        }
+        (serde_json::Value::Object(expected), serde_json::Value::Object(actual)) => {
+            expected.len() == actual.len()
+                && expected.iter().all(|(key, expected)| {
+                    actual
+                        .get(key)
+                        .is_some_and(|actual| json_values_match(expected, actual))
+                })
+        }
+        _ => expected == actual,
+    }
+}
+
 // ★修正1: フィールドがない場合でもパニックしないようにデフォルト値を許可
 #[derive(Deserialize)]
 struct Config {
@@ -132,7 +177,7 @@ fn main() {
                                     expected_error.code, expected_error.message, actual
                                 ),
                             )
-                        } else if actual == case.expected {
+                        } else if results_match(&case.expected, &actual) {
                             ("PASS", "".to_string())
                         } else {
                             (

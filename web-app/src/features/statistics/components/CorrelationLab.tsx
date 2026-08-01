@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { StatisticsApi, TestResult } from "@my-project/client-sdk";
 import { Stack } from "../../../design/primitives/Stack";
 import { View } from "../../../design/primitives/View";
@@ -22,7 +22,7 @@ export const CorrelationLab: React.FC = () => {
     const [busy, setBusy] = useState(false);
     const [pendingSave, setPendingSave] = useState<{ value: string; kind: string } | null>(null);
 
-    const generateData = async () => {
+    const generateData = useCallback(async () => {
         setBusy(true);
         try {
             // Pearson's r simulation: y = r*x + sqrt(1-r^2)*noise
@@ -44,11 +44,11 @@ export const CorrelationLab: React.FC = () => {
         } finally {
             setBusy(false);
         }
-    };
+    }, [correlation, noise, sampleSize]);
 
     useEffect(() => {
-        generateData();
-    }, []);
+        void generateData();
+    }, [generateData]);
 
     const chartConfig = useMemo(() => {
         if (data.length === 0) return null;

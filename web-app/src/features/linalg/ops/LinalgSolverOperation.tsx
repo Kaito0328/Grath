@@ -87,6 +87,11 @@ const toRationalCsvFromNumericCells = (data: string[][]): string | null => {
     return (rows as string[][]).map(r => r.join(",")).join(";");
 };
 
+const errorMessage = (error: unknown): string => {
+    if (error instanceof Error) return error.message;
+    return typeof error === "string" ? error : "";
+};
+
 interface ResultItem {
     label: string;
     value: string; // Plain text or CSV for saving
@@ -486,8 +491,8 @@ export const LinalgSolverOperation = ({ mode, coeffType, group, startIndex = 1 }
                 } else if (runCoeffType === "rational") {
                     try {
                         res = await LinalgApi.eigenvaluesRational(runCsvA);
-                    } catch (e: any) {
-                        const appErr = tryParseAppErrorMessage(e?.message || "");
+                    } catch (e: unknown) {
+                        const appErr = tryParseAppErrorMessage(errorMessage(e));
                         if (appErr?.code === AppErrorCodes.LinalgExactSizeLimit) {
                             const numericCsvA = toNumericCsvFromCells(dataA);
                             if (!numericCsvA) {
@@ -529,8 +534,8 @@ export const LinalgSolverOperation = ({ mode, coeffType, group, startIndex = 1 }
                 else if (runCoeffType === "rational") {
                     try {
                         res = await LinalgApi.svdRational(runCsvA);
-                    } catch (e: any) {
-                        const appErr = tryParseAppErrorMessage(e?.message || "");
+                    } catch (e: unknown) {
+                        const appErr = tryParseAppErrorMessage(errorMessage(e));
                         if (appErr?.code === AppErrorCodes.LinalgExactSizeLimit) {
                             const numericCsvA = toNumericCsvFromCells(dataA);
                             if (!numericCsvA) {
@@ -595,15 +600,16 @@ export const LinalgSolverOperation = ({ mode, coeffType, group, startIndex = 1 }
 
             setResult(res);
             await performVerification(res, csvA);
-        } catch (e: any) {
-            const appErr = tryParseAppErrorMessage(e?.message || "");
+        } catch (e: unknown) {
+            const message = errorMessage(e);
+            const appErr = tryParseAppErrorMessage(message);
             if (appErr?.code === AppErrorCodes.LinalgExactSizeLimit) {
                 // Expected limitation: don't treat as a hard error in logs.
                 console.warn(appErr);
             } else {
                 console.error(e);
             }
-            setError(toUserMessageFromAppError(e?.message || "エラーが発生しました。"));
+            setError(toUserMessageFromAppError(message || "エラーが発生しました。"));
         }
         setLoading(false);
     };

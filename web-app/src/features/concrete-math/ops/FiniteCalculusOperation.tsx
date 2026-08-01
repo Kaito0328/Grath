@@ -89,7 +89,7 @@ export const FiniteCalculusOperation = () => {
             const resStrs = res.map(c => parseFloat(c.re.toFixed(10)).toString());
             setResultLatex(generateLatex(resStrs));
             setResultStr(resStrs.join(", "));
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error(e);
             setError(algebraicErrorToDisplayMessage(e));
         } finally {
@@ -110,7 +110,7 @@ export const FiniteCalculusOperation = () => {
             const resStrs = res.map(c => parseFloat(c.re.toFixed(10)).toString());
             setResultLatex(generateLatex(resStrs));
             setResultStr(resStrs.join(", "));
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error(e);
             setError(algebraicErrorToDisplayMessage(e));
         } finally {
