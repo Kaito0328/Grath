@@ -1,0 +1,41 @@
+# Minimal integration tests for concrete-math
+
+- function: ConcreteMathApi::nt_gcd
+  inputs:
+    - "48"
+    - "18"
+  expected: "6"
+
+- function: ConcreteMathApi::nt_lcm
+  inputs:
+    - "48"
+    - "18"
+  expected: "144"
+
+- function: ConcreteMathApi::nt_mod_pow
+  inputs:
+    - "2"
+    - "10"
+    - "1000"
+  expected: "24"
+
+- function: ConcreteMathApi::nt_mod_inverse
+  inputs:
+    - "3"
+    - "11"
+  expected: "4"
+
+- function: ConcreteMathApi::nt_is_prime
+  inputs:
+    - "97"
+  expected: "true"
+
+- function: ConcreteMathApi::nt_factorize
+  inputs:
+    - "84"
+  expected: '{\"factors\":[{\"p\":\"2\",\"exp\":2},{\"p\":\"3\",\"exp\":1},{\"p\":\"7\",\"exp\":1}]}'
+
+- function: ConcreteMathApi::nt_phi
+  inputs:
+    - "36"
+  expected: "12"

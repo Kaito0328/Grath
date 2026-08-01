@@ -1,0 +1,24 @@
+[package]
+name = "concrete-math"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "concrete_math"
+path = "src/lib.rs"
+
+[dependencies]
+num-traits = "0.2"
+num-complex = "0.4"
+serde = { workspace = true, optional = true }
+thiserror = { workspace = true }
+algebraic = { path = "../algebraic" }
+polynomial = { path = "../polynomial" }
+linalg = { path = "../linalg" }
+number-theory = { path = "../number-theory" }
+special-functions = { path = "../special-functions" }
+num-bigint = "0.4"
+common = { path = "../common" }
+
+[features]
+serde = ["dep:serde", "algebraic/serde", "polynomial/serde", "number-theory/serde"]

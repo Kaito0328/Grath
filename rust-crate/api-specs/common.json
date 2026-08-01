@@ -1,0 +1,47 @@
+{
+  "structs": [
+    {
+      "name": "AppError",
+      "crate_name": "common",
+      "doc": "",
+      "fields": [
+        "code: String",
+        "message: String",
+        "details: Option < String >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "CommonError",
+      "crate_name": "common",
+      "doc": "",
+      "fields": [
+        "InvalidInput",
+        "NotFound",
+        "InternalServerError"
+      ],
+      "enum_variants": [
+        {
+          "name": "InvalidInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "NotFound",
+          "fields": "Unit"
+        },
+        {
+          "name": "InternalServerError",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    }
+  ],
+  "impl_blocks": [],
+  "crate_apis": [],
+  "type_apis": [],
+  "unsupported": []
+}

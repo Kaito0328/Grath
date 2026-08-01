@@ -1,0 +1,55 @@
+/* eslint-disable */
+/* tslint:disable */
+// --- Auto-generated: client-sdk API classes ({{ crate_name }}) ---
+
+import * as W from "../wrappers/{{ crate_name }}";
+import { requireTrimmed, withReady } from "./runtime";
+
+// DTOs (serializable shapes). The classes below store these DTOs internally.
+{% for s in structs %}
+export type {{ s.name }}DTO = W.{{ s.name }}Dto;
+{% endfor %}
+
+// Shared helpers
+function requireSafeInteger(n: number, name: string) {
+  if (!Number.isSafeInteger(n)) throw new Error(`${name} must be a safe integer`);
+  return String(Math.floor(n));
+}
+
+{% for s in structs %}
+export class {{ s.name }} {
+  private readonly _dto: {{ s.name }}DTO;
+
+  private constructor(dto: {{ s.name }}DTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: {{ s.name }}DTO) {
+    return new {{ s.name }}(dto);
+  }
+
+  toDTO(): {{ s.name }}DTO {
+    return this._dto;
+  }
+
+  toString(): string {
+{% if s.has_format %}
+    return W.{{ s.camel_name }}FormatDto(this._dto);
+{% else %}
+    return JSON.stringify(this._dto);
+{% endif %}
+  }
+
+{% for f in s.static_methods %}
+  {{ f.declaration }} {
+    {{ f.body }}
+  }
+{% endfor %}
+
+{% for f in s.instance_methods %}
+  {{ f.declaration }} {
+    {{ f.body }}
+  }
+{% endfor %}
+}
+{% endfor %}

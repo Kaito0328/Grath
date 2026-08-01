@@ -1,0 +1,28 @@
+[package]
+name = "integration-tests"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+# [[test]] セクションを追加
+[[test]]
+name = "integration_test" # ファイル名 (tests/integration_test.rs)
+harness = false           # ★重要: 標準のテストランナーを無効化
+
+[dependencies]
+algebraic = { path = "../crates/algebraic" }
+common = { path = "../crates/common" }
+polynomial = { path = "../crates/polynomial" }
+linalg = { path = "../crates/linalg", features = ["serde"] }
+coding = { path = "../crates/coding" }
+finite-field = { path = "../crates/finite-field" }
+source-coding = { path = "../crates/source-coding" }
+signal-processing = { path = "../crates/signal-processing" }
+statistics = { path = "../crates/statistics" }
+concrete-math = { path = "../crates/concrete-math" }
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1.0"
+
+[dev-dependencies]
+libtest-mimic = "0.7" # ★追加

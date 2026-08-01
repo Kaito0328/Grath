@@ -1,0 +1,9 @@
+/* eslint-disable */
+/* tslint:disable */
+// --- Auto-generated TypeScript Wrapper Stub ---
+
+export type {{ module_name }} = any;
+
+export function setWasm(module: {{ module_name }}) {}
+
+export function setWasmFromWasmLib(wasmLib: unknown) {}

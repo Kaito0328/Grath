@@ -1,0 +1,16 @@
+# Minimal integration tests for source-coding
+
+- function: SourceCodingApi::huffman_roundtrip
+  inputs:
+    - "hello hello hello"
+  expected: "true"
+
+- function: SourceCodingApi::lz78_roundtrip
+  inputs:
+    - "abracadabra abracadabra"
+  expected: "true"
+
+- function: SourceCodingApi::arithmetic_roundtrip
+  inputs:
+    - "BANANA_BANDANA"
+  expected: "true"

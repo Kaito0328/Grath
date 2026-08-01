@@ -1,0 +1,181 @@
+- function: Rational::checked_add
+  inputs:
+    - 1/2
+    - 1/4
+  expected: 3/4
+- function: Rational::checked_div
+  inputs:
+    - 1/2
+    - 1/4
+  expected: "2"
+- function: Rational::checked_mul
+  inputs:
+    - 1/2
+    - 2/3
+  expected: 1/3
+- function: Rational::denom
+  inputs:
+    - 3/4
+  expected: "4"
+- function: Rational::from_int
+  inputs:
+    - "5"
+  expected: "5"
+- function: Rational::is_integer
+  inputs:
+    - 4/2
+  expected: "true"
+- function: Rational::is_zero
+  inputs:
+    - "0"
+  expected: "true"
+- function: Rational::normalize
+  inputs:
+    - 2/4
+  expected: 1/2
+- function: Rational::numer
+  inputs:
+    - 3/4
+  expected: "3"
+- function: Rational::simplified
+  inputs:
+    - 3/9
+  expected: 1/3
+- function: SymbolicComplex::add
+  inputs:
+    - 1 + i
+    - 1 - i
+  expected: "2"
+- function: SymbolicComplex::from_real
+  inputs:
+    - "5"
+  expected: "5"
+- function: SymbolicComplex::i
+  inputs: []
+  expected: i
+- function: SymbolicComplex::is_imag_pure
+  inputs:
+    - 2*i
+  expected: "true"
+- function: SymbolicComplex::is_imag_pure
+  inputs:
+    - 2i
+  expected: "true"
+- function: SymbolicComplex::is_real
+  inputs:
+    - 1+i
+  expected: "false"
+- function: SymbolicComplex::mul
+  inputs:
+    - i
+    - i
+  expected: "-1"
+- function: SymbolicComplex::mul
+  inputs:
+    - 1 + i
+    - 1 - i
+  expected: "2"
+- function: SymbolicComplex::neg
+  inputs:
+    - 1 + i
+  expected: -1 - i
+- function: SymbolicComplex::new
+  inputs:
+    - "1"
+    - "2"
+  expected: 1 + 2i
+- function: SymbolicComplex::sqrt_rational
+  inputs:
+    - "-4"
+    - "1"
+  expected: 2i
+- function: SymbolicComplex::sqrt_rational
+  inputs:
+    - "4"
+    - "1"
+  expected: "2"
+- function: SymbolicComplex::sqrt_rational
+  inputs:
+    - "-1"
+    - "1"
+  expected: i
+- function: SymbolicComplex::to_latex
+  inputs:
+    - 1/2
+  expected: \frac{1}{2}
+
+- function: Rational::to_latex
+  inputs:
+    - -1/2
+  expected: "-\\frac{1}{2}"
+
+- function: SymbolicExpr::add
+  inputs:
+    - 1,1/2
+  expected: 3/2
+
+- function: SymbolicExpr::mul
+  inputs:
+    - 2,3
+  expected: "6"
+
+- function: SymbolicExpr::to_latex
+  inputs:
+    - "-1*b*(1+b)"
+  expected: "b(-1-b)"
+
+# --- from_latex ---
+- function: Rational::from_latex
+  inputs:
+    - "\\frac{1}{2}"
+  expected: 1/2
+- function: Rational::from_latex
+  inputs:
+    - "$\\frac{-2}{4}$"
+  expected: -1/2
+- function: SymbolicExpr::from_latex
+  inputs:
+    - "2x"
+  expected: 2x
+- function: SymbolicExpr::from_latex
+  inputs:
+    - "\\frac{1}{2} + 1"
+  expected: 3/2
+- function: SymbolicComplex::from_latex
+  inputs:
+    - "1 + i"
+  expected: 1 + i
+
+# --- extra coverage (existing functions) ---
+- function: Rational::is_one
+  inputs:
+    - 2/2
+  expected: "true"
+- function: Rational::is_minus_one
+  inputs:
+    - -2/2
+  expected: "true"
+
+- function: SymbolicExpr::pow
+  inputs:
+    - "2"
+    - "3"
+  expected: "8"
+- function: SymbolicExpr::pow
+  inputs:
+    - "2"
+    - "-1"
+  expected: 1/2
+- function: SymbolicExpr::simplify
+  inputs:
+    - "1 + 1"
+  expected: "2"
+
+- function: SymbolicComplex::zero
+  inputs: []
+  expected: "0"
+- function: SymbolicComplex::sub
+  inputs:
+    - 1 + i
+    - 1 - i
+  expected: 2i

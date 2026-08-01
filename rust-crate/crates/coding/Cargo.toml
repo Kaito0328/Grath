@@ -1,0 +1,15 @@
+[package]
+name = "coding"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+linalg = { path = "../linalg" }
+polynomial = { path = "../polynomial" }
+num-traits = "0.2"
+serde = { version = "1", features = ["derive" ] }
+finite-field = { path = "../finite-field" }
+common = { path = "../common" }
+
+[dev-dependencies]
+pretty_assertions = "1"

@@ -1,0 +1,21 @@
+[package]
+name = "number-theory"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+num-bigint = "0.4"
+num-integer = "0.1"
+num-traits = "0.2"
+rand = { version = "0.8", features = ["std"], optional = true }
+num-complex = "0.4"
+serde = { workspace = true, optional = true }
+thiserror = { workspace = true }
+
+# Project crates
+linalg = { path = "../linalg" }
+finite-field = { path = "../finite-field" }
+
+[features]
+default = ["rand"]
+serde = ["dep:serde", "linalg/serde", "finite-field/serde"]

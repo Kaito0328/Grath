@@ -1,0 +1,3747 @@
+{
+  "structs": [
+    {
+      "name": "JonesCode",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "alphabet: Alphabet",
+        "cum: HashMap < Symbol , (u64 , u64) >",
+        "total: u64"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "JonesBitstreamError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "NonAsciiInput",
+        "EmptyInput",
+        "InvalidMagic",
+        "UnsupportedVersion",
+        "Truncated",
+        "DecodeError",
+        "RangeError"
+      ],
+      "enum_variants": [
+        {
+          "name": "NonAsciiInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "EmptyInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "InvalidMagic",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnsupportedVersion",
+          "fields": "Unit"
+        },
+        {
+          "name": "Truncated",
+          "fields": "Unit"
+        },
+        {
+          "name": "DecodeError",
+          "fields": "Unit"
+        },
+        {
+          "name": "RangeError",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "SymbolPr",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "alphabet: Alphabet",
+        "s_to_prs: HashMap < Symbol , f64 >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "SymbolRange",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "alphabet: Alphabet",
+        "s_to_rs: HashMap < Symbol , (f64 , f64) >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "ArithmeticError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "InvalidDistribution",
+        "EmptyInput"
+      ],
+      "enum_variants": [
+        {
+          "name": "InvalidDistribution",
+          "fields": "Unit"
+        },
+        {
+          "name": "EmptyInput",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "ArithmeticCode",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "symbol_range: SymbolRange"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "ArithmeticBitstreamError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "NonAsciiInput",
+        "EmptyInput",
+        "InvalidMagic",
+        "UnsupportedVersion",
+        "Truncated",
+        "DecodeError",
+        "ProbabilityError"
+      ],
+      "enum_variants": [
+        {
+          "name": "NonAsciiInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "EmptyInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "InvalidMagic",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnsupportedVersion",
+          "fields": "Unit"
+        },
+        {
+          "name": "Truncated",
+          "fields": "Unit"
+        },
+        {
+          "name": "DecodeError",
+          "fields": "Unit"
+        },
+        {
+          "name": "ProbabilityError",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Markov",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "alphabet: Alphabet",
+        "init_pr: HashMap < Symbol , f64 >",
+        "cond_pr: HashMap < (Symbol , Symbol) , f64 >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "EliasListBitstreamError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "InvalidMagic",
+        "UnsupportedVersion",
+        "Truncated",
+        "LengthMismatch",
+        "ElementDecodeError(usize)"
+      ],
+      "enum_variants": [
+        {
+          "name": "InvalidMagic",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnsupportedVersion",
+          "fields": "Unit"
+        },
+        {
+          "name": "Truncated",
+          "fields": "Unit"
+        },
+        {
+          "name": "LengthMismatch",
+          "fields": "Unit"
+        },
+        {
+          "name": "ElementDecodeError",
+          "fields": {
+            "Unnamed": [
+              {
+                "Primitive": "USize"
+              }
+            ]
+          }
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "HuffmanCode",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "codes: HashMap < Symbol , Vec < u8 > >",
+        "decode_table: HashMap < (usize , u64) , Symbol >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "HuffmanBitstreamError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "NonAsciiInput",
+        "InvalidMagic",
+        "UnsupportedVersion",
+        "Truncated",
+        "InvalidSymbolCount",
+        "DecodeMismatch"
+      ],
+      "enum_variants": [
+        {
+          "name": "NonAsciiInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "InvalidMagic",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnsupportedVersion",
+          "fields": "Unit"
+        },
+        {
+          "name": "Truncated",
+          "fields": "Unit"
+        },
+        {
+          "name": "InvalidSymbolCount",
+          "fields": "Unit"
+        },
+        {
+          "name": "DecodeMismatch",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Lz78Code",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Lz78BitstreamError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "NonAsciiInput",
+        "Truncated",
+        "InvalidMagic",
+        "UnsupportedVersion",
+        "DecodeError"
+      ],
+      "enum_variants": [
+        {
+          "name": "NonAsciiInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "Truncated",
+          "fields": "Unit"
+        },
+        {
+          "name": "InvalidMagic",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnsupportedVersion",
+          "fields": "Unit"
+        },
+        {
+          "name": "DecodeError",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Lz78VarBitstreamError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "NonAsciiInput",
+        "InvalidMagic",
+        "UnsupportedVersion",
+        "Truncated",
+        "DecodeError"
+      ],
+      "enum_variants": [
+        {
+          "name": "NonAsciiInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "InvalidMagic",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnsupportedVersion",
+          "fields": "Unit"
+        },
+        {
+          "name": "Truncated",
+          "fields": "Unit"
+        },
+        {
+          "name": "DecodeError",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Lz78HuffmanError",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "NonAsciiInput",
+        "InvalidMagic",
+        "UnsupportedVersion",
+        "Truncated",
+        "Huffman(String)",
+        "DecodeError"
+      ],
+      "enum_variants": [
+        {
+          "name": "NonAsciiInput",
+          "fields": "Unit"
+        },
+        {
+          "name": "InvalidMagic",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnsupportedVersion",
+          "fields": "Unit"
+        },
+        {
+          "name": "Truncated",
+          "fields": "Unit"
+        },
+        {
+          "name": "Huffman",
+          "fields": {
+            "Unnamed": [
+              "String"
+            ]
+          }
+        },
+        {
+          "name": "DecodeError",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "SourceCodingApi",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "SymbolsPr",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "block_alphabet: Vec < Symbols >",
+        "ss_to_prs: HashMap < Symbols , f64 >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "BlockHuffmanTree",
+      "crate_name": "source-coding",
+      "doc": "",
+      "fields": [
+        "q: usize",
+        "symbols_pr: SymbolsPr"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    }
+  ],
+  "impl_blocks": [
+    {
+      "crate_name": "source-coding",
+      "target_struct": "JonesCode",
+      "functions": [
+        {
+          "name": "from_symbol_pr",
+          "visibility": "pub",
+          "args": [
+            "pr : & SymbolPr",
+            "total : u64"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn from_symbol_pr (pr : & SymbolPr , total : u64) -> Self { let mut raw : Vec < (Symbol , u64) > = Vec :: new () ; let mut sum_w = 0u64 ; for & s in & pr . alphabet { let p = pr . s_to_prs . get (& s) . cloned () . unwrap_or (0.0) . max (0.0) ; let mut w = (p * total as f64) . round () as u64 ; if w == 0 { w = 1 ; } raw . push ((s , w)) ; sum_w += w ; } if sum_w > total { let mut i = 0 ; while sum_w > total { if raw [i] . 1 > 1 { raw [i] . 1 -= 1 ; sum_w -= 1 ; } i = (i + 1) % raw . len () ; } } else if sum_w < total { let mut i = 0 ; while sum_w < total { raw [i] . 1 += 1 ; sum_w += 1 ; i = (i + 1) % raw . len () ; } } let mut cum = HashMap :: new () ; let mut acc = 0u64 ; for (s , w) in & raw { let l = acc ; let r = l + * w ; cum . insert (* s , (l , r)) ; acc = r ; } Self { alphabet : pr . alphabet . clone () , cum , total , } }",
+          "typed_args": [
+            {
+              "name": "pr",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "SymbolPr"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "total",
+              "rust_type": {
+                "Primitive": "U64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolPr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "U64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "encode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "symbols : & Symbols"
+          ],
+          "return_type": "CodeWords",
+          "doc": "High-precision (64-bit) arithmetic-style integer interval coding.\nAlways returns exactly 64 bits as codeword.",
+          "source_code": "# [doc = \" High-precision (64-bit) arithmetic-style integer interval coding.\"] # [doc = \" Always returns exactly 64 bits as codeword.\"] pub fn encode (& self , symbols : & Symbols) -> CodeWords { const PREC_BITS : u32 = 64 ; let full_high : u128 = (1u128 << PREC_BITS) - 1 ; let mut low : u128 = 0 ; let mut high : u128 = full_high ; let total_u128 = self . total as u128 ; for & s in symbols { let (ls , rs) = self . cum . get (& s) . copied () . unwrap_or ((0 , 1)) ; let range = high - low + 1 ; let ls_u = ls as u128 ; let rs_u = rs as u128 ; let new_low = low + (range * ls_u) / total_u128 ; let new_high = low + (range * rs_u) / total_u128 - 1 ; low = new_low ; high = new_high ; } let mid = (low + high) / 2 ; let mut bits = Vec :: with_capacity (PREC_BITS as usize) ; for i in (0 .. PREC_BITS) . rev () { bits . push (((mid >> i) & 1) as u8) ; } bits }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "symbols",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Symbols"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodeWords"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Symbols",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodeWords"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodeWords",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "decode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "length : usize",
+            "bits : & CodeWords"
+          ],
+          "return_type": "Symbols",
+          "doc": "",
+          "source_code": "pub fn decode (& self , length : usize , bits : & CodeWords) -> Symbols { if length == 0 { return Vec :: new () ; } const PREC_BITS : u32 = 64 ; let mut code : u128 = 0 ; for & b in bits { code = (code << 1) | (b as u128) ; } if bits . len () < PREC_BITS as usize { code <<= (PREC_BITS as usize - bits . len ()) as u32 ; } let mut low : u128 = 0 ; let mut high : u128 = (1u128 << PREC_BITS) - 1 ; let total_u128 = self . total as u128 ; let mut out = Vec :: with_capacity (length) ; for _ in 0 .. length { let range = high - low + 1 ; let offset = code - low ; let scaled = (((offset + 1) * total_u128) - 1) / range ; let mut found = self . alphabet [0] ; for & s in & self . alphabet { let (ls , rs) = self . cum [& s] ; if (ls as u128) <= scaled && scaled < (rs as u128) { found = s ; break ; } } out . push (found) ; let (ls , rs) = self . cum [& found] ; let ls_u = ls as u128 ; let rs_u = rs as u128 ; let new_low = low + (range * ls_u) / total_u128 ; let new_high = low + (range * rs_u) / total_u128 - 1 ; low = new_low ; high = new_high ; } out }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "length",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "bits",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "CodeWords"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Symbols"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "CodeWords"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: CodeWords",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Symbols"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: Symbols",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "ArithmeticCode",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "symbol_pr : SymbolPr"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (symbol_pr : SymbolPr) -> Result < Self > { let mut sum = 0.0f64 ; for & s in & symbol_pr . alphabet { let p = * symbol_pr . s_to_prs . get (& s) . ok_or (ArithmeticError :: InvalidDistribution) ? ; if ! (p >= 0.0) { return Err (ArithmeticError :: InvalidDistribution) ; } sum += p ; } if (sum - 1.0) . abs () > 1e-9 { return Err (ArithmeticError :: InvalidDistribution) ; } Ok (Self { symbol_range : Self :: spr_to_sr (symbol_pr) , }) }",
+          "typed_args": [
+            {
+              "name": "symbol_pr",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolPr"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolPr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "encode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "symbols : & Symbols"
+          ],
+          "return_type": "Result < CodeWords >",
+          "doc": "",
+          "source_code": "pub fn encode (& self , symbols : & Symbols) -> Result < CodeWords > { if symbols . is_empty () { return Err (ArithmeticError :: EmptyInput) ; } let range = self . calc_range (symbols) ; let mid = (range . 0 + range . 1) / 2.0 ; let range_len = (range . 1 - range . 0) . max (f64 :: EPSILON) ; let length = ((- range_len . log2 ()) . ceil () as i64 + 1) . max (1) as usize ; let mut cws = vec ! [0u8 ; length] ; let mut bin = (0.0f64 , 1.0f64) ; for i in 0 .. length { let border = (bin . 0 + bin . 1) / 2.0 ; if mid < border { cws [i] = 0 ; bin . 1 = border ; } else { cws [i] = 1 ; bin . 0 = border ; } } Ok (cws) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "symbols",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Symbols"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "CodeWords"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Symbols",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "CodeWords"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "unsupported Result ok type: custom type is not registered for string boundary: CodeWords",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "decode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "length : usize",
+            "cws : & CodeWords"
+          ],
+          "return_type": "Result < Symbols >",
+          "doc": "",
+          "source_code": "pub fn decode (& self , length : usize , cws : & CodeWords) -> Result < Symbols > { if length == 0 { return Ok (vec ! []) ; } let mut p = 0.0f64 ; let mut bin = 1.0f64 ; for & b in cws { bin /= 2.0 ; p += (b as f64) * bin ; } let mut out = Vec :: with_capacity (length) ; for _ in 0 .. length { let sym = self . in_range (p) ; let (l , r) = self . symbol_range . s_to_rs [& sym] ; out . push (sym) ; p = (p - l) / (r - l) ; } Ok (out) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "length",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "cws",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "CodeWords"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "CodeWords"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: CodeWords",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Symbols"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "unsupported Result ok type: custom type is not registered for string boundary: Symbols",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Markov",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "alphabet : Alphabet",
+            "init_pr : HashMap < Symbol , f64 >",
+            "cond_pr : HashMap < (Symbol , Symbol) , f64 >"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn new (alphabet : Alphabet , init_pr : HashMap < Symbol , f64 > , cond_pr : HashMap < (Symbol , Symbol) , f64 > ,) -> Self { Self { alphabet , init_pr , cond_pr , } }",
+          "typed_args": [
+            {
+              "name": "alphabet",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Alphabet"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "init_pr",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "HashMap"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "Symbol"
+                        ],
+                        "args": []
+                      }
+                    },
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "cond_pr",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "HashMap"
+                  ],
+                  "args": [
+                    {
+                      "Tuple": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "Symbol"
+                            ],
+                            "args": []
+                          }
+                        },
+                        {
+                          "Path": {
+                            "segments": [
+                              "Symbol"
+                            ],
+                            "args": []
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Alphabet"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Alphabet",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "HashMap"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "Symbol"
+                        ],
+                        "args": []
+                      }
+                    },
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "map DTO boundary requires String keys; use Vec<{ key, value }> for other key types",
+              "recommendation": "model the map as a serde DTO (or a Vec of key/value DTOs) before exposing it"
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "HashMap"
+                  ],
+                  "args": [
+                    {
+                      "Tuple": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "Symbol"
+                            ],
+                            "args": []
+                          }
+                        },
+                        {
+                          "Path": {
+                            "segments": [
+                              "Symbol"
+                            ],
+                            "args": []
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "map DTO boundary requires String keys; use Vec<{ key, value }> for other key types",
+              "recommendation": "model the map as a serde DTO (or a Vec of key/value DTOs) before exposing it"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "block_pr",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "block : & Symbols"
+          ],
+          "return_type": "f64",
+          "doc": "",
+          "source_code": "pub fn block_pr (& self , block : & Symbols) -> f64 { if block . is_empty () { return 0.0 ; } let mut p = * self . init_pr . get (& block [0]) . unwrap_or (& 0.0) ; for i in 1 .. block . len () { let prev = block [i - 1] ; let cur = block [i] ; p *= self . cond_pr . get (& (prev , cur)) . cloned () . unwrap_or (0.0) ; } p }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "block",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Symbols"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Primitive": "F64"
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Symbols",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "F64"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "enumerate_block_pr",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "m : usize"
+          ],
+          "return_type": "Vec < (Symbols , f64) >",
+          "doc": "",
+          "source_code": "pub fn enumerate_block_pr (& self , m : usize) -> Vec < (Symbols , f64) > { let mut res : Vec < (Symbols , f64) > = Vec :: new () ; fn dfs (this : & Markov , m : usize , cur : & mut Symbols , out : & mut Vec < (Symbols , f64) >) { if cur . len () == m { let p = this . block_pr (cur) ; out . push ((cur . clone () , p)) ; return ; } for & s in & this . alphabet { cur . push (s) ; dfs (this , m , cur , out) ; cur . pop () ; } } let mut tmp = Vec :: new () ; dfs (self , m , & mut tmp , & mut res) ; res }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "m",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Vec": {
+              "Tuple": [
+                {
+                  "Path": {
+                    "segments": [
+                      "Symbols"
+                    ],
+                    "args": []
+                  }
+                },
+                {
+                  "Primitive": "F64"
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Vec": {
+                "Tuple": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "Symbols"
+                      ],
+                      "args": []
+                    }
+                  },
+                  {
+                    "Primitive": "F64"
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "Vec inner type is not supported: (Symbols, f64)",
+            "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "HuffmanCode",
+      "functions": [
+        {
+          "name": "from_symbol_pr",
+          "visibility": "pub",
+          "args": [
+            "pr : & SymbolPr"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn from_symbol_pr (pr : & SymbolPr) -> Self { let mut heap = BinaryHeap :: new () ; for & s in & pr . alphabet { let p = pr . s_to_prs . get (& s) . cloned () . unwrap_or (0.0) ; heap . push (Node { prob : p , sym : Some (s) , left : None , right : None , }) ; } if heap . len () == 1 { let s = heap . pop () . unwrap () . sym . unwrap () ; let mut codes = HashMap :: new () ; codes . insert (s , vec ! [0]) ; let mut decode_table = HashMap :: new () ; decode_table . insert ((1 , 0) , s) ; return Self { codes , decode_table , } ; } while heap . len () > 1 { let a = heap . pop () . unwrap () ; let b = heap . pop () . unwrap () ; let parent = Node { prob : a . prob + b . prob , sym : None , left : Some (Box :: new (a)) , right : Some (Box :: new (b)) , } ; heap . push (parent) ; } let root = heap . pop () . unwrap () ; let mut lengths : HashMap < Symbol , usize > = HashMap :: new () ; fn walk (n : & Node , depth : usize , lengths : & mut HashMap < Symbol , usize >) { if let Some (s) = n . sym { lengths . insert (s , depth . max (1)) ; } else { if let Some (ref l) = n . left { walk (l , depth + 1 , lengths) ; } if let Some (ref r) = n . right { walk (r , depth + 1 , lengths) ; } } } walk (& root , 0 , & mut lengths) ; let mut syms : Vec < (Symbol , usize) > = pr . alphabet . iter () . filter_map (| & s | lengths . get (& s) . copied () . map (| len | (s , len))) . collect () ; syms . sort_by (| a , b | a . 1 . cmp (& b . 1) . then (a . 0 . cmp (& b . 0))) ; let mut code : u64 = 0 ; let mut prev_len : usize = 0 ; let mut codes : HashMap < Symbol , Vec < u8 > > = HashMap :: new () ; let mut decode_table : HashMap < (usize , u64) , Symbol > = HashMap :: new () ; for (s , len) in syms { if len > prev_len { code <<= (len - prev_len) as u32 ; prev_len = len ; } let mut bits = Vec :: with_capacity (len) ; for i in (0 .. len) . rev () { bits . push (((code >> i) & 1) as u8) ; } codes . insert (s , bits) ; decode_table . insert ((len , code) , s) ; code += 1 ; } Self { codes , decode_table , } }",
+          "typed_args": [
+            {
+              "name": "pr",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "SymbolPr"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolPr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "encode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "symbols : & Symbols"
+          ],
+          "return_type": "CodeWords",
+          "doc": "",
+          "source_code": "pub fn encode (& self , symbols : & Symbols) -> CodeWords { let mut out = Vec :: new () ; for & s in symbols { if let Some (bits) = self . codes . get (& s) { out . extend_from_slice (bits) ; } } out }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "symbols",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Symbols"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodeWords"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Symbols",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodeWords"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodeWords",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "decode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "length : usize",
+            "bits : & CodeWords"
+          ],
+          "return_type": "Symbols",
+          "doc": "",
+          "source_code": "pub fn decode (& self , length : usize , bits : & CodeWords) -> Symbols { let mut out = Vec :: with_capacity (length) ; let mut idx = 0usize ; let mut acc : u64 = 0 ; let mut acc_len : usize = 0 ; while out . len () < length && idx < bits . len () { acc = (acc << 1) | (bits [idx] as u64) ; acc_len += 1 ; idx += 1 ; if let Some (& sym) = self . decode_table . get (& (acc_len , acc)) { out . push (sym) ; acc = 0 ; acc_len = 0 ; } } out }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "length",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "bits",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "CodeWords"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Symbols"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "CodeWords"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: CodeWords",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Symbols"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: Symbols",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "functions": [
+        {
+          "name": "encode_internal",
+          "visibility": "pub",
+          "args": [
+            "input : & Symbols"
+          ],
+          "return_type": "InternalCodeWords",
+          "doc": "",
+          "source_code": "pub fn encode_internal (input : & Symbols) -> InternalCodeWords { let mut dict : HashMap < String , usize > = HashMap :: new () ; dict . insert (String :: new () , 0) ; let mut next_index = 1usize ; let mut w = String :: new () ; let mut out : InternalCodeWords = Vec :: new () ; for & c in input { let mut wc = w . clone () ; wc . push (c) ; if dict . contains_key (& wc) { w = wc ; } else { let idx = * dict . get (& w) . unwrap () ; out . push ((idx , c)) ; dict . insert (wc , next_index) ; next_index += 1 ; w . clear () ; } } if ! w . is_empty () { out . push ((* dict . get (& w) . unwrap () , '\\0')) ; } out }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Symbols"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "InternalCodeWords"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Symbols",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "InternalCodeWords"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: InternalCodeWords",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "decode_internal",
+          "visibility": "pub",
+          "args": [
+            "code : & InternalCodeWords"
+          ],
+          "return_type": "Symbols",
+          "doc": "",
+          "source_code": "pub fn decode_internal (code : & InternalCodeWords) -> Symbols { let mut dict : Vec < String > = vec ! [String :: new ()] ; let mut out = String :: new () ; for & (idx , c) in code { if idx >= dict . len () { break ; } let mut s = dict [idx] . clone () ; if c != '\\0' { s . push (c) ; } out . push_str (& s) ; dict . push (s) ; } out . chars () . collect () }",
+          "typed_args": [
+            {
+              "name": "code",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "InternalCodeWords"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Symbols"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "InternalCodeWords"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: InternalCodeWords",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Symbols"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: Symbols",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "decode_internal_safe",
+          "visibility": "pub",
+          "args": [
+            "code : & InternalCodeWords"
+          ],
+          "return_type": "Result < Symbols , () >",
+          "doc": "Safe variant used by external bitstream decoders. Returns Err on invalid index\ninstead of panicking with an out-of-bounds access. (Malformed / corrupted stream.)",
+          "source_code": "# [doc = \" Safe variant used by external bitstream decoders. Returns Err on invalid index\"] # [doc = \" instead of panicking with an out-of-bounds access. (Malformed / corrupted stream.)\"] pub fn decode_internal_safe (code : & InternalCodeWords) -> Result < Symbols , () > { let mut dict : Vec < String > = vec ! [String :: new ()] ; let mut out = String :: new () ; for & (idx , c) in code { if idx >= dict . len () { return Err (()) ; } let mut s = dict [idx] . clone () ; if c != '\\0' { s . push (c) ; } out . push_str (& s) ; dict . push (s) ; } Ok (out . chars () . collect ()) }",
+          "typed_args": [
+            {
+              "name": "code",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "InternalCodeWords"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "err": "Unit"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "InternalCodeWords"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: InternalCodeWords",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Symbols"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": "Unit"
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "unsupported Result ok type: custom type is not registered for string boundary: Symbols",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "encode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "input : & Symbols"
+          ],
+          "return_type": "CodeWords",
+          "doc": "",
+          "source_code": "pub fn encode (& self , input : & Symbols) -> CodeWords { let internal = Self :: encode_internal (input) ; if internal . is_empty () { return vec ! [] ; } let max_index = internal . len () + 1 ; let mut bits = 0usize ; let mut tmp = max_index ; while tmp > 0 { bits += 1 ; tmp >>= 1 ; } let mut out : CodeWords = Vec :: new () ; for & (idx , c) in & internal { for i in (0 .. bits) . rev () { out . push (((idx >> i) & 1) as u8) ; } let b = c as u32 as u8 ; for i in (0 .. 8) . rev () { out . push (((b >> i) & 1) as u8) ; } } out }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "input",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Symbols"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodeWords"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Symbols",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodeWords"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodeWords",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "decode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "_length : usize",
+            "bits : & CodeWords"
+          ],
+          "return_type": "Symbols",
+          "doc": "",
+          "source_code": "pub fn decode (& self , _length : usize , bits : & CodeWords) -> Symbols { let n = bits . len () ; if n == 0 { return vec ! [] ; } let idx_bits = 8usize ; let pair_bits = idx_bits + 8 ; let mut code : InternalCodeWords = Vec :: new () ; let mut i = 0 ; while i + pair_bits <= n { let mut idx = 0usize ; for _ in 0 .. idx_bits { idx = (idx << 1) | (bits [i] as usize) ; i += 1 ; } let mut b = 0u8 ; for _ in 0 .. 8 { b = (b << 1) | bits [i] ; i += 1 ; } code . push ((idx , b as char)) ; } match Self :: decode_internal_safe (& code) { Ok (syms) => syms , Err (()) => Vec :: new () , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "_length",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "bits",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "CodeWords"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Symbols"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "CodeWords"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: CodeWords",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Symbols"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: Symbols",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "SourceCodingApi",
+      "functions": [
+        {
+          "name": "huffman_roundtrip",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < bool , HuffmanBitstreamError >",
+          "doc": "",
+          "source_code": "pub fn huffman_roundtrip (input : String) -> std :: result :: Result < bool , HuffmanBitstreamError > { let encoded = huffman_encode_to_bytes (& input) ? ; let decoded = huffman_decode_from_bytes (& encoded) ? ; Ok (decoded == input) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Primitive": "Bool"
+              },
+              "err": {
+                "Path": {
+                  "segments": [
+                    "HuffmanBitstreamError"
+                  ],
+                  "args": []
+                }
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Primitive": "Bool"
+                },
+                "err": {
+                  "Path": {
+                    "segments": [
+                      "HuffmanBitstreamError"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "lz78_roundtrip",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < bool , Lz78BitstreamError >",
+          "doc": "",
+          "source_code": "pub fn lz78_roundtrip (input : String) -> std :: result :: Result < bool , Lz78BitstreamError > { let encoded = lz78_encode_to_bytes (& input) ? ; let decoded = lz78_decode_from_bytes (& encoded) ? ; Ok (decoded == input) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Primitive": "Bool"
+              },
+              "err": {
+                "Path": {
+                  "segments": [
+                    "Lz78BitstreamError"
+                  ],
+                  "args": []
+                }
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Primitive": "Bool"
+                },
+                "err": {
+                  "Path": {
+                    "segments": [
+                      "Lz78BitstreamError"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "arithmetic_roundtrip",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < bool , ArithmeticBitstreamError >",
+          "doc": "",
+          "source_code": "pub fn arithmetic_roundtrip (input : String ,) -> std :: result :: Result < bool , ArithmeticBitstreamError > { let encoded = arithmetic_encode_to_bytes (& input) ? ; let decoded = arithmetic_decode_from_bytes (& encoded) ? ; Ok (decoded == input) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Primitive": "Bool"
+              },
+              "err": {
+                "Path": {
+                  "segments": [
+                    "ArithmeticBitstreamError"
+                  ],
+                  "args": []
+                }
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Primitive": "Bool"
+                },
+                "err": {
+                  "Path": {
+                    "segments": [
+                      "ArithmeticBitstreamError"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "huffman_encode_hex",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn huffman_encode_hex (input : String) -> std :: result :: Result < String , String > { huffman_encode_to_bytes (& input) . map (| bytes | encode_hex (& bytes)) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "huffman_decode_hex",
+          "visibility": "pub",
+          "args": [
+            "hex : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn huffman_decode_hex (hex : String) -> std :: result :: Result < String , String > { let bytes = decode_hex (& hex) ? ; huffman_decode_from_bytes (& bytes) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "hex",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "lz78_encode_hex",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn lz78_encode_hex (input : String) -> std :: result :: Result < String , String > { lz78_encode_to_bytes (& input) . map (| bytes | encode_hex (& bytes)) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "lz78_decode_hex",
+          "visibility": "pub",
+          "args": [
+            "hex : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn lz78_decode_hex (hex : String) -> std :: result :: Result < String , String > { let bytes = decode_hex (& hex) ? ; lz78_decode_from_bytes (& bytes) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "hex",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "arithmetic_encode_hex",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn arithmetic_encode_hex (input : String) -> std :: result :: Result < String , String > { arithmetic_encode_to_bytes (& input) . map (| bytes | encode_hex (& bytes)) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "arithmetic_decode_hex",
+          "visibility": "pub",
+          "args": [
+            "hex : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn arithmetic_decode_hex (hex : String) -> std :: result :: Result < String , String > { let bytes = decode_hex (& hex) ? ; arithmetic_decode_from_bytes (& bytes) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "hex",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "BlockHuffmanTree",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "q : usize",
+            "symbols_pr : SymbolsPr"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn new (q : usize , symbols_pr : SymbolsPr) -> Self { Self { q : q . max (2) , symbols_pr , } }",
+          "typed_args": [
+            {
+              "name": "q",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "symbols_pr",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolsPr"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolsPr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "huffman_code",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "SymbolsToCodeWord",
+          "doc": "",
+          "source_code": "pub fn huffman_code (& self) -> SymbolsToCodeWord { let (nodes , root_idx) = self . build_tree () ; let mut map : SymbolsToCodeWord = HashMap :: new () ; if nodes . len () == 1 { if let Some (sym) = nodes [0] . sym . clone () { map . insert (sym , vec ! [0]) ; } return map ; } fn dfs (nodes : & Vec < Node > , q : usize , cur : usize , path : & mut Vec < usize > , out : & mut SymbolsToCodeWord ,) { let node = & nodes [cur] ; if let Some (sym) = & node . sym { out . insert (sym . clone () , path . clone ()) ; return ; } for (i , & child) in node . children . iter () . enumerate () { if i >= q { break ; } path . push (i) ; dfs (nodes , q , child , path , out) ; path . pop () ; } } let mut tmp = Vec :: new () ; dfs (& nodes , self . q , root_idx , & mut tmp , & mut map) ; map }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolsToCodeWord"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolsToCodeWord"
+                ],
+                "args": []
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: SymbolsToCodeWord",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "encode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "blocks : & [Symbols]"
+          ],
+          "return_type": "Vec < usize >",
+          "doc": "",
+          "source_code": "pub fn encode (& self , blocks : & [Symbols]) -> Vec < usize > { let codes = self . huffman_code () ; let mut out : Vec < usize > = Vec :: new () ; if codes . len () == 1 { out . resize (blocks . len () , 0) ; return out ; } for b in blocks { if let Some (code) = codes . get (b) { out . extend_from_slice (code) ; } } out }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "blocks",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Slice": {
+                      "Path": {
+                        "segments": [
+                          "Symbols"
+                        ],
+                        "args": []
+                      }
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Vec": {
+              "Primitive": "USize"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Slice": {
+                  "Path": {
+                    "segments": [
+                      "Symbols"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "slice boundaries are not supported; use Vec<T>",
+              "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Vec": {
+                "Primitive": "USize"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "decode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "length : usize",
+            "digits : & [usize]"
+          ],
+          "return_type": "Vec < Symbols >",
+          "doc": "",
+          "source_code": "pub fn decode (& self , length : usize , digits : & [usize]) -> Vec < Symbols > { # [derive (Default)] struct Trie { children : Vec < Option < Box < Trie > > > , sym : Option < Symbols > , } fn mk_children (q : usize) -> Vec < Option < Box < Trie > > > { let mut v : Vec < Option < Box < Trie > > > = Vec :: with_capacity (q) ; for _ in 0 .. q { v . push (None) ; } v } let codes = self . huffman_code () ; if codes . len () == 1 { let sym = codes . keys () . next () . unwrap () . clone () ; return vec ! [sym ; length] ; } let mut root = Trie { children : mk_children (self . q) , sym : None , } ; for (sym , code) in & codes { let mut node = & mut root ; for & d in code { if d >= self . q { continue ; } if node . children . is_empty () { node . children = mk_children (self . q) ; } if node . children [d] . is_none () { node . children [d] = Some (Box :: new (Trie { children : mk_children (self . q) , sym : None , })) ; } node = node . children [d] . as_mut () . unwrap () ; } node . sym = Some (sym . clone ()) ; } let mut out : Vec < Symbols > = Vec :: with_capacity (length) ; let mut node = & root ; for & d in digits { if d >= self . q { continue ; } if let Some (ref child) = node . children . get (d) . and_then (| x | x . as_ref ()) { if child . sym . is_some () { out . push (child . sym . as_ref () . unwrap () . clone ()) ; node = & root ; if out . len () >= length { break ; } } else { node = child ; } } else { node = & root ; } } out }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "length",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "digits",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Slice": {
+                      "Primitive": "USize"
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Vec": {
+              "Path": {
+                "segments": [
+                  "Symbols"
+                ],
+                "args": []
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Slice": {
+                  "Primitive": "USize"
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "slice boundaries are not supported; use Vec<T>",
+              "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Vec": {
+                "Path": {
+                  "segments": [
+                    "Symbols"
+                  ],
+                  "args": []
+                }
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "Vec inner type is not supported: Symbols",
+            "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+          }
+        }
+      ]
+    }
+  ],
+  "crate_apis": [
+    {
+      "crate_name": "source-coding",
+      "api_struct": "SourceCodingApi",
+      "api_crate_name": "source-coding",
+      "functions": [
+        {
+          "name": "huffman_roundtrip",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < bool , HuffmanBitstreamError >",
+          "doc": "",
+          "source_code": "pub fn huffman_roundtrip (input : String) -> std :: result :: Result < bool , HuffmanBitstreamError > { let encoded = huffman_encode_to_bytes (& input) ? ; let decoded = huffman_decode_from_bytes (& encoded) ? ; Ok (decoded == input) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Primitive": "Bool"
+              },
+              "err": {
+                "Path": {
+                  "segments": [
+                    "HuffmanBitstreamError"
+                  ],
+                  "args": []
+                }
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Primitive": "Bool"
+                },
+                "err": {
+                  "Path": {
+                    "segments": [
+                      "HuffmanBitstreamError"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "lz78_roundtrip",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < bool , Lz78BitstreamError >",
+          "doc": "",
+          "source_code": "pub fn lz78_roundtrip (input : String) -> std :: result :: Result < bool , Lz78BitstreamError > { let encoded = lz78_encode_to_bytes (& input) ? ; let decoded = lz78_decode_from_bytes (& encoded) ? ; Ok (decoded == input) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Primitive": "Bool"
+              },
+              "err": {
+                "Path": {
+                  "segments": [
+                    "Lz78BitstreamError"
+                  ],
+                  "args": []
+                }
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Primitive": "Bool"
+                },
+                "err": {
+                  "Path": {
+                    "segments": [
+                      "Lz78BitstreamError"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "arithmetic_roundtrip",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < bool , ArithmeticBitstreamError >",
+          "doc": "",
+          "source_code": "pub fn arithmetic_roundtrip (input : String ,) -> std :: result :: Result < bool , ArithmeticBitstreamError > { let encoded = arithmetic_encode_to_bytes (& input) ? ; let decoded = arithmetic_decode_from_bytes (& encoded) ? ; Ok (decoded == input) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Primitive": "Bool"
+              },
+              "err": {
+                "Path": {
+                  "segments": [
+                    "ArithmeticBitstreamError"
+                  ],
+                  "args": []
+                }
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Primitive": "Bool"
+                },
+                "err": {
+                  "Path": {
+                    "segments": [
+                      "ArithmeticBitstreamError"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "huffman_encode_hex",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn huffman_encode_hex (input : String) -> std :: result :: Result < String , String > { huffman_encode_to_bytes (& input) . map (| bytes | encode_hex (& bytes)) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "huffman_decode_hex",
+          "visibility": "pub",
+          "args": [
+            "hex : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn huffman_decode_hex (hex : String) -> std :: result :: Result < String , String > { let bytes = decode_hex (& hex) ? ; huffman_decode_from_bytes (& bytes) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "hex",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "lz78_encode_hex",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn lz78_encode_hex (input : String) -> std :: result :: Result < String , String > { lz78_encode_to_bytes (& input) . map (| bytes | encode_hex (& bytes)) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "lz78_decode_hex",
+          "visibility": "pub",
+          "args": [
+            "hex : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn lz78_decode_hex (hex : String) -> std :: result :: Result < String , String > { let bytes = decode_hex (& hex) ? ; lz78_decode_from_bytes (& bytes) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "hex",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "arithmetic_encode_hex",
+          "visibility": "pub",
+          "args": [
+            "input : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn arithmetic_encode_hex (input : String) -> std :: result :: Result < String , String > { arithmetic_encode_to_bytes (& input) . map (| bytes | encode_hex (& bytes)) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "input",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "arithmetic_decode_hex",
+          "visibility": "pub",
+          "args": [
+            "hex : String"
+          ],
+          "return_type": "std :: result :: Result < String , String >",
+          "doc": "",
+          "source_code": "pub fn arithmetic_decode_hex (hex : String) -> std :: result :: Result < String , String > { let bytes = decode_hex (& hex) ? ; arithmetic_decode_from_bytes (& bytes) . map_err (| e | e . to_string ()) }",
+          "typed_args": [
+            {
+              "name": "hex",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": "String"
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": "String"
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    }
+  ],
+  "type_apis": [],
+  "unsupported": [
+    {
+      "crate_name": "source-coding",
+      "target_struct": "JonesCode",
+      "function": "encode",
+      "position": "arg:symbols",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "JonesCode",
+      "function": "encode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "JonesCode",
+      "function": "decode",
+      "position": "arg:bits",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "JonesCode",
+      "function": "decode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "ArithmeticCode",
+      "function": "encode",
+      "position": "arg:symbols",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "ArithmeticCode",
+      "function": "encode",
+      "position": "return",
+      "rust_type": {
+        "Result": {
+          "ok": {
+            "Path": {
+              "segments": [
+                "CodeWords"
+              ],
+              "args": []
+            }
+          },
+          "err": null
+        }
+      },
+      "reason": "unsupported Result ok type: custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "ArithmeticCode",
+      "function": "decode",
+      "position": "arg:cws",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "ArithmeticCode",
+      "function": "decode",
+      "position": "return",
+      "rust_type": {
+        "Result": {
+          "ok": {
+            "Path": {
+              "segments": [
+                "Symbols"
+              ],
+              "args": []
+            }
+          },
+          "err": null
+        }
+      },
+      "reason": "unsupported Result ok type: custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Markov",
+      "function": "new",
+      "position": "arg:alphabet",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Alphabet"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Alphabet",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Markov",
+      "function": "new",
+      "position": "arg:init_pr",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "HashMap"
+          ],
+          "args": [
+            {
+              "Path": {
+                "segments": [
+                  "Symbol"
+                ],
+                "args": []
+              }
+            },
+            {
+              "Primitive": "F64"
+            }
+          ]
+        }
+      },
+      "reason": "map DTO boundary requires String keys; use Vec<{ key, value }> for other key types",
+      "recommendation": "model the map as a serde DTO (or a Vec of key/value DTOs) before exposing it"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Markov",
+      "function": "new",
+      "position": "arg:cond_pr",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "HashMap"
+          ],
+          "args": [
+            {
+              "Tuple": [
+                {
+                  "Path": {
+                    "segments": [
+                      "Symbol"
+                    ],
+                    "args": []
+                  }
+                },
+                {
+                  "Path": {
+                    "segments": [
+                      "Symbol"
+                    ],
+                    "args": []
+                  }
+                }
+              ]
+            },
+            {
+              "Primitive": "F64"
+            }
+          ]
+        }
+      },
+      "reason": "map DTO boundary requires String keys; use Vec<{ key, value }> for other key types",
+      "recommendation": "model the map as a serde DTO (or a Vec of key/value DTOs) before exposing it"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Markov",
+      "function": "block_pr",
+      "position": "arg:block",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Markov",
+      "function": "enumerate_block_pr",
+      "position": "return",
+      "rust_type": {
+        "Vec": {
+          "Tuple": [
+            {
+              "Path": {
+                "segments": [
+                  "Symbols"
+                ],
+                "args": []
+              }
+            },
+            {
+              "Primitive": "F64"
+            }
+          ]
+        }
+      },
+      "reason": "Vec inner type is not supported: (Symbols, f64)",
+      "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "HuffmanCode",
+      "function": "encode",
+      "position": "arg:symbols",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "HuffmanCode",
+      "function": "encode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "HuffmanCode",
+      "function": "decode",
+      "position": "arg:bits",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "HuffmanCode",
+      "function": "decode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "encode_internal",
+      "position": "arg:input",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "encode_internal",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "InternalCodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: InternalCodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "decode_internal",
+      "position": "arg:code",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "InternalCodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: InternalCodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "decode_internal",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "decode_internal_safe",
+      "position": "arg:code",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "InternalCodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: InternalCodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "decode_internal_safe",
+      "position": "return",
+      "rust_type": {
+        "Result": {
+          "ok": {
+            "Path": {
+              "segments": [
+                "Symbols"
+              ],
+              "args": []
+            }
+          },
+          "err": "Unit"
+        }
+      },
+      "reason": "unsupported Result ok type: custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "encode",
+      "position": "arg:input",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "encode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "decode",
+      "position": "arg:bits",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodeWords"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodeWords",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "Lz78Code",
+      "function": "decode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Symbols"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Symbols",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "BlockHuffmanTree",
+      "function": "huffman_code",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "SymbolsToCodeWord"
+          ],
+          "args": []
+        }
+      },
+      "reason": "custom type is not registered for string boundary: SymbolsToCodeWord",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "BlockHuffmanTree",
+      "function": "encode",
+      "position": "arg:blocks",
+      "rust_type": {
+        "Slice": {
+          "Path": {
+            "segments": [
+              "Symbols"
+            ],
+            "args": []
+          }
+        }
+      },
+      "reason": "slice boundaries are not supported; use Vec<T>",
+      "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "BlockHuffmanTree",
+      "function": "decode",
+      "position": "arg:digits",
+      "rust_type": {
+        "Slice": {
+          "Primitive": "USize"
+        }
+      },
+      "reason": "slice boundaries are not supported; use Vec<T>",
+      "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+    },
+    {
+      "crate_name": "source-coding",
+      "target_struct": "BlockHuffmanTree",
+      "function": "decode",
+      "position": "return",
+      "rust_type": {
+        "Vec": {
+          "Path": {
+            "segments": [
+              "Symbols"
+            ],
+            "args": []
+          }
+        }
+      },
+      "reason": "Vec inner type is not supported: Symbols",
+      "recommendation": "use a supported native boundary type, an explicit string facade, or a serde DTO"
+    }
+  ]
+}

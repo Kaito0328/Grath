@@ -1,0 +1,64 @@
+@import "katex/dist/katex.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Refined Neutrals (Tinted with Sky) */
+  --color-slate-50: #f8fafc;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  --background: #ffffff;
+  /* Pure white for notebook style */
+  --foreground: #0f172a;
+
+  /* Brand Colors */
+  --color-primary: #0891b2;
+  /* Cyan 600 - High contrast, between green and blue */
+  --color-primary-hover: #0e7490;
+  /* Cyan 700 */
+  --color-secondary: #f1f5f9;
+  --color-secondary-hover: #e2e8f0;
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-success: #10b981;
+  --color-success-hover: #059669;
+  --color-heart: #f43f5e;
+  --color-heart-hover: #e11d48;
+  --color-warning: #f59e0b;
+  --color-warning-hover: #d97706;
+  --color-info: #3b82f6;
+  --color-info-hover: #2563eb;
+
+  /* Surface Colors - Light Mode */
+  --color-surface-base: var(--color-slate-50);
+  --color-surface-muted: #f1f5f9;
+  --color-surface-card: #ffffff;
+  --color-surface-card-hover: #f8fafc;
+}
+
+.dark {
+  --background: var(--color-slate-950);
+  --foreground: #f1f5f9;
+
+  --color-surface-base: var(--color-slate-950);
+  --color-surface-muted: #1e293b;
+  --color-surface-card: #0f172a;
+  --color-surface-card-hover: #1e293b;
+
+  /* Adjust brand colors for dark mode visibility */
+  --color-primary: #38bdf8;
+  --color-primary-hover: #7dd3fc;
+}
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Inter, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

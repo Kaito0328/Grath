@@ -1,0 +1,22 @@
+[package]
+name = "linalg"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "linalg"
+path = "src/lib.rs"
+
+[features]
+default = []
+serde = ["dep:serde"]
+
+[dependencies]
+num-traits = "0.2"
+num-complex = "0.4"
+serde = { version = "1.0", features = ["derive"], optional = true }
+common = { path = "../common" }
+algebraic = { path = "../algebraic" }
+polynomial = { path = "../polynomial" }
+fft_core = { path = "../fft-core", package = "fft-core" }
+utils = { path = "../utils" }

@@ -1,0 +1,40 @@
+/* eslint-disable */
+/* tslint:disable */
+// --- Auto-generated TypeScript Wrapper (DTO-only) ---
+
+{% for t in type_defs %}
+{{ t }}
+{% endfor %}
+
+export type {{ module_name }} = Pick<
+  typeof import("wasm-lib"),
+{% for f in exported_funcs %}  | "{{ f }}"
+{% endfor %}>;
+
+let wasm: {{ module_name }} | null = null;
+
+export function setWasm(module: {{ module_name }}) {
+  wasm = module;
+}
+
+export function setWasmFromWasmLib(wasmLib: unknown) {
+  const m = wasmLib as Record<string, unknown>;
+  const required = [
+{% for f in exported_funcs %}    "{{ f }}",
+{% endfor %}  ];
+  for (const key of required) {
+    if (!m[key]) throw new Error(`wasm-lib module is missing expected export: ${key}`);
+  }
+  setWasm(wasmLib as {{ module_name }});
+}
+
+function getWasm(): {{ module_name }} {
+  if (!wasm) {
+    throw new Error("wasm module is not set. Call setWasmFromWasmLib() after wasm initialization.");
+  }
+  return wasm;
+}
+
+{% for f in wrapper_funcs %}
+{{ f }}
+{% endfor %}

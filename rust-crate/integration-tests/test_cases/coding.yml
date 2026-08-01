@@ -1,0 +1,56 @@
+# Minimal integration tests for coding
+
+- function: CodingApi::hamming74_encode_len
+  inputs:
+    - "1,0,1,1"
+  expected: "7"
+
+- function: CodingApi::linear_code_gf5_third
+  inputs:
+    - "0"
+    - "1"
+  expected: "3"
+
+# DTO regression cases: the same JSON values are consumed by the Rust runner
+# and the generated real-WASM Vitest suite.
+- function: DtoFixtureApi::batch
+  inputs:
+    - '[{"x":1.0,"y":2.0},{"x":-3.0,"y":4.5}]'
+  expected: '[{"x":1.0,"y":2.0},{"x":-3.0,"y":4.5}]'
+
+- function: DtoFixtureApi::maybe
+  inputs:
+    - 'null'
+  expected: 'null'
+
+- function: DtoFixtureApi::pair
+  inputs:
+    - '[{"x":1.0,"y":2.0},7]'
+  expected: '[{"x":1.0,"y":2.0},7]'
+
+- function: DtoFixtureApi::fixed
+  inputs:
+    - '[{"x":1.0,"y":2.0},{"x":3.0,"y":4.0}]'
+  expected: '[{"x":1.0,"y":2.0},{"x":3.0,"y":4.0}]'
+
+- function: DtoFixtureApi::by_name
+  inputs:
+    - '{"origin":{"x":0.0,"y":0.0}}'
+  expected: '{"origin":{"x":0.0,"y":0.0}}'
+
+- function: DtoFixtureApi::label
+  inputs:
+    - '{"kind":"Named","name":"fixture"}'
+  expected: '{"kind":"Named","name":"fixture"}'
+
+- function: DtoFixtureApi::nested
+  inputs:
+    - '{"x":5.0,"y":8.0}'
+  expected: '[{"x":5.0,"y":8.0}]'
+
+- function: DtoFixtureApi::checked
+  inputs:
+    - '{"x":-1.0,"y":2.0}'
+  expected_error:
+    code: InvalidParameters
+    message: point coordinates must be finite and non-negative

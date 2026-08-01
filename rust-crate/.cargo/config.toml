@@ -1,0 +1,8 @@
+[alias]
+# Inspector shortcuts
+# Examples:
+#   cd rust-crate
+#   cargo insp --            # dev pipeline (same as `cargo run -p inspector --`)
+#   cargo insp -- -n algebraic
+#   cargo insp -- full -n algebraic
+insp = "run -p inspector --"

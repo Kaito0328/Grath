@@ -1,0 +1,36 @@
+[package]
+name = "wasm-lib"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+# DTO (plain JS objects via JsValue)
+serde-wasm-bindgen = "0.6"
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+js-sys = "0.3"
+getrandom = { version = "0.2", features = ["js"] }
+
+# ★自作クレートへの依存 (パスを修正)
+algebraic = { path = "../crates/algebraic" }
+common = { path = "../crates/common" }
+polynomial = { path = "../crates/polynomial" }
+num-bigint = "0.4"
+linalg = { path = "../crates/linalg", features = ["serde"] }
+concrete-math = { path = "../crates/concrete-math" }
+number-theory = { path = "../crates/number-theory" }
+special-functions = { path = "../crates/special-functions" }
+finite-field = { path = "../crates/finite-field" }
+source-coding = { path = "../crates/source-coding" }
+coding = { path = "../crates/coding" }
+signal-processing = { path = "../crates/signal-processing" }
+statistics = { path = "../crates/statistics" }
+rand = { version = "0.8", features = ["small_rng"] }
+rand_distr = "0.4"
+num-complex = "0.4"
+num-traits = "0.2"

@@ -1,0 +1,15 @@
+[package]
+name = "lti-systems"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "lti_systems"
+path = "src/lib.rs"
+
+[dependencies]
+num-complex = "0.4"
+polynomial = { path = "../polynomial" }
+linalg = { path = "../linalg" }
+algebraic = { path = "../algebraic" }
+num-traits = "0.2"

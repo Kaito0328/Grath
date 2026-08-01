@@ -1,0 +1,23 @@
+{
+  "name": "@my-project/client-sdk",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./api/runtime": "./src/api/runtime.ts",
+    "./api/algebraicApi": "./src/api/algebraicApi.ts",
+    "./api/algebraicDtoApi": "./src/api/algebraicDtoApi.ts",
+    "./api/concreteMath": "./src/api/concreteMath.ts",
+    "./api/polynomialSolver": "./src/api/polynomialSolver.ts",
+    "./api/linalgApi": "./src/api/linalgApi.ts",
+    "./api/finiteFieldApi": "./src/api/finiteFieldApi.ts",
+    "./api/sourceCodingApi": "./src/api/sourceCodingApi.ts",
+    "./api/codingApi": "./src/api/codingApi.ts",
+    "./api/statisticsApi": "./src/api/statisticsApi.ts",
+    "./api/signalProcessingApi": "./src/api/signalProcessingApi.ts"
+  },
+  "dependencies": {
+    "wasm-lib": "file:./wasm-pkg"
+  }
+}

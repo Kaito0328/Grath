@@ -1,0 +1,144 @@
+# Minimal integration tests for statistics
+
+- function: StatisticsApi::get_descriptive_stats
+  inputs:
+    - "1,2,3"
+  expected: '{"mean":2.0,"median":2.0,"variance":1.0,"std_dev":1.0,"skewness":0.0,"kurtosis":-1.5,"range":2.0,"q1":1.5,"q3":2.5,"iqr":1.0,"n":3}'
+
+- function: StatisticsApi::run_simple_linear_regression
+  inputs:
+    - "1,2,3"
+    - "2,4,6"
+  expected: '{"intercept":-8.881784197001252e-16,"slope":2.000000000000001,"r_squared":1.0,"coefficients":[-8.881784197001252e-16,2.000000000000001],"residuals":[0.0,-8.881784197001252e-16,-1.7763568394002505e-15]}'
+
+- function: StatisticsApi::run_ols_solve_linear_system
+  inputs:
+    - "1,0;1,1;1,2"
+    - "1,2,3"
+  expected: '{"coefficients":[1.0000000000000007,0.9999999999999993],"residuals":[-6.661338147750939e-16,0.0,8.881784197001252e-16]}'
+
+- function: StatisticsApi::run_ridge_regression
+  inputs:
+    - "1,0;1,1;1,2;1,3"
+    - "1,3,5,7"
+    - "0.1"
+  expected: '{"coefficients":[0.9990039692568391,1.998999013880011],"residuals":[0.0009960307431609028,0.001997016863149792,0.0029980029831389032,0.00399898910312757]}'
+
+- function: StatisticsApi::run_lasso_regression
+  inputs:
+    - "1,0;1,1;1,2;1,3"
+    - "1,3,5,7"
+    - "0.1"
+    - "1000"
+    - "0.000001"
+  expected: '{"coefficients":[0.9600014030235171,2.009999398704207],"residuals":[0.03999859697648289,0.02999919827227604,0.019999799568068966,0.010000400863861891]}'
+
+- function: StatisticsApi::run_bayesian_estimation
+  inputs:
+    - "1,2,3"
+    - "1,0;1,1;1,2"
+    - "0,0"
+    - "1,0;0,1"
+    - "1,0,0;0,1,0;0,0,1"
+  expected: '{"posterior_mean":[0.8,0.9333333333333333],"posterior_covariance":[[0.4,-0.2],[-0.2,0.26666666666666666]]}'
+
+- function: StatisticsApi::run_bayesian_em
+  inputs:
+    - "1,2,3"
+    - "1,0;1,1;1,2"
+    - "100"
+    - "0.000001"
+  expected: '{"prior_mean":[0.9999999999996314,0.999999999999996],"prior_covariance":[[9.312953289333948e-11,-5.580526706529417e-11],[-5.580526706529417e-11,5.580528549138332e-11]],"noise_covariance":[[1e-8,1.2441421942681818e-11,-6.160333745749568e-12],[1.2441421942681818e-11,1e-8,1.2441434226741252e-11],[-6.160333745749568e-12,1.2441434226741252e-11,1e-8]]}'
+
+- function: StatisticsApi::run_z_test_proportion
+  inputs:
+    - "50"
+    - "100"
+    - "0.5"
+    - "two-sided"
+    - "0.05"
+  expected: '{"stat":0.0,"p_value":1.0,"df1":null,"df2":null,"ci_lower":0.48831267545092016,"ci_upper":0.5116873245490798,"effect":null,"n1":100,"n2":0,"method":"One-sample proportion z-test","tail":"two-sided"}'
+
+- function: StatisticsApi::run_logistic_regression
+  inputs:
+    - "0;1;2;3"
+    - "0,0,1,1"
+    - "0.1"
+    - "5000"
+  expected: '{"coefficients":[-12.84006769362724,8.718844289334482],"probabilities":[2.6523345435182076e-6,0.015965616399251096,0.9900247299259899,0.9999983528545878],"predictions":[0.0,0.0,1.0,1.0]}'
+
+- function: StatisticsApi::logistic_predict_proba
+  inputs:
+    - "0,2"
+    - "1"
+  expected: "0.8807970779778823"
+
+- function: StatisticsApi::logistic_predict
+  inputs:
+    - "0,2"
+    - "1"
+  expected: "1"
+
+- function: StatisticsApi::run_kalman_filter
+  inputs:
+    - "0,1"
+    - "1,0;0,1"
+    - "1,1;0,1"
+    - "1,0"
+    - "0.001,0;0,0.001"
+    - "0.1"
+    - "1;2;3"
+  expected: '{"states":[[1.0,1.0],[2.0,1.0],[3.0,1.0]],"covariance_diagonals":[[0.09524036173250833,0.5250361732508328],[0.087752142063493,0.12441905920594712],[0.07794644557547738,0.04194333808749254]]}'
+
+- function: StatisticsApi::run_gmm_fit
+  inputs:
+    - "-0.1;0.0;0.2;9.8;10.0;10.2"
+    - "2"
+    - "100"
+    - "0.000001"
+  expected: '{"weights":[0.5,0.5],"means":[[0.03333333333333333],[10.0]],"covariance_diagonals":[[0.015556555555555558],[0.026667666666666482]],"assignments":[0,0,0,1,1,1],"log_likelihood":-0.9909967367134296}'
+
+- function: StatisticsApi::run_gmm_pdf
+  inputs:
+    - "-0.1;0.0;0.2;9.8;10.0;10.2"
+    - "10.1"
+    - "2"
+    - "100"
+    - "0.000001"
+  expected: "1.0126524069580964"
+
+- function: StatisticsApi::run_gmm_log_pdf
+  inputs:
+    - "-0.1;0.0;0.2;9.8;10.0;10.2"
+    - "10.1"
+    - "2"
+    - "100"
+    - "0.000001"
+  expected: "0.01257303406145971"
+
+- function: StatisticsApi::run_gmm_predict_proba
+  inputs:
+    - "-0.1;0.0;0.2;9.8;10.0;10.2"
+    - "10.1"
+    - "2"
+    - "100"
+    - "0.000001"
+  expected: "[0.0,1.0]"
+
+- function: StatisticsApi::run_gmm_predict
+  inputs:
+    - "-0.1;0.0;0.2;9.8;10.0;10.2"
+    - "10.1"
+    - "2"
+    - "100"
+    - "0.000001"
+  expected: "1"
+
+- function: StatisticsApi::run_bayesian_estimation_with_precision
+  inputs:
+    - "1,2,3"
+    - "1,0;1,1;1,2"
+    - "0,0"
+    - "1,0;0,1"
+    - "1,0,0;0,1,0;0,0,1"
+  expected: '{"posterior_mean":[0.8,0.9333333333333333],"posterior_covariance":[[0.4,-0.2],[-0.2,0.26666666666666666]]}'

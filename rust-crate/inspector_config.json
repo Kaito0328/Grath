@@ -1,0 +1,37 @@
+{
+  "ignored_crates": [
+    "core",
+    "wasm"
+  ],
+  "target_crates": [
+    "common",
+    "algebraic",
+    "polynomial",
+    "linalg",
+    "finite-field",
+    "source-coding",
+    "signal-processing",
+    "coding",
+    "concrete-math",
+    "test-cases",
+    "statistics"
+  ],
+  "paths": {
+    "ts_wrapper_dir": "../web-app/generated/client-sdk/src/wrappers",
+    "ts_test_dir": "../web-app/generated/client-sdk/src/tests",
+    "ts_api_dir": "../web-app/generated/client-sdk/src/api",
+    "wasm_output_dir": "../web-app/generated/client-sdk/wasm-pkg"
+  },
+  "test_runner": {
+    "imports": [
+      "std::str::FromStr"
+    ],
+    "extra_attributes": [
+      "#![allow(unused_imports)]",
+      "#![allow(non_snake_case)]",
+      "#![allow(unused_mut)]",
+      "#![allow(clippy::match_single_binding)]",
+      "#![allow(unused_variables)]"
+    ]
+  }
+}

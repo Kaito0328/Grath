@@ -1,0 +1,43 @@
+{
+  "name": "Grath",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  
+  // コンテナ内の作業ディレクトリパスを固定
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  // 【推奨】コンテナ作成時に1回だけ走るコマンド
+  // ここで依存関係を入れておくと、起動直後から開発を始められます
+  "postCreateCommand": "cd web-app && npm install",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.watcherExclude": { "**/target/**": true, "**/node_modules/**": true },
+        "rust-analyzer.check.command": "clippy",
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens",
+        "GitHub.copilot",
+        "openai.chatgpt"
+      ]
+    }
+  },
+
+  // 3000: Next.js用
+  "forwardPorts": [3000],
+
+  // 権限トラブル回避のため node ユーザーを指定
+  "remoteUser": "node",
+  "runArgs": [
+    "--security-opt=seccomp=unconfined",
+    "--security-opt=apparmor=unconfined"
+  ]
+}

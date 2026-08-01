@@ -1,0 +1,33 @@
+{
+  "hashes": {
+    "fn::Rational::new": 8920586466255513259,
+    "fn::Rational::is_minus_one": 8700413254129500661,
+    "fn::SymbolicComplex::mul": 1269748809018262786,
+    "fn::Rational::simplified": 4910480912217686211,
+    "fn::Rational::checked_mul": 12833626778936032926,
+    "fn::Rational::checked_div": 10461645321487509855,
+    "fn::Rational::from_int": 15411050747374811720,
+    "fn::SymbolicComplex::is_real": 9195452059944535270,
+    "fn::SymbolicComplex::neg": 14041557423270236363,
+    "fn::SymbolicComplex::sqrt_rational": 17289481106236326493,
+    "fn::Rational::denom": 16873733522480682309,
+    "fn::SymbolicComplex::to_latex": 9667157511301487415,
+    "fn::Rational::checked_add": 13749204072318425803,
+    "fn::Rational::numer": 14663230620616565495,
+    "fn::SymbolicComplex::new": 16382109916260858253,
+    "fn::SymbolicComplex::is_imag_pure": 7815366650846697960,
+    "fn::Rational::is_one": 12527599346321644072,
+    "fn::SymbolicComplex::i": 5489508717448248470,
+    "fn::Rational::is_integer": 15231046043634525232,
+    "fn::SymbolicComplex::from_real": 3367385310125961914,
+    "struct::SymbolicComplex": 5645651873121347390,
+    "fn::Rational::try_new": 7279355043537067177,
+    "fn::Rational::normalize": 18212837390886066449,
+    "fn::SymbolicComplex::add": 15854638129034273088,
+    "fn::Rational::to_latex": 17460039167321251913,
+    "struct::Rational": 13678138894229598572,
+    "fn::SymbolicComplex::sub": 10291779191598185002,
+    "fn::Rational::is_zero": 14013648142294195623,
+    "fn::SymbolicComplex::zero": 15030584549290053518
+  }
+}

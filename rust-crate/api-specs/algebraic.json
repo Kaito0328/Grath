@@ -1,0 +1,3028 @@
+{
+  "structs": [
+    {
+      "name": "Rational",
+      "crate_name": "algebraic",
+      "doc": "",
+      "fields": [
+        "numer: i64",
+        "denom: u64",
+        "dirty: bool"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "Token",
+      "crate_name": "algebraic",
+      "doc": "字句解析器 (Lexer)",
+      "fields": [
+        "Number(Rational)",
+        "Plus",
+        "Minus",
+        "Star",
+        "Slash",
+        "Caret",
+        "LParen",
+        "RParen",
+        "Identifier(String)",
+        "Eof"
+      ],
+      "enum_variants": [
+        {
+          "name": "Number",
+          "fields": {
+            "Unnamed": [
+              {
+                "Path": {
+                  "segments": [
+                    "Rational"
+                  ],
+                  "args": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Plus",
+          "fields": "Unit"
+        },
+        {
+          "name": "Minus",
+          "fields": "Unit"
+        },
+        {
+          "name": "Star",
+          "fields": "Unit"
+        },
+        {
+          "name": "Slash",
+          "fields": "Unit"
+        },
+        {
+          "name": "Caret",
+          "fields": "Unit"
+        },
+        {
+          "name": "LParen",
+          "fields": "Unit"
+        },
+        {
+          "name": "RParen",
+          "fields": "Unit"
+        },
+        {
+          "name": "Identifier",
+          "fields": {
+            "Unnamed": [
+              "String"
+            ]
+          }
+        },
+        {
+          "name": "Eof",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "SymbolicExpr",
+      "crate_name": "algebraic",
+      "doc": "",
+      "fields": [
+        "Rational(Rational)",
+        "Symbol(String)",
+        "Add(Vec < SymbolicExpr >)",
+        "Mul(Vec < SymbolicExpr >)",
+        "Pow(Box < SymbolicExpr >, Box < SymbolicExpr >)"
+      ],
+      "enum_variants": [
+        {
+          "name": "Rational",
+          "fields": {
+            "Unnamed": [
+              {
+                "Path": {
+                  "segments": [
+                    "Rational"
+                  ],
+                  "args": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Symbol",
+          "fields": {
+            "Unnamed": [
+              "String"
+            ]
+          }
+        },
+        {
+          "name": "Add",
+          "fields": {
+            "Unnamed": [
+              {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "SymbolicExpr"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mul",
+          "fields": {
+            "Unnamed": [
+              {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "SymbolicExpr"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Pow",
+          "fields": {
+            "Unnamed": [
+              {
+                "Path": {
+                  "segments": [
+                    "Box"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "SymbolicExpr"
+                        ],
+                        "args": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "Path": {
+                  "segments": [
+                    "Box"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "SymbolicExpr"
+                        ],
+                        "args": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "SymbolicComplex",
+      "crate_name": "algebraic",
+      "doc": "",
+      "fields": [
+        "re: SymbolicExpr",
+        "im: SymbolicExpr"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "AlgebraicError",
+      "crate_name": "algebraic",
+      "doc": "構文解析中に発生する可能性のあるエラーを定義します。",
+      "fields": [
+        "UnexpectedCharacter(char)",
+        "InvalidNumber(String)",
+        "UnexpectedToken {...}",
+        "UnexpectedEof",
+        "UnknownFunction(String)",
+        "DivisionByZero",
+        "RationalOverflow(String)",
+        "ParseError(String)"
+      ],
+      "enum_variants": [
+        {
+          "name": "UnexpectedCharacter",
+          "fields": {
+            "Unnamed": [
+              {
+                "Path": {
+                  "segments": [
+                    "char"
+                  ],
+                  "args": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "InvalidNumber",
+          "fields": {
+            "Unnamed": [
+              "String"
+            ]
+          }
+        },
+        {
+          "name": "UnexpectedToken",
+          "fields": {
+            "Named": [
+              {
+                "name": "expected",
+                "rust_type": "String",
+                "is_receiver": false
+              },
+              {
+                "name": "found",
+                "rust_type": {
+                  "Path": {
+                    "segments": [
+                      "Token"
+                    ],
+                    "args": []
+                  }
+                },
+                "is_receiver": false
+              }
+            ]
+          }
+        },
+        {
+          "name": "UnexpectedEof",
+          "fields": "Unit"
+        },
+        {
+          "name": "UnknownFunction",
+          "fields": {
+            "Unnamed": [
+              "String"
+            ]
+          }
+        },
+        {
+          "name": "DivisionByZero",
+          "fields": "Unit"
+        },
+        {
+          "name": "RationalOverflow",
+          "fields": {
+            "Unnamed": [
+              "String"
+            ]
+          }
+        },
+        {
+          "name": "ParseError",
+          "fields": {
+            "Unnamed": [
+              "String"
+            ]
+          }
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    }
+  ],
+  "impl_blocks": [
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": [
+        {
+          "name": "try_new",
+          "visibility": "pub",
+          "args": [
+            "numer : i64",
+            "denom : i64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn try_new (numer : i64 , denom : i64) -> Result < Self > { if denom == 0 { return Err (AlgebraicError :: DivisionByZero) ; } if numer == 0 { return Ok (Self { numer : 0 , denom : 1 , dirty : false , }) ; } let mut d = denom ; let mut n = numer ; if d < 0 { d = - d ; n = - n ; } let g = gcd_i64_u64 (n . abs () , d as u64) ; Ok (Self { numer : n / g as i64 , denom : (d as u64) / g , dirty : false , }) }",
+          "typed_args": [
+            {
+              "name": "numer",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "denom",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "numer : i64",
+            "denom : i64"
+          ],
+          "return_type": "Self",
+          "doc": "2. パニックするコンストラクタ (定数・プログラマ用)",
+          "source_code": "# [doc = \" 2. パニックするコンストラクタ (定数・プログラマ用)\"] pub fn new (numer : i64 , denom : i64) -> Self { Self :: try_new (numer , denom) . expect (\"Rational::new failed (division by zero)\") }",
+          "typed_args": [
+            {
+              "name": "numer",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "denom",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "to_latex",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "String",
+          "doc": "",
+          "source_code": "pub fn to_latex (& self) -> String { if self . numer == 0 { return \"0\" . to_string () ; } let mut tmp = * self ; tmp . normalize () ; if tmp . denom == 1 { return format ! (\"{}\" , tmp . numer) ; } if tmp . numer < 0 { format ! (\"-\\\\frac{{{}}}{{{}}}\" , - tmp . numer , tmp . denom) } else { format ! (\"\\\\frac{{{}}}{{{}}}\" , tmp . numer , tmp . denom) } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": "String",
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": "String",
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "from_latex",
+          "visibility": "pub",
+          "args": [
+            "latex : & str"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn from_latex (latex : & str) -> Result < Self > { let text = crate :: latex :: latex_to_infix (latex) ; text . parse :: < Rational > () }",
+          "typed_args": [
+            {
+              "name": "latex",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": "Str"
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "Str",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "from_int",
+          "visibility": "pub",
+          "args": [
+            "n : i64"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn from_int (n : i64) -> Self { Self { numer : n , denom : 1 , dirty : false , } }",
+          "typed_args": [
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "is_integer",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "bool",
+          "doc": "",
+          "source_code": "pub fn is_integer (& self) -> bool { if self . numer > 0 { (self . numer as u64) . is_multiple_of (self . denom) } else { (- (self . numer) as u64) . is_multiple_of (self . denom) } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "Bool"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "Bool"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "numer",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "i64",
+          "doc": "",
+          "source_code": "pub fn numer (& self) -> i64 { self . numer }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "I64"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "I64"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "denom",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "u64",
+          "doc": "",
+          "source_code": "pub fn denom (& self) -> u64 { self . denom }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "U64"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "U64"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "is_zero",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "bool",
+          "doc": "",
+          "source_code": "pub fn is_zero (& self) -> bool { self . numer == 0 }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "Bool"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "Bool"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "is_one",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "bool",
+          "doc": "",
+          "source_code": "pub fn is_one (& self) -> bool { self . numer > 0 && (self . numer as u64) == self . denom }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "Bool"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "Bool"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "is_minus_one",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "bool",
+          "doc": "",
+          "source_code": "pub fn is_minus_one (& self) -> bool { self . numer < 0 && (- (self . numer) as u64) == self . denom }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "Bool"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "Bool"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "normalize",
+          "visibility": "pub",
+          "args": [
+            "& mut self"
+          ],
+          "return_type": "()",
+          "doc": "完全正規化 (in-place)",
+          "source_code": "# [doc = \" 完全正規化 (in-place)\"] pub fn normalize (& mut self) { if ! self . dirty { return ; } if self . numer == 0 { self . denom = 1 ; self . dirty = false ; return ; } let g = gcd_i64_u64 (self . numer . abs () , self . denom) ; if g > 1 { self . numer /= g as i64 ; self . denom /= g ; } self . dirty = false ; }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": "Unit",
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": "Unit",
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "simplified",
+          "visibility": "pub",
+          "args": [
+            "mut self"
+          ],
+          "return_type": "Self",
+          "doc": "コピーを正規化したものを返す",
+          "source_code": "# [doc = \" コピーを正規化したものを返す\"] pub fn simplified (mut self) -> Self { self . normalize () ; self }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "checked_add",
+          "visibility": "pub",
+          "args": [
+            "self",
+            "rhs : Self"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn checked_add (self , rhs : Self) -> Result < Self > { if self . is_zero () { return Ok (rhs) ; } if rhs . is_zero () { return Ok (self) ; } let num1 = self . numer as i128 ; let den1 = self . denom as u128 ; let num2 = rhs . numer as i128 ; let den2 = rhs . denom as u128 ; let gcd = gcd_u64 (den1 as u64 , den2 as u64) as u128 ; let fact1 = den2 / gcd ; let fact2 = den1 / gcd ; let n128 = num1 * (fact1 as i128) + num2 * (fact2 as i128) ; if n128 == 0 { return Ok (Rational :: from_int (0)) ; } let denom_u128 = fact2 * den2 ; let (mut n_final , mut d_final) = if denom_u128 <= u64 :: MAX as u128 { (n128 , denom_u128 as u64) } else { let n_abs = n128 . unsigned_abs () ; let mut tmp_denom = denom_u128 ; let g2 = gcd_u128 (n_abs , tmp_denom) ; tmp_denom /= g2 ; if tmp_denom > u64 :: MAX as u128 { return Err (AlgebraicError :: RationalOverflow (\"Add denominator overflow\" . to_string () ,)) ; } let reduced_numer = n128 / (g2 as i128) ; if reduced_numer > i64 :: MAX as i128 || reduced_numer < i64 :: MIN as i128 { return Err (AlgebraicError :: RationalOverflow (\"Add numerator overflow\" . to_string () ,)) ; } return Ok (Rational { numer : reduced_numer as i64 , denom : tmp_denom as u64 , dirty : false , }) ; } ; let g2 = gcd_i128_u128 (n128 . unsigned_abs () , gcd) ; if g2 > 1 { n_final /= g2 as i128 ; d_final /= g2 as u64 ; } if n_final > i64 :: MAX as i128 || n_final < i64 :: MIN as i128 { return Err (AlgebraicError :: RationalOverflow (\"Add numerator overflow\" . to_string () ,)) ; } Ok (Rational { numer : n_final as i64 , denom : d_final , dirty : true , }) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "rhs",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "checked_mul",
+          "visibility": "pub",
+          "args": [
+            "self",
+            "rhs : Self"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn checked_mul (self , rhs : Self) -> Result < Self > { if self . is_zero () || rhs . is_zero () { return Ok (Rational { numer : 0 , denom : 1 , dirty : false , }) ; } let mut num1 = self . numer ; let mut den1 = self . denom ; let mut num2 = rhs . numer ; let mut den2 = rhs . denom ; let g1 = gcd_i64_u64 (num1 . abs () , den2) ; if g1 > 1 { num1 /= g1 as i64 ; den2 /= g1 ; } let g2 = gcd_i64_u64 (num2 . abs () , den1) ; if g2 > 1 { num2 /= g2 as i64 ; den1 /= g2 ; } let n128 = (num1 as i128) * (num2 as i128) ; let denom_u128 = (den1 as u128) * (den2 as u128) ; if denom_u128 > u64 :: MAX as u128 { return Err (AlgebraicError :: RationalOverflow (\"Mul denominator overflow\" . to_string () ,)) ; } if n128 > i64 :: MAX as i128 || n128 < i64 :: MIN as i128 { return Err (AlgebraicError :: RationalOverflow (\"Mul numerator overflow\" . to_string () ,)) ; } Ok (Rational { numer : n128 as i64 , denom : denom_u128 as u64 , dirty : self . dirty || rhs . dirty , }) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "rhs",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "checked_div",
+          "visibility": "pub",
+          "args": [
+            "self",
+            "rhs : Self"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn checked_div (self , rhs : Self) -> Result < Self > { if rhs . is_zero () { return Err (AlgebraicError :: DivisionByZero) ; } if rhs . denom > i64 :: MAX as u64 { return Err (AlgebraicError :: RationalOverflow (\"Reciprocal numerator overflow\" . to_string () ,)) ; } let flipped = Rational { numer : rhs . denom as i64 * rhs . numer . signum () , denom : rhs . numer . unsigned_abs () , dirty : rhs . dirty , } ; self . checked_mul (flipped) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "rhs",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "Rational",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": [
+        {
+          "name": "to_latex",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "String",
+          "doc": "数式をLaTeX形式の文字列に変換します。",
+          "source_code": "# [doc = \" 数式をLaTeX形式の文字列に変換します。\"] pub fn to_latex (& self) -> String { self . to_latex_inner (0) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": "String",
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": "String",
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "functions": [
+        {
+          "name": "from_latex",
+          "visibility": "pub",
+          "args": [
+            "latex : & str"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn from_latex (latex : & str) -> Result < Self > { let text = crate :: latex :: latex_to_infix (latex) ; text . parse :: < SymbolicExpr > () }",
+          "typed_args": [
+            {
+              "name": "latex",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": "Str"
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "Str",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "rational",
+          "visibility": "pub",
+          "args": [
+            "n : i64",
+            "d : i64"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn rational (n : i64 , d : i64) -> Self { SymbolicExpr :: Rational (Rational :: new (n , d)) }",
+          "typed_args": [
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "d",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "int",
+          "visibility": "pub",
+          "args": [
+            "n : i64"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn int (n : i64) -> Self { SymbolicExpr :: Rational (Rational :: from (n)) }",
+          "typed_args": [
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "add",
+          "visibility": "pub",
+          "args": [
+            "terms : Vec < SymbolicExpr >"
+          ],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn add (terms : Vec < SymbolicExpr >) -> SymbolicExpr { let mut flat : Vec < SymbolicExpr > = Vec :: with_capacity (terms . len ()) ; let mut acc_r : Option < Rational > = None ; for t in terms . into_iter () { match t { SymbolicExpr :: Add (inner) => { for x in inner { match x { SymbolicExpr :: Rational (r) => { acc_r = Some (match acc_r { Some (a) => a + r , None => r , }) ; } other => flat . push (other) , } } } SymbolicExpr :: Rational (r) => { acc_r = Some (match acc_r { Some (a) => a + r , None => r , }) ; } other => flat . push (other) , } } if let Some (r) = acc_r { if ! r . is_zero () { flat . push (SymbolicExpr :: Rational (r . simplified ())) ; } } flat . retain (| e | ! matches ! (e , SymbolicExpr :: Rational (r) if r . is_zero ())) ; flat = rules :: combine_like_terms (flat) ; rules :: sort_canonical (& mut flat) ; match flat . len () { 0 => SymbolicExpr :: int (0) , 1 => flat . into_iter () . next () . unwrap () , _ => SymbolicExpr :: Add (flat) , } }",
+          "typed_args": [
+            {
+              "name": "terms",
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "SymbolicExpr"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "SymbolicExpr"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "mul",
+          "visibility": "pub",
+          "args": [
+            "factors : Vec < SymbolicExpr >"
+          ],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn mul (factors : Vec < SymbolicExpr >) -> SymbolicExpr { let mut flat : Vec < SymbolicExpr > = Vec :: with_capacity (factors . len ()) ; let mut acc_r : Option < Rational > = None ; for f in factors . into_iter () { match f { SymbolicExpr :: Mul (inner) => { for x in inner { match x { SymbolicExpr :: Rational (r) => { acc_r = Some (match acc_r { Some (a) => a * r , None => r , }) ; } other => flat . push (other) , } } } SymbolicExpr :: Rational (r) => { if r . is_zero () { return SymbolicExpr :: int (0) ; } acc_r = Some (match acc_r { Some (a) => a * r , None => r , }) ; } other => flat . push (other) , } } if let Some (r) = acc_r { if r . is_zero () { return SymbolicExpr :: int (0) ; } if ! r . is_one () { flat . push (SymbolicExpr :: Rational (r . simplified ())) ; } } flat . retain (| e | ! matches ! (e , SymbolicExpr :: Rational (r) if r . is_one ())) ; rules :: sort_canonical (& mut flat) ; match flat . len () { 0 => SymbolicExpr :: int (1) , 1 => flat . into_iter () . next () . unwrap () , _ => SymbolicExpr :: Mul (flat) , } }",
+          "typed_args": [
+            {
+              "name": "factors",
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "SymbolicExpr"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "SymbolicExpr"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "pow",
+          "visibility": "pub",
+          "args": [
+            "base : SymbolicExpr",
+            "exp : SymbolicExpr"
+          ],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn pow (base : SymbolicExpr , exp : SymbolicExpr) -> SymbolicExpr { if let SymbolicExpr :: Rational (r) = & exp { if r . is_one () { return base ; } if r . is_zero () { return SymbolicExpr :: int (1) ; } } if let SymbolicExpr :: Rational (r) = & base { if r . is_zero () { return SymbolicExpr :: int (0) ; } if r . is_one () { return SymbolicExpr :: int (1) ; } } match (& base , & exp) { (SymbolicExpr :: Rational (b) , SymbolicExpr :: Rational (e)) if e . denom () == 1 => { let k = e . numer () ; if k == 1 { return SymbolicExpr :: Rational (* b) ; } if k == 0 { return SymbolicExpr :: int (1) ; } fn rat_pow (base : crate :: rational :: Rational , mut exp : i64 ,) -> crate :: rational :: Rational { let mut result = crate :: rational :: Rational :: from_int (1) ; let mut b = base ; while exp > 0 { if (exp & 1) == 1 { result = result * b ; } exp >>= 1 ; if exp > 0 { b = b * b ; } } result } if k > 0 { let rp = rat_pow (* b , k) ; SymbolicExpr :: Rational (rp . simplified ()) } else { let rp = rat_pow (* b , - k) ; SymbolicExpr :: Rational ((crate :: rational :: Rational :: from_int (1) / rp) . simplified () ,) } } (SymbolicExpr :: Pow (inner_b , inner_e) , SymbolicExpr :: Rational (er)) if matches ! (** inner_e , SymbolicExpr :: Rational (_)) => { if let SymbolicExpr :: Rational (a_r) = & * * inner_e { let mut prod = * a_r * * er ; prod . normalize () ; return SymbolicExpr :: pow ((* * inner_b) . clone () , SymbolicExpr :: Rational (prod)) ; } SymbolicExpr :: Pow (Box :: new (base) , Box :: new (exp)) } (SymbolicExpr :: Rational (r) , SymbolicExpr :: Rational (e)) => { if e . numer () == 1 && r . numer () > 0 { let k = e . denom () ; if k == 2 || k == 3 || k == 4 { return rules :: simplify_positive_rational_kth_root (* r , k) ; } } SymbolicExpr :: Pow (Box :: new (base) , Box :: new (exp)) } _ => SymbolicExpr :: Pow (Box :: new (base) , Box :: new (exp)) , } }",
+          "typed_args": [
+            {
+              "name": "base",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "exp",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "sqrt",
+          "visibility": "pub",
+          "args": [
+            "self"
+          ],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn sqrt (self) -> SymbolicExpr { SymbolicExpr :: pow (self , SymbolicExpr :: rational (1 , 2)) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "sqrt2",
+          "visibility": "pub",
+          "args": [],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn sqrt2 () -> SymbolicExpr { SymbolicExpr :: pow (SymbolicExpr :: int (2) , SymbolicExpr :: rational (1 , 2)) }",
+          "typed_args": [],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "expand",
+          "visibility": "pub",
+          "args": [
+            "self"
+          ],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn expand (self) -> SymbolicExpr { match self { SymbolicExpr :: Add (v) => { let inner : Vec < _ > = v . into_iter () . map (| e | e . expand ()) . collect () ; SymbolicExpr :: add (inner) } SymbolicExpr :: Mul (factors) => { let current_factors = factors . into_iter () . map (| f | f . expand ()) . collect :: < Vec < _ > > () ; let mut result = SymbolicExpr :: int (1) ; for f in current_factors { result = match (result , f) { (SymbolicExpr :: Add (terms_a) , SymbolicExpr :: Add (terms_b)) => { let mut new_terms = Vec :: new () ; for ta in terms_a { for tb in & terms_b { new_terms . push (SymbolicExpr :: mul (vec ! [ta . clone () , tb . clone ()])) ; } } SymbolicExpr :: add (new_terms) } (SymbolicExpr :: Add (terms) , other) | (other , SymbolicExpr :: Add (terms)) => { let mut new_terms = Vec :: new () ; for t in terms { new_terms . push (SymbolicExpr :: mul (vec ! [t , other . clone ()])) ; } SymbolicExpr :: add (new_terms) } (a , b) => SymbolicExpr :: mul (vec ! [a , b]) , } ; } result } SymbolicExpr :: Pow (b , e) => { let bb = b . expand () ; let ee = e . expand () ; if let SymbolicExpr :: Rational (r) = & ee { if r . denom () == 1 && r . numer () >= 2 && r . numer () <= 4 { let mut res = bb . clone () ; for _ in 1 .. r . numer () { res = SymbolicExpr :: mul (vec ! [res , bb . clone ()]) . expand () ; } return res ; } } SymbolicExpr :: pow (bb , ee) } leaf => leaf , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "simplify",
+          "visibility": "pub",
+          "args": [
+            "self"
+          ],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn simplify (self) -> SymbolicExpr { match self { SymbolicExpr :: Add (v) => { let inner : Vec < _ > = v . into_iter () . map (| e | e . simplify ()) . collect () ; SymbolicExpr :: add (inner) } SymbolicExpr :: Mul (v) => { let inner : Vec < _ > = v . into_iter () . map (| e | e . simplify ()) . collect () ; let flattened_pows = rules :: distribute_pow_over_mul (inner) ; let merged_pows = rules :: merge_same_exponent_pows (flattened_pows) ; let merged_bases = rules :: merge_same_base_pows (merged_pows) ; let distributed = rules :: distribute_constant_into_add (merged_bases) ; let simplified_mul = rules :: absorb_coefficients_into_powers (distributed) ; let combined = rules :: combine_identical_factors_to_pow (simplified_mul) ; SymbolicExpr :: mul (combined) } SymbolicExpr :: Pow (b , e) => { let bb = b . simplify () ; let ee = e . simplify () ; SymbolicExpr :: pow (bb , ee) } leaf => leaf , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "substitute",
+          "visibility": "pub",
+          "args": [
+            "self",
+            "sym : & str",
+            "val : & SymbolicExpr"
+          ],
+          "return_type": "SymbolicExpr",
+          "doc": "",
+          "source_code": "pub fn substitute (self , sym : & str , val : & SymbolicExpr) -> SymbolicExpr { match self { SymbolicExpr :: Symbol (s) if s == sym => val . clone () , SymbolicExpr :: Add (terms) => { SymbolicExpr :: add (terms . into_iter () . map (| t | t . substitute (sym , val)) . collect ()) } SymbolicExpr :: Mul (factors) => SymbolicExpr :: mul (factors . into_iter () . map (| f | f . substitute (sym , val)) . collect () ,) , SymbolicExpr :: Pow (b , e) => { SymbolicExpr :: pow (b . substitute (sym , val) , e . substitute (sym , val)) } leaf => leaf , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "sym",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": "Str"
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "val",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "SymbolicExpr"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "SymbolicExpr"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "Str",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "SymbolicExpr"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": [
+        {
+          "name": "from_latex",
+          "visibility": "pub",
+          "args": [
+            "latex : & str"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn from_latex (latex : & str) -> Result < Self > { let text = crate :: latex :: latex_to_infix (latex) ; text . parse :: < SymbolicComplex > () }",
+          "typed_args": [
+            {
+              "name": "latex",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": "Str"
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "Str",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "to_latex",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "String",
+          "doc": "",
+          "source_code": "pub fn to_latex (& self) -> String { let re = self . re . clone () . simplify () ; let im = self . im . clone () . simplify () ; let re_is_zero = re . is_zero () ; let im_is_zero = im . is_zero () ; if re_is_zero && im_is_zero { return \"0\" . to_string () ; } if im_is_zero { return re . to_latex () ; } if re_is_zero { return Self :: format_imag_part_latex (& im) ; } let re_latex = re . to_latex () ; let im_latex = im . to_latex () ; if let Some (im_abs_latex) = im_latex . strip_prefix ('-') { let op = \"-\" ; if im . clone () . neg () == SymbolicExpr :: int (1) { format ! (\"{}{}{}\" , re_latex , op , \"i\") } else { let im_part = match im . neg () { SymbolicExpr :: Add (_) => format ! (\"({})\" , im_abs_latex) , _ => im_abs_latex . to_string () , } ; format ! (\"{}{}{}i\" , re_latex , op , im_part) } } else { let op = \"+\" ; if im == SymbolicExpr :: int (1) { format ! (\"{}{}{}\" , re_latex , op , \"i\") } else { let im_part = match im { SymbolicExpr :: Add (_) => format ! (\"({})\" , im_latex) , _ => im_latex , } ; format ! (\"{}{}{}i\" , re_latex , op , im_part) } } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": "String",
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": "String",
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "re : SymbolicExpr",
+            "im : SymbolicExpr"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn new (re : SymbolicExpr , im : SymbolicExpr) -> Self { Self { re , im } }",
+          "typed_args": [
+            {
+              "name": "re",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "im",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "from_real",
+          "visibility": "pub",
+          "args": [
+            "re : SymbolicExpr"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn from_real (re : SymbolicExpr) -> Self { Self { re , im : SymbolicExpr :: int (0) , } }",
+          "typed_args": [
+            {
+              "name": "re",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "SymbolicExpr"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "i",
+          "visibility": "pub",
+          "args": [],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn i () -> Self { Self { re : SymbolicExpr :: int (0) , im : SymbolicExpr :: int (1) , } }",
+          "typed_args": [],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "zero",
+          "visibility": "pub",
+          "args": [],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn zero () -> Self { Self :: from_real (SymbolicExpr :: int (0)) }",
+          "typed_args": [],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "is_real",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "bool",
+          "doc": "",
+          "source_code": "pub fn is_real (& self) -> bool { matches ! (self . im , SymbolicExpr :: Rational (ref r) if r . is_zero ()) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "Bool"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "Bool"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "is_imag_pure",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "bool",
+          "doc": "",
+          "source_code": "pub fn is_imag_pure (& self) -> bool { matches ! (self . re , SymbolicExpr :: Rational (ref r) if r . is_zero ()) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "Bool"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "Bool"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "neg",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn neg (& self) -> Self { SymbolicComplex { re : SymbolicExpr :: mul (vec ! [SymbolicExpr :: int (- 1) , self . re . clone ()]) . simplify () , im : SymbolicExpr :: mul (vec ! [SymbolicExpr :: int (- 1) , self . im . clone ()]) . simplify () , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "add",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "other : & Self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn add (& self , other : & Self) -> Self { SymbolicComplex { re : SymbolicExpr :: add (vec ! [self . re . clone () , other . re . clone ()]) . simplify () , im : SymbolicExpr :: add (vec ! [self . im . clone () , other . im . clone ()]) . simplify () , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "other",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Self"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "sub",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "other : & Self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn sub (& self , other : & Self) -> Self { self . add (& other . neg ()) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "other",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Self"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "mul",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "other : & Self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn mul (& self , other : & Self) -> Self { let a = self . re . clone () ; let b = self . im . clone () ; let c = other . re . clone () ; let d = other . im . clone () ; let ac = SymbolicExpr :: mul (vec ! [a . clone () , c . clone ()]) ; let bd = SymbolicExpr :: mul (vec ! [b . clone () , d . clone ()]) ; let ad = SymbolicExpr :: mul (vec ! [a . clone () , d . clone ()]) ; let bc = SymbolicExpr :: mul (vec ! [b . clone () , c . clone ()]) ; let re = SymbolicExpr :: add (vec ! [ac , SymbolicExpr :: mul (vec ! [SymbolicExpr :: int (- 1) , bd])]) . simplify () ; let im = SymbolicExpr :: add (vec ! [ad , bc]) . simplify () ; SymbolicComplex { re , im } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "other",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Self"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "conj",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn conj (& self) -> Self { SymbolicComplex { re : self . re . clone () , im : self . im . clone () . neg () . simplify () , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "sqrt_rational",
+          "visibility": "pub",
+          "args": [
+            "n : i64",
+            "d : i64"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn sqrt_rational (n : i64 , d : i64) -> Self { use SymbolicExpr as E ; if n == 0 { return SymbolicComplex :: from_real (E :: int (0)) ; } if n > 0 { return SymbolicComplex :: from_real (E :: pow (E :: rational (n , d) , E :: rational (1 , 2)) . simplify () ,) ; } let abs_expr = E :: pow (E :: rational (- n , d) , E :: rational (1 , 2)) . simplify () ; SymbolicComplex { re : E :: int (0) , im : abs_expr , } }",
+          "typed_args": [
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "d",
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "I64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "simplify",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn simplify (& self) -> Self { SymbolicComplex { re : self . re . clone () . simplify () , im : self . im . clone () . simplify () , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "expand",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn expand (& self) -> Self { SymbolicComplex { re : self . re . clone () . expand () , im : self . im . clone () . expand () , } }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicComplex",
+      "functions": []
+    }
+  ],
+  "crate_apis": [],
+  "type_apis": [],
+  "unsupported": [
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "function": "add",
+      "position": "arg:terms",
+      "rust_type": {
+        "Vec": {
+          "Path": {
+            "segments": [
+              "SymbolicExpr"
+            ],
+            "args": []
+          }
+        }
+      },
+      "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "algebraic",
+      "target_struct": "SymbolicExpr",
+      "function": "mul",
+      "position": "arg:factors",
+      "rust_type": {
+        "Vec": {
+          "Path": {
+            "segments": [
+              "SymbolicExpr"
+            ],
+            "args": []
+          }
+        }
+      },
+      "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    }
+  ]
+}

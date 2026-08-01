@@ -1,0 +1,85 @@
+- function: LinalgApi::add_rational
+  inputs:
+    - 1/2,1/2;1/2,1/2
+    - 1/2,1/2;1/2,1/2
+  expected: 1,1;1,1
+- function: LinalgApi::mul_rational
+  inputs:
+    - 1,2;3,4
+    - 1,0;0,1
+  expected: 1,2;3,4
+- function: LinalgApi::inverse_exact_rational
+  inputs:
+    - 1,2;3,4
+  expected: -2,1;3/2,-1/2
+- function: LinalgApi::lu_exact_rational
+  inputs:
+    - 1,2;3,4
+  expected: 1,0;3,1|1,2;0,-2
+- function: LinalgApi::add_symbolic
+  inputs:
+    - a,b;c,d
+    - x,y;z,w
+  expected: a + x,b + y;c + z,d + w
+- function: LinalgApi::mul_symbolic
+  inputs:
+    - a,b;c,d
+    - x,y;z,w
+  expected: ax + bz,ay + bw;cx + dz,cy + dw
+- function: LinalgApi::inverse_exact_symbolic
+  inputs:
+    - a,b;c,d
+  expected: -d(-ad + bc)^{-1},b(-ad + bc)^{-1};c(-ad + bc)^{-1},-a(-ad + bc)^{-1}
+- function: LinalgApi::lu_exact_symbolic
+  inputs:
+    - a,b;c,d
+  expected: 1,0;ca^{-1},1|a,b;0,d + -bca^{-1}
+- function: RationalMatrixApi::inverse
+  inputs:
+    - 1,2;3,4
+  expected: -2,1;3/2,-1/2
+- function: RationalMatrixApi::zeros
+  inputs:
+    - 2
+    - 3
+  expected: 0,0,0;0,0,0
+- function: RationalMatrixApi::rows
+  inputs:
+    - 1,2,3;4,5,6
+  expected: 2
+- function: RationalMatrixApi::first
+  inputs:
+    - 1/2,2;3,4
+  expected: 1/2
+- function: RationalMatrixApi::add
+  inputs:
+    - 1/2,1/2;1/2,1/2
+    - 1/2,1/2;1/2,1/2
+  expected: 1,1;1,1
+- function: RationalMatrixApi::mul
+  inputs:
+    - 1,2;3,4
+    - 1,0;0,1
+  expected: 1,2;3,4
+- function: RationalMatrixApi::transpose
+  inputs:
+    - 1,2;3,4
+  expected: 1,3;2,4
+
+# DTO-first rational matrix API.  These values are passed unchanged through
+# Rust runner, wasm, and generated TypeScript tests.
+- function: RationalMatrixDtoApi::inverse
+  inputs:
+    - '{"values":[[{"numer":1,"denom":1},{"numer":2,"denom":1}],[{"numer":3,"denom":1},{"numer":4,"denom":1}]]}'
+  expected: '{"values":[[{"numer":-2,"denom":1},{"numer":1,"denom":1}],[{"numer":3,"denom":2},{"numer":-1,"denom":2}]]}'
+
+- function: RationalMatrixDtoApi::add
+  inputs:
+    - '{"values":[[{"numer":1,"denom":2},{"numer":1,"denom":2}],[{"numer":1,"denom":2},{"numer":1,"denom":2}]]}'
+    - '{"values":[[{"numer":1,"denom":2},{"numer":1,"denom":2}],[{"numer":1,"denom":2},{"numer":1,"denom":2}]]}'
+  expected: '{"values":[[{"numer":1,"denom":1},{"numer":1,"denom":1}],[{"numer":1,"denom":1},{"numer":1,"denom":1}]]}'
+
+- function: RationalMatrixDtoApi::transpose
+  inputs:
+    - '{"values":[[{"numer":1,"denom":1},{"numer":2,"denom":1}],[{"numer":3,"denom":1},{"numer":4,"denom":1}]]}'
+  expected: '{"values":[[{"numer":1,"denom":1},{"numer":3,"denom":1}],[{"numer":2,"denom":1},{"numer":4,"denom":1}]]}'

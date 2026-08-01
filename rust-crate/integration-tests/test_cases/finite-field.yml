@@ -1,0 +1,30 @@
+# Minimal integration tests for finite-field
+# format: function + inputs + expected
+
+- function: FiniteFieldApi::gf256_mul
+  inputs:
+    - "0x57"
+    - "0x83"
+  expected: "193"
+
+- function: FiniteFieldApi::gf256_inv_check
+  inputs:
+    - "0x53"
+  expected: "true"
+
+- function: FiniteFieldApi::gfp5_add
+  inputs:
+    - "3"
+    - "4"
+  expected: "2"
+
+- function: FiniteFieldApi::gfp5_mul
+  inputs:
+    - "2"
+    - "4"
+  expected: "3"
+
+- function: FiniteFieldApi::gfp5_inv
+  inputs:
+    - "2"
+  expected: "3"

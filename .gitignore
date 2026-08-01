@@ -1,0 +1,40 @@
+# General
+*.log
+*.tmp
+*.swp
+*.env
+
+# Ignore all .env variants by default (secrets), but keep examples.
+.env*
+!.env.example
+web-app/.env*
+!web-app/.env.example
+
+# VS Code - チームで共有したい設定ファイルは除外する
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# ----------------------------------------------------------------
+# Rust
+# ----------------------------------------------------------------
+/rust-crate/target/
+/rust-crate/**/target/
+
+# ----------------------------------------------------------------
+# Node.js / Next.js
+# ----------------------------------------------------------------
+**/node_modules/
+
+web-app/.next/
+web-app/out/
+
+packages/**/dist/
+packages/**/build/
+
+# npmのデバッグログ
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

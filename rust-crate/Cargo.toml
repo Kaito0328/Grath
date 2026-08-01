@@ -1,0 +1,19 @@
+# (ルート)/Cargo.toml
+
+[workspace]
+members = ["crates/*", "tools/inspector", "integration-tests", "wasm"]
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] } # derive機能は必須
+thiserror = "2.0"                                  # 最新はv2系です
+strum = "0.26"
+strum_macros = "0.26"
+wasm-bindgen = "0.2"
+serde-wasm-bindgen = "0.6"
+
+crates-common = { path = "../crates/common" }
+
+
+[profile.release]
+lto = true
+opt-level = 3

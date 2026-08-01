@@ -1,0 +1,27 @@
+- function: linalg::Matrix::add_rational
+  inputs:
+    - 1/2,1/2;1/2,1/2
+    - 1/2,1/2;1/2,1/2
+  expected: 1,1;1,1
+- function: linalg::Matrix::mul_rational
+  inputs:
+    - 1,2;3,4
+    - 1,0;0,1
+  expected: 1,2;3,4
+- function: linalg::Matrix::inverse_exact_symbolic
+  inputs:
+    - a,b;c,d
+  expected: -d(-ad + bc)^{-1},b(-ad + bc)^{-1};c(-ad + bc)^{-1},-a(-ad + bc)^{-1}
+- function: polynomial::PolynomialSolver::solve_rational
+  inputs:
+    - "[1, -2, 1]"
+  expected: "1,1"
+- function: polynomial::Polynomial::find_roots_symbolic
+  inputs:
+    - "[c, b, a]"
+  expected: "a^{-1}(1/2(b^{2} + -4ac)^{1/2} + -1/2b),a^{-1}(-1/2(b^{2} + -4ac)^{1/2} + -1/2b)"
+- function: algebraic::Rational::checked_add
+  inputs:
+    - 1/2
+    - 1/4
+  expected: 3/4

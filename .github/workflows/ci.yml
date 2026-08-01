@@ -1,0 +1,146 @@
+name: CI
+
+# いつ実行するかを指定 (mainブランチへのpush時 と 全てのPull Request時)
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust-check:
+    name: Rust (fmt/clippy/test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            rust-crate
+
+      - name: Check formatting
+        working-directory: ./rust-crate
+        run: cargo fmt -- --check
+
+      - name: Clippy (workspace)
+        working-directory: ./rust-crate
+        run: cargo clippy --workspace --all-targets
+
+      - name: Tests (core crates)
+        working-directory: ./rust-crate
+        run: |
+          cargo test -p common
+          cargo test -p algebraic
+          cargo test -p inspector
+
+      - name: Tests (integration-tests)
+        working-directory: ./rust-crate
+        run: cargo test -p integration-tests
+
+  generated-check:
+    name: Generated files are up-to-date
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            rust-crate
+
+      - name: Re-generate error message maps
+        working-directory: ./rust-crate
+        run: cargo run -p inspector -- error-messages
+
+      - name: Fail if generated files changed
+        run: |
+          changed_files=$(git status --porcelain | awk '{print $2}')
+          echo "$changed_files" | grep -E '^(web-app/src/features/.*/config/errorCodeMessages\.generated\.ts|web-app/src/shared/errors/commonErrorCodeMessages\.generated\.ts)$' >/dev/null && {
+            echo "Generated files are out-of-date. Run: cargo run -p inspector -- error-messages"
+            git diff -- web-app/src/features web-app/src/shared/errors/commonErrorCodeMessages.generated.ts || true
+            exit 1
+          }
+
+  web-app-check:
+    name: web-app (test/build)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            web-app/package-lock.json
+
+      - name: Setup Rust (for wasm-pack)
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            rust-crate
+
+      - name: Add wasm32 target
+        run: rustup target add wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+
+      - name: Generate wasm/TS artifacts (inspector dev)
+        working-directory: ./rust-crate
+        run: cargo run -p inspector -- dev
+
+      - name: Fail if pipeline-generated artifacts changed
+        run: |
+          git diff --exit-code -- \
+            rust-crate/api-specs \
+            rust-crate/integration-tests/tests/common \
+            rust-crate/wasm/src \
+            web-app/generated/client-sdk
+
+      - name: Install web-app dependencies
+        working-directory: ./web-app
+        run: npm ci
+
+      - name: web-app lint
+        working-directory: ./web-app
+        run: npm run lint
+
+      - name: web-app tests
+        working-directory: ./web-app
+        run: npm test
+
+      - name: web-app build
+        working-directory: ./web-app
+        run: npm run build

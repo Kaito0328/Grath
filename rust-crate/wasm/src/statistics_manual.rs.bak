@@ -1,0 +1,110 @@
+use wasm_bindgen::prelude::*;
+use serde::{Serialize, Deserialize};
+use statistics::continuous_stats::Stats as ContStats;
+use statistics::discrete_stats::Stats as DiscStats;
+use statistics::hypothesis::{self, Tail};
+use statistics::distribution::{
+    continuous::{
+        normal::Normal,
+        t::T,
+        chi_square::ChiSquare,
+        f::F,
+        core::Distribution as ContDistribution,
+    },
+    discrete::{
+        binomial::Binomial,
+        poisson::Poisson,
+        core::Distribution as DiscDistribution,
+    },
+};
+use statistics::plot;
+
+#[wasm_bindgen]
+#[derive(Serialize)]
+pub struct DescriptiveStats {
+    pub mean: Option<f64>,
+    pub median: Option<f64>,
+    pub variance: Option<f64>,
+    pub std_dev: Option<f64>,
+    pub skewness: Option<f64>,
+    pub kurtosis: Option<f64>,
+    pub range: Option<f64>,
+    pub iqr: Option<f64>,
+}
+
+#[wasm_bindgen]
+pub fn get_descriptive_stats(data: Vec<f64>) -> Result<JsValue, JsValue> {
+    let stats = DescriptiveStats {
+        mean: data.mean(),
+        median: data.median(),
+        variance: data.unbiased_variance(),
+        std_dev: data.unbiased_standard_deviation(),
+        skewness: data.skewness(),
+        kurtosis: data.kurtosis(),
+        range: data.range(),
+        iqr: data.iqr(),
+    };
+    serde_wasm_bindgen::to_value(&stats).map_err(|e| JsValue::from_str(&e.to_string()))
+}
+
+#[wasm_bindgen]
+#[derive(Serialize)]
+pub struct TestResult {
+    pub stat: f64,
+    pub p_value: f64,
+    pub method: String,
+    pub ci_lower: Option<f64>,
+    pub ci_upper: Option<f64>,
+}
+
+fn map_tail(tail: &str) -> Tail {
+    match tail {
+        "less" => Tail::Less,
+        "greater" => Tail::Greater,
+        _ => Tail::TwoSided,
+    }
+}
+
+#[wasm_bindgen]
+pub fn run_one_sample_t_test(data: Vec<f64>, mu0: f64, tail: &str, alpha: f64) -> Result<JsValue, JsValue> {
+    let res = hypothesis::one_sample_t(&data, mu0, map_tail(tail), Some(alpha))
+        .map_err(|e| JsValue::from_str(&e.to_string()))?;
+    
+    let (ci_lower, ci_upper) = match res.ci {
+        Some((l, u)) => (Some(l), Some(u)),
+        None => (None, None),
+    };
+
+    let dto = TestResult {
+        stat: res.stat,
+        p_value: res.p_value,
+        method: res.method.to_string(),
+        ci_lower,
+        ci_upper,
+    };
+    serde_wasm_bindgen::to_value(&dto).map_err(|e| JsValue::from_str(&e.to_string()))
+}
+
+#[wasm_bindgen]
+pub fn get_normal_pdf_svg(mean: f64, std: f64, width: u32, height: u32) -> Result<String, JsValue> {
+    let dist = Normal::new(mean, std).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    Ok(plot::svg_continuous_pdf(&dist, width, height, 200))
+}
+
+#[wasm_bindgen]
+pub fn get_t_pdf_svg(df: usize, width: u32, height: u32) -> Result<String, JsValue> {
+    let dist = T::new(df).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    Ok(plot::svg_continuous_pdf(&dist, width, height, 200))
+}
+
+#[wasm_bindgen]
+pub fn get_binomial_pmf_svg(n: u64, p: f64, width: u32, height: u32) -> Result<String, JsValue> {
+    let dist = Binomial::new(n, p).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    Ok(plot::svg_discrete_pmf(&dist, width, height))
+}
+
+#[wasm_bindgen]
+pub fn get_poisson_pmf_svg(lambda: f64, width: u32, height: u32) -> Result<String, JsValue> {
+    let dist = Poisson::new(lambda).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    Ok(plot::svg_discrete_pmf(&dist, width, height))
+}
