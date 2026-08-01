@@ -21,13 +21,13 @@ function getWasm(): CodingModule {
     return wasm;
 }
 
-export type DtoPointDto = 
+export type DtoPointDto =
   {
     x: number;
     y: number;
   };
 
-export type DtoLabelDto = 
+export type DtoLabelDto =
   | { kind: "Origin" }
   | { kind: "Named"; name: string; }
 ;

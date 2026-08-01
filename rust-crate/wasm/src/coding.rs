@@ -101,19 +101,19 @@ impl WasmDtoFixtureApi {
 }
 
 #[wasm_bindgen]
-pub struct WasmReedSolomon(pub(crate) ReedSolomon);
+pub struct WasmBCHCode(pub(crate) BCHCode);
 
-impl WasmReedSolomon {
-    pub fn inner(&self) -> &ReedSolomon {
+impl WasmBCHCode {
+    pub fn inner(&self) -> &BCHCode {
         &self.0
     }
 }
 
 #[wasm_bindgen]
-impl WasmReedSolomon {
+impl WasmBCHCode {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
-        stringify!(ReedSolomon).to_string()
+        stringify!(BCHCode).to_string()
     }
 }
 
@@ -135,19 +135,19 @@ impl WasmHamming74 {
 }
 
 #[wasm_bindgen]
-pub struct WasmBCHCode(pub(crate) BCHCode);
+pub struct WasmReedSolomon(pub(crate) ReedSolomon);
 
-impl WasmBCHCode {
-    pub fn inner(&self) -> &BCHCode {
+impl WasmReedSolomon {
+    pub fn inner(&self) -> &ReedSolomon {
         &self.0
     }
 }
 
 #[wasm_bindgen]
-impl WasmBCHCode {
+impl WasmReedSolomon {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
-        stringify!(BCHCode).to_string()
+        stringify!(ReedSolomon).to_string()
     }
 }
 

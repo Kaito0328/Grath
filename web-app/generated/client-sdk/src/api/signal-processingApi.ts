@@ -7,19 +7,13 @@ import { requireTrimmed, withReady } from "./runtime";
 
 // DTOs (serializable shapes). The classes below store these DTOs internally.
 
-export type WavInfoDTO = W.WavInfoDto;
-
-export type SignalDTO = W.SignalDto;
-
-export type SpectrumDTO = W.SpectrumDto;
-
-export type SignalProcessingApiDTO = W.SignalProcessingApiDto;
-
 export type AdaptiveFilterLMSDTO = W.AdaptiveFilterLMSDto;
 
 export type AdaptiveFilterNLMSDTO = W.AdaptiveFilterNLMSDto;
 
-export type SeriesDTO = W.SeriesDto;
+export type SignalProcessingApiDTO = W.SignalProcessingApiDto;
+
+export type FIRFilterDTO = W.FIRFilterDto;
 
 export type IIRFilterDTO = W.IIRFilterDto;
 
@@ -33,9 +27,15 @@ export type KernelDTO = W.KernelDto;
 
 export type ImageDTO = W.ImageDto;
 
-export type WindowTypeDTO = W.WindowTypeDto;
+export type WavInfoDTO = W.WavInfoDto;
 
-export type FIRFilterDTO = W.FIRFilterDto;
+export type SeriesDTO = W.SeriesDto;
+
+export type SignalDTO = W.SignalDto;
+
+export type SpectrumDTO = W.SpectrumDto;
+
+export type WindowTypeDTO = W.WindowTypeDto;
 
 
 // Shared helpers
@@ -44,110 +44,6 @@ function requireSafeInteger(n: number, name: string) {
   return String(Math.floor(n));
 }
 
-
-export class WavInfo {
-  private readonly _dto: WavInfoDTO;
-
-  private constructor(dto: WavInfoDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: WavInfoDTO) {
-    return new WavInfo(dto);
-  }
-
-  toDTO(): WavInfoDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class Signal {
-  private readonly _dto: SignalDTO;
-
-  private constructor(dto: SignalDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: SignalDTO) {
-    return new Signal(dto);
-  }
-
-  toDTO(): SignalDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class Spectrum {
-  private readonly _dto: SpectrumDTO;
-
-  private constructor(dto: SpectrumDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: SpectrumDTO) {
-    return new Spectrum(dto);
-  }
-
-  toDTO(): SpectrumDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class SignalProcessingApi {
-  private readonly _dto: SignalProcessingApiDTO;
-
-  private constructor(dto: SignalProcessingApiDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: SignalProcessingApiDTO) {
-    return new SignalProcessingApi(dto);
-  }
-
-  toDTO(): SignalProcessingApiDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
 
 export class AdaptiveFilterLMS {
   private readonly _dto: AdaptiveFilterLMSDTO;
@@ -201,18 +97,44 @@ export class AdaptiveFilterNLMS {
 
 }
 
-export class Series {
-  private readonly _dto: SeriesDTO;
+export class SignalProcessingApi {
+  private readonly _dto: SignalProcessingApiDTO;
 
-  private constructor(dto: SeriesDTO) {
+  private constructor(dto: SignalProcessingApiDTO) {
     this._dto = dto;
   }
 
-  static fromDTO(dto: SeriesDTO) {
-    return new Series(dto);
+  static fromDTO(dto: SignalProcessingApiDTO) {
+    return new SignalProcessingApi(dto);
   }
 
-  toDTO(): SeriesDTO {
+  toDTO(): SignalProcessingApiDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class FIRFilter {
+  private readonly _dto: FIRFilterDTO;
+
+  private constructor(dto: FIRFilterDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: FIRFilterDTO) {
+    return new FIRFilter(dto);
+  }
+
+  toDTO(): FIRFilterDTO {
     return this._dto;
   }
 
@@ -383,18 +305,18 @@ export class Image {
 
 }
 
-export class WindowType {
-  private readonly _dto: WindowTypeDTO;
+export class WavInfo {
+  private readonly _dto: WavInfoDTO;
 
-  private constructor(dto: WindowTypeDTO) {
+  private constructor(dto: WavInfoDTO) {
     this._dto = dto;
   }
 
-  static fromDTO(dto: WindowTypeDTO) {
-    return new WindowType(dto);
+  static fromDTO(dto: WavInfoDTO) {
+    return new WavInfo(dto);
   }
 
-  toDTO(): WindowTypeDTO {
+  toDTO(): WavInfoDTO {
     return this._dto;
   }
 
@@ -409,18 +331,96 @@ export class WindowType {
 
 }
 
-export class FIRFilter {
-  private readonly _dto: FIRFilterDTO;
+export class Series {
+  private readonly _dto: SeriesDTO;
 
-  private constructor(dto: FIRFilterDTO) {
+  private constructor(dto: SeriesDTO) {
     this._dto = dto;
   }
 
-  static fromDTO(dto: FIRFilterDTO) {
-    return new FIRFilter(dto);
+  static fromDTO(dto: SeriesDTO) {
+    return new Series(dto);
   }
 
-  toDTO(): FIRFilterDTO {
+  toDTO(): SeriesDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class Signal {
+  private readonly _dto: SignalDTO;
+
+  private constructor(dto: SignalDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: SignalDTO) {
+    return new Signal(dto);
+  }
+
+  toDTO(): SignalDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class Spectrum {
+  private readonly _dto: SpectrumDTO;
+
+  private constructor(dto: SpectrumDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: SpectrumDTO) {
+    return new Spectrum(dto);
+  }
+
+  toDTO(): SpectrumDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class WindowType {
+  private readonly _dto: WindowTypeDTO;
+
+  private constructor(dto: WindowTypeDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: WindowTypeDTO) {
+    return new WindowType(dto);
+  }
+
+  toDTO(): WindowTypeDTO {
     return this._dto;
   }
 

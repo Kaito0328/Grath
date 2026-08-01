@@ -67,23 +67,6 @@ where
 }
 
 #[wasm_bindgen]
-pub struct WasmPolynomialSolver(pub(crate) PolynomialSolver);
-
-impl WasmPolynomialSolver {
-    pub fn inner(&self) -> &PolynomialSolver {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmPolynomialSolver {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(PolynomialSolver).to_string()
-    }
-}
-
-#[wasm_bindgen]
 pub struct WasmPolynomialApi(pub(crate) PolynomialApi);
 
 impl WasmPolynomialApi {
@@ -97,6 +80,23 @@ impl WasmPolynomialApi {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
         stringify!(PolynomialApi).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmPolynomialSolver(pub(crate) PolynomialSolver);
+
+impl WasmPolynomialSolver {
+    pub fn inner(&self) -> &PolynomialSolver {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmPolynomialSolver {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(PolynomialSolver).to_string()
     }
 }
 

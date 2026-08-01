@@ -1,150 +1,6 @@
 {
   "structs": [
     {
-      "name": "Vector",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "data: Vec < T >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
-      "name": "Svd",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "u: Matrix < f64 >",
-        "sigma: Vector < f64 >",
-        "v: Matrix < f64 >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
-      "name": "QR",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "q: Matrix < f64 >",
-        "r: Matrix < f64 >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
-      "name": "Eigen",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "eigen_values: Vec < f64 >",
-        "eigen_vectors: Matrix < f64 >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
-      "name": "EigenComplex",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "eigen_values: Vec < Complex < f64 > >",
-        "eigen_vectors: Matrix < Complex < f64 > >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "BasicLU",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "l: Matrix < T >",
-        "u: Matrix < T >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "EigenDecompositionExact",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "values: Vec < T >",
-        "vectors: Matrix < T >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
-      "name": "SVD",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "u: Matrix < T >",
-        "s: Matrix < T >",
-        "v: Matrix < T >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
-      "name": "LU",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "p: Matrix < T >",
-        "l: Matrix < T >",
-        "u: Matrix < T >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Matrix",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "rows: usize",
-        "cols: usize",
-        "data: Vec < T >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
-      "name": "Direction",
-      "crate_name": "linalg",
-      "doc": "",
-      "fields": [
-        "Left",
-        "Right"
-      ],
-      "enum_variants": [
-        {
-          "name": "Left",
-          "fields": "Unit"
-        },
-        {
-          "name": "Right",
-          "fields": "Unit"
-        }
-      ],
-      "dto_candidate": true,
-      "dto_enabled": false
-    },
-    {
       "name": "LinalgApi",
       "crate_name": "linalg",
       "doc": "Compatibility crate-level API for the current string-boundary Web UI.\n\nNew WASM-facing APIs should prefer typed marker APIs such as\n[`RationalMatrixApi`] so the inspector can generate type-aware wrappers and\ntests. Keep this facade available while existing screens and generated SDK\ncallers still depend on string inputs/outputs.",
@@ -312,58 +168,153 @@
       ],
       "dto_candidate": true,
       "dto_enabled": false
+    },
+    {
+      "name": "EigenDecompositionExact",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "values: Vec < T >",
+        "vectors: Matrix < T >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "BasicLU",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "l: Matrix < T >",
+        "u: Matrix < T >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "LU",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "p: Matrix < T >",
+        "l: Matrix < T >",
+        "u: Matrix < T >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "QR",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "q: Matrix < T >",
+        "r: Matrix < T >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "SVD",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "u: Matrix < T >",
+        "s: Matrix < T >",
+        "v: Matrix < T >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "Matrix",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "rows: usize",
+        "cols: usize",
+        "data: Vec < T >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "Direction",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "Left",
+        "Right"
+      ],
+      "enum_variants": [
+        {
+          "name": "Left",
+          "fields": "Unit"
+        },
+        {
+          "name": "Right",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "Eigen",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "eigen_values: Vec < f64 >",
+        "eigen_vectors: Matrix < f64 >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "EigenComplex",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "eigen_values: Vec < Complex < f64 > >",
+        "eigen_vectors: Matrix < Complex < f64 > >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Svd",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "u: Matrix < f64 >",
+        "sigma: Vector < f64 >",
+        "v: Matrix < f64 >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "Vector",
+      "crate_name": "linalg",
+      "doc": "",
+      "fields": [
+        "data: Vec < T >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
     }
   ],
   "impl_blocks": [
-    {
-      "crate_name": "linalg",
-      "target_struct": "Svd",
-      "functions": [
-        {
-          "name": "sort",
-          "visibility": "pub",
-          "args": [
-            "& mut self"
-          ],
-          "return_type": "crate :: Result < () >",
-          "doc": "",
-          "source_code": "pub fn sort (& mut self) -> crate :: Result < () > { let mut pairs : Vec < _ > = self . sigma . data . iter () . cloned () . enumerate () . collect () ; pairs . sort_by (| a , b | b . 1 . partial_cmp (& a . 1) . unwrap_or (std :: cmp :: Ordering :: Equal)) ; let mut new_sigma = vec ! [0.0 ; self . sigma . dim ()] ; let mut new_u = Matrix :: zeros (self . u . rows , self . u . cols) ; let mut new_v = Matrix :: zeros (self . v . rows , self . v . cols) ; for (new_idx , (old_idx , val)) in pairs . iter () . enumerate () { new_sigma [new_idx] = * val ; let u_col = self . u . col (* old_idx) ? ; new_u . set_col (new_idx , & u_col) ? ; let v_col = self . v . col (* old_idx) ? ; new_v . set_col (new_idx , & v_col) ? ; } let n = self . sigma . dim () ; for col in n .. self . u . cols { let ucol = self . u . col (col) ? ; new_u . set_col (col , & ucol) ? ; } self . sigma . data = new_sigma ; self . u = new_u ; self . v = new_v ; Ok (()) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": "Unit",
-              "err": null
-            }
-          },
-          "codec_args": [],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": "Unit",
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "native",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
     {
       "crate_name": "linalg",
       "target_struct": "RationalValue",
@@ -3775,6 +3726,55 @@
                     "args": []
                   }
                 }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "linalg",
+      "target_struct": "Svd",
+      "functions": [
+        {
+          "name": "sort",
+          "visibility": "pub",
+          "args": [
+            "& mut self"
+          ],
+          "return_type": "crate :: Result < () >",
+          "doc": "",
+          "source_code": "pub fn sort (& mut self) -> crate :: Result < () > { let mut pairs : Vec < _ > = self . sigma . data . iter () . cloned () . enumerate () . collect () ; pairs . sort_by (| a , b | b . 1 . partial_cmp (& a . 1) . unwrap_or (std :: cmp :: Ordering :: Equal)) ; let mut new_sigma = vec ! [0.0 ; self . sigma . dim ()] ; let mut new_u = Matrix :: zeros (self . u . rows , self . u . cols) ; let mut new_v = Matrix :: zeros (self . v . rows , self . v . cols) ; for (new_idx , (old_idx , val)) in pairs . iter () . enumerate () { new_sigma [new_idx] = * val ; let u_col = self . u . col (* old_idx) ? ; new_u . set_col (new_idx , & u_col) ? ; let v_col = self . v . col (* old_idx) ? ; new_v . set_col (new_idx , & v_col) ? ; } let n = self . sigma . dim () ; for col in n .. self . u . cols { let ucol = self . u . col (col) ? ; new_u . set_col (col , & ucol) ? ; } self . sigma . data = new_sigma ; self . u = new_u ; self . v = new_v ; Ok (()) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "Unit",
+              "err": null
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "Unit",
+                "err": null
               }
             },
             "supported": true,

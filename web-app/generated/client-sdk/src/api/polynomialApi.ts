@@ -7,9 +7,17 @@ import { requireTrimmed, withReady } from "./runtime";
 
 // DTOs (serializable shapes). The classes below store these DTOs internally.
 
-export type PolynomialSolverDTO = W.PolynomialSolverDto;
-
 export type PolynomialApiDTO = W.PolynomialApiDto;
+
+export type PolynomialDTO = W.PolynomialDto;
+
+export type PolyStyleDTO = W.PolyStyleDto;
+
+export type PolyDisplayDTO = W.PolyDisplayDto;
+
+export type RfDisplayDTO = W.RfDisplayDto;
+
+export type RationalFunctionDTO = W.RationalFunctionDto;
 
 export type PoleDTO = W.PoleDto;
 
@@ -17,19 +25,11 @@ export type PoleTermDTO = W.PoleTermDto;
 
 export type PartialFractionExpansionDTO = W.PartialFractionExpansionDto;
 
-export type RationalFunctionDTO = W.RationalFunctionDto;
-
-export type PolynomialDTO = W.PolynomialDto;
+export type PolynomialSolverDTO = W.PolynomialSolverDto;
 
 export type RootMethodDTO = W.RootMethodDto;
 
 export type RootDTO = W.RootDto;
-
-export type PolyStyleDTO = W.PolyStyleDto;
-
-export type PolyDisplayDTO = W.PolyDisplayDto;
-
-export type RfDisplayDTO = W.RfDisplayDto;
 
 
 // Shared helpers
@@ -39,18 +39,18 @@ function requireSafeInteger(n: number, name: string) {
 }
 
 
-export class PolynomialSolver {
-  private readonly _dto: PolynomialSolverDTO;
+export class PolynomialApi {
+  private readonly _dto: PolynomialApiDTO;
 
-  private constructor(dto: PolynomialSolverDTO) {
+  private constructor(dto: PolynomialApiDTO) {
     this._dto = dto;
   }
 
-  static fromDTO(dto: PolynomialSolverDTO) {
-    return new PolynomialSolver(dto);
+  static fromDTO(dto: PolynomialApiDTO) {
+    return new PolynomialApi(dto);
   }
 
-  toDTO(): PolynomialSolverDTO {
+  toDTO(): PolynomialApiDTO {
     return this._dto;
   }
 
@@ -65,18 +65,122 @@ export class PolynomialSolver {
 
 }
 
-export class PolynomialApi {
-  private readonly _dto: PolynomialApiDTO;
+export class Polynomial {
+  private readonly _dto: PolynomialDTO;
 
-  private constructor(dto: PolynomialApiDTO) {
+  private constructor(dto: PolynomialDTO) {
     this._dto = dto;
   }
 
-  static fromDTO(dto: PolynomialApiDTO) {
-    return new PolynomialApi(dto);
+  static fromDTO(dto: PolynomialDTO) {
+    return new Polynomial(dto);
   }
 
-  toDTO(): PolynomialApiDTO {
+  toDTO(): PolynomialDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class PolyStyle {
+  private readonly _dto: PolyStyleDTO;
+
+  private constructor(dto: PolyStyleDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: PolyStyleDTO) {
+    return new PolyStyle(dto);
+  }
+
+  toDTO(): PolyStyleDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class PolyDisplay {
+  private readonly _dto: PolyDisplayDTO;
+
+  private constructor(dto: PolyDisplayDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: PolyDisplayDTO) {
+    return new PolyDisplay(dto);
+  }
+
+  toDTO(): PolyDisplayDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class RfDisplay {
+  private readonly _dto: RfDisplayDTO;
+
+  private constructor(dto: RfDisplayDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: RfDisplayDTO) {
+    return new RfDisplay(dto);
+  }
+
+  toDTO(): RfDisplayDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class RationalFunction {
+  private readonly _dto: RationalFunctionDTO;
+
+  private constructor(dto: RationalFunctionDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: RationalFunctionDTO) {
+    return new RationalFunction(dto);
+  }
+
+  toDTO(): RationalFunctionDTO {
     return this._dto;
   }
 
@@ -169,44 +273,18 @@ export class PartialFractionExpansion {
 
 }
 
-export class RationalFunction {
-  private readonly _dto: RationalFunctionDTO;
+export class PolynomialSolver {
+  private readonly _dto: PolynomialSolverDTO;
 
-  private constructor(dto: RationalFunctionDTO) {
+  private constructor(dto: PolynomialSolverDTO) {
     this._dto = dto;
   }
 
-  static fromDTO(dto: RationalFunctionDTO) {
-    return new RationalFunction(dto);
+  static fromDTO(dto: PolynomialSolverDTO) {
+    return new PolynomialSolver(dto);
   }
 
-  toDTO(): RationalFunctionDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class Polynomial {
-  private readonly _dto: PolynomialDTO;
-
-  private constructor(dto: PolynomialDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: PolynomialDTO) {
-    return new Polynomial(dto);
-  }
-
-  toDTO(): PolynomialDTO {
+  toDTO(): PolynomialSolverDTO {
     return this._dto;
   }
 
@@ -259,84 +337,6 @@ export class Root {
   }
 
   toDTO(): RootDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class PolyStyle {
-  private readonly _dto: PolyStyleDTO;
-
-  private constructor(dto: PolyStyleDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: PolyStyleDTO) {
-    return new PolyStyle(dto);
-  }
-
-  toDTO(): PolyStyleDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class PolyDisplay {
-  private readonly _dto: PolyDisplayDTO;
-
-  private constructor(dto: PolyDisplayDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: PolyDisplayDTO) {
-    return new PolyDisplay(dto);
-  }
-
-  toDTO(): PolyDisplayDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class RfDisplay {
-  private readonly _dto: RfDisplayDTO;
-
-  private constructor(dto: RfDisplayDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: RfDisplayDTO) {
-    return new RfDisplay(dto);
-  }
-
-  toDTO(): RfDisplayDTO {
     return this._dto;
   }
 

@@ -1,19 +1,6 @@
 {
   "structs": [
     {
-      "name": "LinearCode",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "n: usize",
-        "k: usize",
-        "g: GeneratorMatrix < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
       "name": "CodingApi",
       "crate_name": "coding",
       "doc": "",
@@ -73,98 +60,6 @@
       "dto_enabled": false
     },
     {
-      "name": "RSDecodeResult",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "decoded: Message < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "ReedSolomon",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "field: FiniteField2m",
-        "n: usize",
-        "k: usize",
-        "t: usize",
-        "g: Poly < GFExt < GFp < 2 > > >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Hamming74",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "g: GeneratorMatrix < GFp < 2 > >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Message",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "Vector < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Codeword",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "Vector < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Syndrome",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "Vector < GFp < 2 > >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "GeneratorMatrix",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "Matrix < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "ParityCheckMatrix",
-      "crate_name": "coding",
-      "doc": "",
-      "fields": [
-        "Matrix < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
       "name": "BCHCode",
       "crate_name": "coding",
       "doc": "",
@@ -177,6 +72,18 @@
       ],
       "enum_variants": [],
       "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "CyclicCode",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "n: usize",
+        "g: Vec < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
       "dto_enabled": false
     },
     {
@@ -240,15 +147,108 @@
       "dto_enabled": false
     },
     {
-      "name": "CyclicCode",
+      "name": "Hamming74",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "g: GeneratorMatrix < GFp < 2 > >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "LinearCode",
       "crate_name": "coding",
       "doc": "",
       "fields": [
         "n: usize",
-        "g: Vec < F >"
+        "k: usize",
+        "g: GeneratorMatrix < F >"
       ],
       "enum_variants": [],
-      "dto_candidate": true,
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "RSDecodeResult",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "decoded: Message < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "ReedSolomon",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "field: FiniteField2m",
+        "n: usize",
+        "k: usize",
+        "t: usize",
+        "g: Poly < GFExt < GFp < 2 > > >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Message",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "Vector < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Codeword",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "Vector < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Syndrome",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "Vector < GFp < 2 > >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "GeneratorMatrix",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "Matrix < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "ParityCheckMatrix",
+      "crate_name": "coding",
+      "doc": "",
+      "fields": [
+        "Matrix < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
       "dto_enabled": false
     }
   ],
@@ -2539,910 +2539,6 @@
     },
     {
       "crate_name": "coding",
-      "target_struct": "ReedSolomon",
-      "functions": [
-        {
-          "name": "encode",
-          "visibility": "pub",
-          "args": [
-            "& self",
-            "f : & Message < GFExt < GFp < 2 > > >"
-          ],
-          "return_type": "CodingResult < Codeword < GFExt < GFp < 2 > > > >",
-          "doc": "",
-          "source_code": "pub fn encode (& self , f : & Message < GFExt < GFp < 2 > > >) -> CodingResult < Codeword < GFExt < GFp < 2 > > > > { if f . dim () != self . k { return Err (CodingError :: InvalidParameters { text : format ! (\"message length {} must equal k {}\" , f . dim () , self . k) , }) ; } let n_full = self . field . n ; systematic_cyclic_encode_shortened_over_full (n_full , self . n , self . k , & self . g , f) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            },
-            {
-              "name": "f",
-              "rust_type": {
-                "Reference": {
-                  "mutable": false,
-                  "inner": {
-                    "Path": {
-                      "segments": [
-                        "Message"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFExt"
-                            ],
-                            "args": [
-                              {
-                                "Path": {
-                                  "segments": [
-                                    "GFp"
-                                  ],
-                                  "args": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "CodingResult"
-              ],
-              "args": [
-                {
-                  "Path": {
-                    "segments": [
-                      "Codeword"
-                    ],
-                    "args": [
-                      {
-                        "Path": {
-                          "segments": [
-                            "GFExt"
-                          ],
-                          "args": [
-                            {
-                              "Path": {
-                                "segments": [
-                                  "GFp"
-                                ],
-                                "args": []
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Message"
-                  ],
-                  "args": [
-                    {
-                      "Path": {
-                        "segments": [
-                          "GFExt"
-                        ],
-                        "args": [
-                          {
-                            "Path": {
-                              "segments": [
-                                "GFp"
-                              ],
-                              "args": []
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "CodingResult"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "Codeword"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFExt"
-                            ],
-                            "args": [
-                              {
-                                "Path": {
-                                  "segments": [
-                                    "GFp"
-                                  ],
-                                  "args": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFExt<GFp>>>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        },
-        {
-          "name": "decode",
-          "visibility": "pub",
-          "args": [
-            "& self",
-            "r : & Codeword < GFExt < GFp < 2 > > >"
-          ],
-          "return_type": "CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > >",
-          "doc": "",
-          "source_code": "pub fn decode (& self , r : & Codeword < GFExt < GFp < 2 > > > ,) -> CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > > { if r . dim () != self . n { return Err (CodingError :: InvalidParameters { text : format ! (\"received length {} must equal n {}\" , r . dim () , self . n) , }) ; } let rvec = r . as_ref () ; let two_t = 2 * self . t ; let n_full = self . field . n ; let r_full = self . n - self . k ; let mut indices_full : Vec < usize > = Vec :: with_capacity (self . n) ; for i_local in 0 .. r_full { indices_full . push (i_local) ; } for i_local in r_full .. self . n { indices_full . push (n_full - self . k + (i_local - r_full)) ; } let r_slice : Vec < GFExt < GFp < 2 > > > = (0 .. self . n) . map (| i | rvec [i] . clone ()) . collect () ; let synd = rs_compute_syndromes_over_indices (& self . field , & r_slice , & indices_full , two_t) ; if synd . iter () . all (| x | * x == GFExt :: < GFp < 2 > > :: zero ()) { let parity = self . n - self . k ; let msg = Vector :: new ((0 .. self . k) . map (| i | rvec [parity + i] . clone ()) . collect ()) ; return Ok (RSDecodeResult { decoded : Message :: from (msg) , }) ; } let sigma_coeffs = berlekamp_massey (& synd) ; let sigma : Poly < GFExt < GFp < 2 > > > = Poly :: new (sigma_coeffs . clone ()) ; let omega : Poly < GFExt < GFp < 2 > > > = crate :: lfsr :: error_evaluator_from_syndromes (& synd , & sigma , two_t) ; let dsigma = crate :: lfsr :: formal_derivative (& sigma) ; let error_pos : Vec < usize > = rs_chien_positions_over_indices (& self . field , & sigma , & indices_full) ; let l = error_pos . len () ; if l == 0 { return Err (CodingError :: DecodeFailure { text : \"no error locations found (nonzero syndromes)\" . into () , }) ; } if l > self . t { return Err (CodingError :: DecodeFailure { text : \"too many errors\" . into () , }) ; } let mut corrected = rvec . clone () ; let positions_full : Vec < usize > = error_pos . iter () . map (| & pos | { if pos < r_full { pos } else { n_full - self . k + (pos - r_full) } }) . collect () ; let values = rs_forney_values (& self . field , & omega , & dsigma , & positions_full) ? ; for (idx , & pos) in error_pos . iter () . enumerate () { corrected [pos] = corrected [pos] . clone () + values [idx] . clone () ; } let parity = self . n - self . k ; let msg = Vector :: new ((0 .. self . k) . map (| i | corrected [parity + i] . clone ()) . collect ()) ; Ok (RSDecodeResult { decoded : Message :: from (msg) , }) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            },
-            {
-              "name": "r",
-              "rust_type": {
-                "Reference": {
-                  "mutable": false,
-                  "inner": {
-                    "Path": {
-                      "segments": [
-                        "Codeword"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFExt"
-                            ],
-                            "args": [
-                              {
-                                "Path": {
-                                  "segments": [
-                                    "GFp"
-                                  ],
-                                  "args": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "CodingResult"
-              ],
-              "args": [
-                {
-                  "Path": {
-                    "segments": [
-                      "RSDecodeResult"
-                    ],
-                    "args": [
-                      {
-                        "Path": {
-                          "segments": [
-                            "GFExt"
-                          ],
-                          "args": [
-                            {
-                              "Path": {
-                                "segments": [
-                                  "GFp"
-                                ],
-                                "args": []
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Codeword"
-                  ],
-                  "args": [
-                    {
-                      "Path": {
-                        "segments": [
-                          "GFExt"
-                        ],
-                        "args": [
-                          {
-                            "Path": {
-                              "segments": [
-                                "GFp"
-                              ],
-                              "args": []
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "CodingResult"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "RSDecodeResult"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFExt"
-                            ],
-                            "args": [
-                              {
-                                "Path": {
-                                  "segments": [
-                                    "GFp"
-                                  ],
-                                  "args": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: CodingResult<RSDecodeResult<GFExt<GFp>>>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "ReedSolomon",
-      "functions": []
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "ReedSolomon",
-      "functions": [
-        {
-          "name": "decode_bm",
-          "visibility": "pub",
-          "args": [
-            "& self",
-            "r : & Codeword < GFExt < GFp < 2 > > >"
-          ],
-          "return_type": "CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > >",
-          "doc": "",
-          "source_code": "pub fn decode_bm (& self , r : & Codeword < GFExt < GFp < 2 > > > ,) -> CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > > { self . decode (r) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            },
-            {
-              "name": "r",
-              "rust_type": {
-                "Reference": {
-                  "mutable": false,
-                  "inner": {
-                    "Path": {
-                      "segments": [
-                        "Codeword"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFExt"
-                            ],
-                            "args": [
-                              {
-                                "Path": {
-                                  "segments": [
-                                    "GFp"
-                                  ],
-                                  "args": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "CodingResult"
-              ],
-              "args": [
-                {
-                  "Path": {
-                    "segments": [
-                      "RSDecodeResult"
-                    ],
-                    "args": [
-                      {
-                        "Path": {
-                          "segments": [
-                            "GFExt"
-                          ],
-                          "args": [
-                            {
-                              "Path": {
-                                "segments": [
-                                  "GFp"
-                                ],
-                                "args": []
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Codeword"
-                  ],
-                  "args": [
-                    {
-                      "Path": {
-                        "segments": [
-                          "GFExt"
-                        ],
-                        "args": [
-                          {
-                            "Path": {
-                              "segments": [
-                                "GFp"
-                              ],
-                              "args": []
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "CodingResult"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "RSDecodeResult"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFExt"
-                            ],
-                            "args": [
-                              {
-                                "Path": {
-                                  "segments": [
-                                    "GFp"
-                                  ],
-                                  "args": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: CodingResult<RSDecodeResult<GFExt<GFp>>>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "ReedSolomon",
-      "functions": [
-        {
-          "name": "new_with_field",
-          "visibility": "pub",
-          "args": [
-            "k : usize",
-            "n : usize",
-            "field : & FiniteField2m"
-          ],
-          "return_type": "CodingResult < Self >",
-          "doc": "Construct RS over GF(2^m) with generator polynomial g(x)=∏_{i=1..n-k}(x-α^i)\nConstraints: n <= 2^m - 1",
-          "source_code": "# [doc = \" Construct RS over GF(2^m) with generator polynomial g(x)=∏_{i=1..n-k}(x-α^i)\"] # [doc = \" Constraints: n <= 2^m - 1\"] pub fn new_with_field (k : usize , n : usize , field : & FiniteField2m) -> CodingResult < Self > { if n == 0 || k == 0 || k > n { return Err (CodingError :: InvalidParameters { text : format ! (\"invalid (n,k)=({n},{k})\") , }) ; } if n > field . n { return Err (CodingError :: InvalidParameters { text : format ! (\"n must be <= 2^m-1 = {}\" , field . n) , }) ; } let deg = n - k ; let mut g : Poly < GFExt < GFp < 2 > > > = Poly :: one () ; for i in 1 ..= deg { let ai = field . u16_to_gfext (field . alpha_pow (i)) ; let lin = Poly :: new (vec ! [GFExt ::< GFp < 2 >>:: zero () - ai , GFExt ::< GFp < 2 >>:: one ()]) ; g = & g * & lin ; } let t = (n - k + 1 - 1) / 2 ; Ok (Self { field : field . clone () , n , k , t , g , }) }",
-          "typed_args": [
-            {
-              "name": "k",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "n",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "field",
-              "rust_type": {
-                "Reference": {
-                  "mutable": false,
-                  "inner": {
-                    "Path": {
-                      "segments": [
-                        "FiniteField2m"
-                      ],
-                      "args": []
-                    }
-                  }
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "CodingResult"
-              ],
-              "args": [
-                {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "FiniteField2m"
-                  ],
-                  "args": []
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "CodingResult"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "Self"
-                      ],
-                      "args": []
-                    }
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: CodingResult<Self>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        },
-        {
-          "name": "new_auto",
-          "visibility": "pub",
-          "args": [
-            "k : usize",
-            "n : usize"
-          ],
-          "return_type": "CodingResult < Self >",
-          "doc": "Construct RS by auto-selecting primitive polynomial for smallest m with 2^m-1 >= n (2<=m<=15)",
-          "source_code": "# [doc = \" Construct RS by auto-selecting primitive polynomial for smallest m with 2^m-1 >= n (2<=m<=15)\"] pub fn new_auto (k : usize , n : usize) -> CodingResult < Self > { if n == 0 || k == 0 || k > n { return Err (CodingError :: InvalidParameters { text : format ! (\"invalid (n,k)=({n},{k})\") , }) ; } let mut m : usize = 1 ; loop { let q_minus_1 = (1usize << m) - 1 ; if q_minus_1 >= n { break ; } m += 1 ; if m > 15 { return Err (CodingError :: InvalidParameters { text : format ! (\"unsupported n={}, requires m>15 (table limited)\" , n) , }) ; } } if m < 2 { return Err (CodingError :: InvalidParameters { text : \"m must be >= 2\" . into () , }) ; } let field = FiniteField2m :: new_auto (m) ; Self :: new_with_field (k , n , & field) }",
-          "typed_args": [
-            {
-              "name": "k",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "n",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "CodingResult"
-              ],
-              "args": [
-                {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "CodingResult"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "Self"
-                      ],
-                      "args": []
-                    }
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: CodingResult<Self>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "Hamming74",
-      "functions": []
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "Hamming74",
-      "functions": [
-        {
-          "name": "encode",
-          "visibility": "pub",
-          "args": [
-            "& self",
-            "u : & Message < GFp < 2 > >"
-          ],
-          "return_type": "CodingResult < Codeword < GFp < 2 > > >",
-          "doc": "",
-          "source_code": "pub fn encode (& self , u : & Message < GFp < 2 > >) -> CodingResult < Codeword < GFp < 2 > > > { let v : Vector < GFp < 2 > > = u . as_ref () . clone () ; let g = & self . g . 0 ; let row = (v * g) . row (0) ? ; Ok (Codeword :: from (row)) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            },
-            {
-              "name": "u",
-              "rust_type": {
-                "Reference": {
-                  "mutable": false,
-                  "inner": {
-                    "Path": {
-                      "segments": [
-                        "Message"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFp"
-                            ],
-                            "args": []
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "CodingResult"
-              ],
-              "args": [
-                {
-                  "Path": {
-                    "segments": [
-                      "Codeword"
-                    ],
-                    "args": [
-                      {
-                        "Path": {
-                          "segments": [
-                            "GFp"
-                          ],
-                          "args": []
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Message"
-                  ],
-                  "args": [
-                    {
-                      "Path": {
-                        "segments": [
-                          "GFp"
-                        ],
-                        "args": []
-                      }
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "CodingResult"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "Codeword"
-                      ],
-                      "args": [
-                        {
-                          "Path": {
-                            "segments": [
-                              "GFp"
-                            ],
-                            "args": []
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFp>>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "Syndrome",
-      "functions": []
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "Syndrome",
-      "functions": []
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "Syndrome",
-      "functions": []
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "Syndrome",
-      "functions": []
-    },
-    {
-      "crate_name": "coding",
       "target_struct": "BCHCode",
       "functions": [
         {
@@ -4261,6 +3357,910 @@
           }
         }
       ]
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "Hamming74",
+      "functions": []
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "Hamming74",
+      "functions": [
+        {
+          "name": "encode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "u : & Message < GFp < 2 > >"
+          ],
+          "return_type": "CodingResult < Codeword < GFp < 2 > > >",
+          "doc": "",
+          "source_code": "pub fn encode (& self , u : & Message < GFp < 2 > >) -> CodingResult < Codeword < GFp < 2 > > > { let v : Vector < GFp < 2 > > = u . as_ref () . clone () ; let g = & self . g . 0 ; let row = (v * g) . row (0) ? ; Ok (Codeword :: from (row)) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "u",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Message"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFp"
+                            ],
+                            "args": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodingResult"
+              ],
+              "args": [
+                {
+                  "Path": {
+                    "segments": [
+                      "Codeword"
+                    ],
+                    "args": [
+                      {
+                        "Path": {
+                          "segments": [
+                            "GFp"
+                          ],
+                          "args": []
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Message"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "GFp"
+                        ],
+                        "args": []
+                      }
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodingResult"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "Codeword"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFp"
+                            ],
+                            "args": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFp>>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "ReedSolomon",
+      "functions": [
+        {
+          "name": "encode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "f : & Message < GFExt < GFp < 2 > > >"
+          ],
+          "return_type": "CodingResult < Codeword < GFExt < GFp < 2 > > > >",
+          "doc": "",
+          "source_code": "pub fn encode (& self , f : & Message < GFExt < GFp < 2 > > >) -> CodingResult < Codeword < GFExt < GFp < 2 > > > > { if f . dim () != self . k { return Err (CodingError :: InvalidParameters { text : format ! (\"message length {} must equal k {}\" , f . dim () , self . k) , }) ; } let n_full = self . field . n ; systematic_cyclic_encode_shortened_over_full (n_full , self . n , self . k , & self . g , f) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "f",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Message"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFExt"
+                            ],
+                            "args": [
+                              {
+                                "Path": {
+                                  "segments": [
+                                    "GFp"
+                                  ],
+                                  "args": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodingResult"
+              ],
+              "args": [
+                {
+                  "Path": {
+                    "segments": [
+                      "Codeword"
+                    ],
+                    "args": [
+                      {
+                        "Path": {
+                          "segments": [
+                            "GFExt"
+                          ],
+                          "args": [
+                            {
+                              "Path": {
+                                "segments": [
+                                  "GFp"
+                                ],
+                                "args": []
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Message"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "GFExt"
+                        ],
+                        "args": [
+                          {
+                            "Path": {
+                              "segments": [
+                                "GFp"
+                              ],
+                              "args": []
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodingResult"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "Codeword"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFExt"
+                            ],
+                            "args": [
+                              {
+                                "Path": {
+                                  "segments": [
+                                    "GFp"
+                                  ],
+                                  "args": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFExt<GFp>>>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "decode",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "r : & Codeword < GFExt < GFp < 2 > > >"
+          ],
+          "return_type": "CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > >",
+          "doc": "",
+          "source_code": "pub fn decode (& self , r : & Codeword < GFExt < GFp < 2 > > > ,) -> CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > > { if r . dim () != self . n { return Err (CodingError :: InvalidParameters { text : format ! (\"received length {} must equal n {}\" , r . dim () , self . n) , }) ; } let rvec = r . as_ref () ; let two_t = 2 * self . t ; let n_full = self . field . n ; let r_full = self . n - self . k ; let mut indices_full : Vec < usize > = Vec :: with_capacity (self . n) ; for i_local in 0 .. r_full { indices_full . push (i_local) ; } for i_local in r_full .. self . n { indices_full . push (n_full - self . k + (i_local - r_full)) ; } let r_slice : Vec < GFExt < GFp < 2 > > > = (0 .. self . n) . map (| i | rvec [i] . clone ()) . collect () ; let synd = rs_compute_syndromes_over_indices (& self . field , & r_slice , & indices_full , two_t) ; if synd . iter () . all (| x | * x == GFExt :: < GFp < 2 > > :: zero ()) { let parity = self . n - self . k ; let msg = Vector :: new ((0 .. self . k) . map (| i | rvec [parity + i] . clone ()) . collect ()) ; return Ok (RSDecodeResult { decoded : Message :: from (msg) , }) ; } let sigma_coeffs = berlekamp_massey (& synd) ; let sigma : Poly < GFExt < GFp < 2 > > > = Poly :: new (sigma_coeffs . clone ()) ; let omega : Poly < GFExt < GFp < 2 > > > = crate :: lfsr :: error_evaluator_from_syndromes (& synd , & sigma , two_t) ; let dsigma = crate :: lfsr :: formal_derivative (& sigma) ; let error_pos : Vec < usize > = rs_chien_positions_over_indices (& self . field , & sigma , & indices_full) ; let l = error_pos . len () ; if l == 0 { return Err (CodingError :: DecodeFailure { text : \"no error locations found (nonzero syndromes)\" . into () , }) ; } if l > self . t { return Err (CodingError :: DecodeFailure { text : \"too many errors\" . into () , }) ; } let mut corrected = rvec . clone () ; let positions_full : Vec < usize > = error_pos . iter () . map (| & pos | { if pos < r_full { pos } else { n_full - self . k + (pos - r_full) } }) . collect () ; let values = rs_forney_values (& self . field , & omega , & dsigma , & positions_full) ? ; for (idx , & pos) in error_pos . iter () . enumerate () { corrected [pos] = corrected [pos] . clone () + values [idx] . clone () ; } let parity = self . n - self . k ; let msg = Vector :: new ((0 .. self . k) . map (| i | corrected [parity + i] . clone ()) . collect ()) ; Ok (RSDecodeResult { decoded : Message :: from (msg) , }) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "r",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Codeword"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFExt"
+                            ],
+                            "args": [
+                              {
+                                "Path": {
+                                  "segments": [
+                                    "GFp"
+                                  ],
+                                  "args": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodingResult"
+              ],
+              "args": [
+                {
+                  "Path": {
+                    "segments": [
+                      "RSDecodeResult"
+                    ],
+                    "args": [
+                      {
+                        "Path": {
+                          "segments": [
+                            "GFExt"
+                          ],
+                          "args": [
+                            {
+                              "Path": {
+                                "segments": [
+                                  "GFp"
+                                ],
+                                "args": []
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Codeword"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "GFExt"
+                        ],
+                        "args": [
+                          {
+                            "Path": {
+                              "segments": [
+                                "GFp"
+                              ],
+                              "args": []
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodingResult"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "RSDecodeResult"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFExt"
+                            ],
+                            "args": [
+                              {
+                                "Path": {
+                                  "segments": [
+                                    "GFp"
+                                  ],
+                                  "args": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodingResult<RSDecodeResult<GFExt<GFp>>>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "ReedSolomon",
+      "functions": []
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "ReedSolomon",
+      "functions": [
+        {
+          "name": "decode_bm",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "r : & Codeword < GFExt < GFp < 2 > > >"
+          ],
+          "return_type": "CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > >",
+          "doc": "",
+          "source_code": "pub fn decode_bm (& self , r : & Codeword < GFExt < GFp < 2 > > > ,) -> CodingResult < RSDecodeResult < GFExt < GFp < 2 > > > > { self . decode (r) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "r",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "Codeword"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFExt"
+                            ],
+                            "args": [
+                              {
+                                "Path": {
+                                  "segments": [
+                                    "GFp"
+                                  ],
+                                  "args": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodingResult"
+              ],
+              "args": [
+                {
+                  "Path": {
+                    "segments": [
+                      "RSDecodeResult"
+                    ],
+                    "args": [
+                      {
+                        "Path": {
+                          "segments": [
+                            "GFExt"
+                          ],
+                          "args": [
+                            {
+                              "Path": {
+                                "segments": [
+                                  "GFp"
+                                ],
+                                "args": []
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Codeword"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "GFExt"
+                        ],
+                        "args": [
+                          {
+                            "Path": {
+                              "segments": [
+                                "GFp"
+                              ],
+                              "args": []
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodingResult"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "RSDecodeResult"
+                      ],
+                      "args": [
+                        {
+                          "Path": {
+                            "segments": [
+                              "GFExt"
+                            ],
+                            "args": [
+                              {
+                                "Path": {
+                                  "segments": [
+                                    "GFp"
+                                  ],
+                                  "args": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodingResult<RSDecodeResult<GFExt<GFp>>>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "ReedSolomon",
+      "functions": [
+        {
+          "name": "new_with_field",
+          "visibility": "pub",
+          "args": [
+            "k : usize",
+            "n : usize",
+            "field : & FiniteField2m"
+          ],
+          "return_type": "CodingResult < Self >",
+          "doc": "Construct RS over GF(2^m) with generator polynomial g(x)=∏_{i=1..n-k}(x-α^i)\nConstraints: n <= 2^m - 1",
+          "source_code": "# [doc = \" Construct RS over GF(2^m) with generator polynomial g(x)=∏_{i=1..n-k}(x-α^i)\"] # [doc = \" Constraints: n <= 2^m - 1\"] pub fn new_with_field (k : usize , n : usize , field : & FiniteField2m) -> CodingResult < Self > { if n == 0 || k == 0 || k > n { return Err (CodingError :: InvalidParameters { text : format ! (\"invalid (n,k)=({n},{k})\") , }) ; } if n > field . n { return Err (CodingError :: InvalidParameters { text : format ! (\"n must be <= 2^m-1 = {}\" , field . n) , }) ; } let deg = n - k ; let mut g : Poly < GFExt < GFp < 2 > > > = Poly :: one () ; for i in 1 ..= deg { let ai = field . u16_to_gfext (field . alpha_pow (i)) ; let lin = Poly :: new (vec ! [GFExt ::< GFp < 2 >>:: zero () - ai , GFExt ::< GFp < 2 >>:: one ()]) ; g = & g * & lin ; } let t = (n - k + 1 - 1) / 2 ; Ok (Self { field : field . clone () , n , k , t , g , }) }",
+          "typed_args": [
+            {
+              "name": "k",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "field",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": {
+                    "Path": {
+                      "segments": [
+                        "FiniteField2m"
+                      ],
+                      "args": []
+                    }
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodingResult"
+              ],
+              "args": [
+                {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "FiniteField2m"
+                  ],
+                  "args": []
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodingResult"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "Self"
+                      ],
+                      "args": []
+                    }
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodingResult<Self>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "new_auto",
+          "visibility": "pub",
+          "args": [
+            "k : usize",
+            "n : usize"
+          ],
+          "return_type": "CodingResult < Self >",
+          "doc": "Construct RS by auto-selecting primitive polynomial for smallest m with 2^m-1 >= n (2<=m<=15)",
+          "source_code": "# [doc = \" Construct RS by auto-selecting primitive polynomial for smallest m with 2^m-1 >= n (2<=m<=15)\"] pub fn new_auto (k : usize , n : usize) -> CodingResult < Self > { if n == 0 || k == 0 || k > n { return Err (CodingError :: InvalidParameters { text : format ! (\"invalid (n,k)=({n},{k})\") , }) ; } let mut m : usize = 1 ; loop { let q_minus_1 = (1usize << m) - 1 ; if q_minus_1 >= n { break ; } m += 1 ; if m > 15 { return Err (CodingError :: InvalidParameters { text : format ! (\"unsupported n={}, requires m>15 (table limited)\" , n) , }) ; } } if m < 2 { return Err (CodingError :: InvalidParameters { text : \"m must be >= 2\" . into () , }) ; } let field = FiniteField2m :: new_auto (m) ; Self :: new_with_field (k , n , & field) }",
+          "typed_args": [
+            {
+              "name": "k",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "CodingResult"
+              ],
+              "args": [
+                {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "CodingResult"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "Self"
+                      ],
+                      "args": []
+                    }
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: CodingResult<Self>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "Syndrome",
+      "functions": []
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "Syndrome",
+      "functions": []
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "Syndrome",
+      "functions": []
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "Syndrome",
+      "functions": []
     }
   ],
   "crate_apis": [
@@ -6586,6 +6586,99 @@
     },
     {
       "crate_name": "coding",
+      "target_struct": "BCHCode",
+      "function": "g",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "Poly"
+          ],
+          "args": [
+            {
+              "Path": {
+                "segments": [
+                  "GFp"
+                ],
+                "args": []
+              }
+            }
+          ]
+        }
+      },
+      "reason": "custom type is not registered for string boundary: Poly<GFp>",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "BCHCode",
+      "function": "encode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodingResult"
+          ],
+          "args": [
+            {
+              "Path": {
+                "segments": [
+                  "Codeword"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "GFp"
+                      ],
+                      "args": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFp>>",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "coding",
+      "target_struct": "Hamming74",
+      "function": "encode",
+      "position": "return",
+      "rust_type": {
+        "Path": {
+          "segments": [
+            "CodingResult"
+          ],
+          "args": [
+            {
+              "Path": {
+                "segments": [
+                  "Codeword"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "GFp"
+                      ],
+                      "args": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFp>>",
+      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+    },
+    {
+      "crate_name": "coding",
       "target_struct": "ReedSolomon",
       "function": "encode",
       "position": "return",
@@ -6761,99 +6854,6 @@
         }
       },
       "reason": "custom type is not registered for string boundary: CodingResult<Self>",
-      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "Hamming74",
-      "function": "encode",
-      "position": "return",
-      "rust_type": {
-        "Path": {
-          "segments": [
-            "CodingResult"
-          ],
-          "args": [
-            {
-              "Path": {
-                "segments": [
-                  "Codeword"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "GFp"
-                      ],
-                      "args": []
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFp>>",
-      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "BCHCode",
-      "function": "g",
-      "position": "return",
-      "rust_type": {
-        "Path": {
-          "segments": [
-            "Poly"
-          ],
-          "args": [
-            {
-              "Path": {
-                "segments": [
-                  "GFp"
-                ],
-                "args": []
-              }
-            }
-          ]
-        }
-      },
-      "reason": "custom type is not registered for string boundary: Poly<GFp>",
-      "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-    },
-    {
-      "crate_name": "coding",
-      "target_struct": "BCHCode",
-      "function": "encode",
-      "position": "return",
-      "rust_type": {
-        "Path": {
-          "segments": [
-            "CodingResult"
-          ],
-          "args": [
-            {
-              "Path": {
-                "segments": [
-                  "Codeword"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "GFp"
-                      ],
-                      "args": []
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "reason": "custom type is not registered for string boundary: CodingResult<Codeword<GFp>>",
       "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
     }
   ]

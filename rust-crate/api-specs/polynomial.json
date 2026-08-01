@@ -1,7 +1,7 @@
 {
   "structs": [
     {
-      "name": "PolynomialSolver",
+      "name": "PolynomialApi",
       "crate_name": "polynomial",
       "doc": "",
       "fields": [],
@@ -10,10 +10,62 @@
       "dto_enabled": false
     },
     {
-      "name": "PolynomialApi",
+      "name": "Polynomial",
       "crate_name": "polynomial",
       "doc": "",
-      "fields": [],
+      "fields": [
+        "coeffs: Vec < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
+      "dto_enabled": false
+    },
+    {
+      "name": "PolyStyle",
+      "crate_name": "polynomial",
+      "doc": "",
+      "fields": [
+        "unicode_superscript: bool",
+        "use_asterisk: bool"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "PolyDisplay",
+      "crate_name": "polynomial",
+      "doc": "",
+      "fields": [
+        "poly: & 'a Polynomial < F >",
+        "var: & 'a str",
+        "style: PolyStyle"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "RfDisplay",
+      "crate_name": "polynomial",
+      "doc": "",
+      "fields": [
+        "rf: & 'a RationalFunction < F >",
+        "var: & 'a str",
+        "style: PolyStyle"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "RationalFunction",
+      "crate_name": "polynomial",
+      "doc": "",
+      "fields": [
+        "numerator: Polynomial < F >",
+        "denominator: Polynomial < F >"
+      ],
       "enum_variants": [],
       "dto_candidate": false,
       "dto_enabled": false
@@ -54,26 +106,12 @@
       "dto_enabled": false
     },
     {
-      "name": "RationalFunction",
+      "name": "PolynomialSolver",
       "crate_name": "polynomial",
       "doc": "",
-      "fields": [
-        "numerator: Polynomial < F >",
-        "denominator: Polynomial < F >"
-      ],
+      "fields": [],
       "enum_variants": [],
       "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Polynomial",
-      "crate_name": "polynomial",
-      "doc": "",
-      "fields": [
-        "coeffs: Vec < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
       "dto_enabled": false
     },
     {
@@ -118,47 +156,82 @@
       "enum_variants": [],
       "dto_candidate": false,
       "dto_enabled": false
-    },
-    {
-      "name": "PolyStyle",
-      "crate_name": "polynomial",
-      "doc": "",
-      "fields": [
-        "unicode_superscript: bool",
-        "use_asterisk: bool"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "PolyDisplay",
-      "crate_name": "polynomial",
-      "doc": "",
-      "fields": [
-        "poly: & 'a Polynomial < F >",
-        "var: & 'a str",
-        "style: PolyStyle"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "RfDisplay",
-      "crate_name": "polynomial",
-      "doc": "",
-      "fields": [
-        "rf: & 'a RationalFunction < F >",
-        "var: & 'a str",
-        "style: PolyStyle"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
     }
   ],
   "impl_blocks": [
+    {
+      "crate_name": "polynomial",
+      "target_struct": "PolynomialApi",
+      "functions": [
+        {
+          "name": "find_roots_symbolic_expr",
+          "visibility": "pub",
+          "args": [
+            "coeffs : String"
+          ],
+          "return_type": "std :: result :: Result < String , algebraic :: error :: AlgebraicError >",
+          "doc": "",
+          "source_code": "pub fn find_roots_symbolic_expr (coeffs : String ,) -> std :: result :: Result < String , algebraic :: error :: AlgebraicError > { let coeffs = parse_symbolic_coeffs (& coeffs) ? ; let poly = Polynomial :: new (coeffs) ; let roots = poly . find_roots_symbolic_expr () ; Ok (roots . into_iter () . map (| r | r . to_string ()) . collect :: < Vec < _ > > () . join (\",\")) }",
+          "typed_args": [
+            {
+              "name": "coeffs",
+              "rust_type": "String",
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": "String",
+              "err": {
+                "Path": {
+                  "segments": [
+                    "algebraic",
+                    "error",
+                    "AlgebraicError"
+                  ],
+                  "args": []
+                }
+              }
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "String",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": "String",
+                "err": {
+                  "Path": {
+                    "segments": [
+                      "algebraic",
+                      "error",
+                      "AlgebraicError"
+                    ],
+                    "args": []
+                  }
+                }
+              }
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "polynomial",
+      "target_struct": "Pole",
+      "functions": []
+    },
     {
       "crate_name": "polynomial",
       "target_struct": "PolynomialSolver",
@@ -244,79 +317,6 @@
           }
         }
       ]
-    },
-    {
-      "crate_name": "polynomial",
-      "target_struct": "PolynomialApi",
-      "functions": [
-        {
-          "name": "find_roots_symbolic_expr",
-          "visibility": "pub",
-          "args": [
-            "coeffs : String"
-          ],
-          "return_type": "std :: result :: Result < String , algebraic :: error :: AlgebraicError >",
-          "doc": "",
-          "source_code": "pub fn find_roots_symbolic_expr (coeffs : String ,) -> std :: result :: Result < String , algebraic :: error :: AlgebraicError > { let coeffs = parse_symbolic_coeffs (& coeffs) ? ; let poly = Polynomial :: new (coeffs) ; let roots = poly . find_roots_symbolic_expr () ; Ok (roots . into_iter () . map (| r | r . to_string ()) . collect :: < Vec < _ > > () . join (\",\")) }",
-          "typed_args": [
-            {
-              "name": "coeffs",
-              "rust_type": "String",
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": "String",
-              "err": {
-                "Path": {
-                  "segments": [
-                    "algebraic",
-                    "error",
-                    "AlgebraicError"
-                  ],
-                  "args": []
-                }
-              }
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": "String",
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": "String",
-                "err": {
-                  "Path": {
-                    "segments": [
-                      "algebraic",
-                      "error",
-                      "AlgebraicError"
-                    ],
-                    "args": []
-                  }
-                }
-              }
-            },
-            "supported": true,
-            "mode": "native",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "polynomial",
-      "target_struct": "Pole",
-      "functions": []
     }
   ],
   "crate_apis": [

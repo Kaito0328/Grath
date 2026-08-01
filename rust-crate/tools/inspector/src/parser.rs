@@ -476,7 +476,14 @@ pub fn run(
     let mut visitor = ApiVisitor::new(target_crate, config);
 
     // 再帰的にディレクトリを探索
-    for entry in WalkDir::new(target_dir).into_iter().filter_map(|e| e.ok()) {
+    // Filesystem directory order is unspecified. Sorting prevents equivalent
+    // source trees from producing different API specs and generated SDK files
+    // on local machines and GitHub runners.
+    for entry in WalkDir::new(target_dir)
+        .sort_by_file_name()
+        .into_iter()
+        .filter_map(|e| e.ok())
+    {
         let path = entry.path();
         if path.extension().is_some_and(|ext| ext == "rs") {
             let crate_name = extract_crate_name(path, target_dir);

@@ -67,57 +67,6 @@ where
 }
 
 #[wasm_bindgen]
-pub struct WasmSignal(pub(crate) Signal);
-
-impl WasmSignal {
-    pub fn inner(&self) -> &Signal {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSignal {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Signal).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmSpectrum(pub(crate) Spectrum);
-
-impl WasmSpectrum {
-    pub fn inner(&self) -> &Spectrum {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSpectrum {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Spectrum).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmSignalProcessingApi(pub(crate) SignalProcessingApi);
-
-impl WasmSignalProcessingApi {
-    pub fn inner(&self) -> &SignalProcessingApi {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSignalProcessingApi {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(SignalProcessingApi).to_string()
-    }
-}
-
-#[wasm_bindgen]
 pub struct WasmAdaptiveFilterLMS(pub(crate) AdaptiveFilterLMS);
 
 impl WasmAdaptiveFilterLMS {
@@ -152,19 +101,19 @@ impl WasmAdaptiveFilterNLMS {
 }
 
 #[wasm_bindgen]
-pub struct WasmIIRFilter(pub(crate) IIRFilter);
+pub struct WasmSignalProcessingApi(pub(crate) SignalProcessingApi);
 
-impl WasmIIRFilter {
-    pub fn inner(&self) -> &IIRFilter {
+impl WasmSignalProcessingApi {
+    pub fn inner(&self) -> &SignalProcessingApi {
         &self.0
     }
 }
 
 #[wasm_bindgen]
-impl WasmIIRFilter {
+impl WasmSignalProcessingApi {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
-        stringify!(IIRFilter).to_string()
+        stringify!(SignalProcessingApi).to_string()
     }
 }
 
@@ -186,132 +135,70 @@ impl WasmFIRFilter {
 }
 
 #[wasm_bindgen]
+pub struct WasmIIRFilter(pub(crate) IIRFilter);
+
+impl WasmIIRFilter {
+    pub fn inner(&self) -> &IIRFilter {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmIIRFilter {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(IIRFilter).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmSignal(pub(crate) Signal);
+
 impl WasmSignal {
-    pub fn from_image_grayscale(
-        path: &str,
-        sample_rate: f64,
-    ) -> std::result::Result<WasmSignal, JsError> {
-        Signal::from_image_grayscale(path, sample_rate)
-            .map(WasmSignal)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn from_image_rgb(
-        path: &str,
-        sample_rate: f64,
-    ) -> std::result::Result<WasmSignal, JsError> {
-        Signal::from_image_rgb(path, sample_rate)
-            .map(WasmSignal)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn from_wav_mono(path: &str) -> std::result::Result<WasmSignal, JsError> {
-        Signal::from_wav_mono(path)
-            .map(WasmSignal)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn save_wav_mono(&self, path: &str) -> std::result::Result<(), JsError> {
-        self.0
-            .save_wav_mono(path)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn save_image_grayscale(
-        &self,
-        path: &str,
-        width: u32,
-        height: u32,
-    ) -> std::result::Result<(), JsError> {
-        self.0
-            .save_image_grayscale(path, width, height)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn save_image_rgb(
-        &self,
-        path: &str,
-        width: u32,
-        height: u32,
-    ) -> std::result::Result<(), JsError> {
-        self.0
-            .save_image_rgb(path, width, height)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    pub fn inner(&self) -> &Signal {
+        &self.0
     }
 }
 
 #[wasm_bindgen]
 impl WasmSignal {
-    pub fn new(data: Vec<f64>, sample_rate: f64) -> WasmSignal {
-        WasmSignal(Signal::new(data, sample_rate))
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Signal).to_string()
     }
-    pub fn is_empty(&self) -> bool {
-        self.0.is_empty()
-    }
-    pub fn sample_rate(&self) -> f64 {
-        self.0.sample_rate()
-    }
-    pub fn duration(&self) -> f64 {
-        self.0.duration()
-    }
-    pub fn save_svg(
-        &self,
-        path: &str,
-        width: u32,
-        height: u32,
-    ) -> std::result::Result<(), JsError> {
-        self.0
-            .save_svg(path, width, height)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn save_svg_with_axes(
-        &self,
-        path: &str,
-        width: u32,
-        height: u32,
-        label: &str,
-    ) -> std::result::Result<(), JsError> {
-        self.0
-            .save_svg_with_axes(path, width, height, label)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn apply_fir_filter(&self, filter: &WasmFIRFilter) -> WasmSignal {
-        WasmSignal(self.0.apply_fir_filter(filter.inner()))
+}
+
+#[wasm_bindgen]
+pub struct WasmSpectrum(pub(crate) Spectrum);
+
+impl WasmSpectrum {
+    pub fn inner(&self) -> &Spectrum {
+        &self.0
     }
 }
 
 #[wasm_bindgen]
 impl WasmSpectrum {
-    pub fn is_empty(&self) -> bool {
-        self.0.is_empty()
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Spectrum).to_string()
     }
-    pub fn sample_rate(&self) -> f64 {
-        self.0.sample_rate()
+}
+
+#[wasm_bindgen]
+impl WasmAdaptiveFilterLMS {
+    pub fn new(taps: usize, step_size: f64) -> WasmAdaptiveFilterLMS {
+        WasmAdaptiveFilterLMS(AdaptiveFilterLMS::new(taps, step_size))
     }
-    pub fn bin_hz(&self, k: usize) -> f64 {
-        self.0.bin_hz(k)
+}
+
+#[wasm_bindgen]
+impl WasmAdaptiveFilterNLMS {
+    pub fn new(taps: usize, step_size: f64, epsilon: f64) -> WasmAdaptiveFilterNLMS {
+        WasmAdaptiveFilterNLMS(AdaptiveFilterNLMS::new(taps, step_size, epsilon))
     }
-    pub fn magnitude(&self, k: usize) -> f64 {
-        self.0.magnitude(k)
-    }
-    pub fn magnitudes(&self) -> Vec<f64> {
-        self.0.magnitudes()
-    }
-    pub fn save_svg_magnitude_db(
-        &self,
-        path: &str,
-        width: u32,
-        height: u32,
-    ) -> std::result::Result<(), JsError> {
-        self.0
-            .save_svg_magnitude_db(path, width, height)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn save_svg_magnitude_db_with_axes(
-        &self,
-        path: &str,
-        width: u32,
-        height: u32,
-        label: &str,
-    ) -> std::result::Result<(), JsError> {
-        self.0
-            .save_svg_magnitude_db_with_axes(path, width, height, label)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    pub fn weights_vec(&self) -> Vec<f64> {
+        self.0.weights_vec()
     }
 }
 
@@ -484,19 +371,35 @@ impl WasmSignalProcessingApi {
 }
 
 #[wasm_bindgen]
-impl WasmAdaptiveFilterLMS {
-    pub fn new(taps: usize, step_size: f64) -> WasmAdaptiveFilterLMS {
-        WasmAdaptiveFilterLMS(AdaptiveFilterLMS::new(taps, step_size))
+impl WasmSignal {
+    pub fn dft(&self) -> WasmSpectrum {
+        WasmSpectrum(self.0.dft())
+    }
+    pub fn convolve(&self, h: &WasmSignal) -> WasmSignal {
+        WasmSignal(self.0.convolve(h.inner()))
     }
 }
 
 #[wasm_bindgen]
-impl WasmAdaptiveFilterNLMS {
-    pub fn new(taps: usize, step_size: f64, epsilon: f64) -> WasmAdaptiveFilterNLMS {
-        WasmAdaptiveFilterNLMS(AdaptiveFilterNLMS::new(taps, step_size, epsilon))
+impl WasmSpectrum {
+    pub fn ift(&self) -> WasmSignal {
+        WasmSignal(self.0.ift())
     }
-    pub fn weights_vec(&self) -> Vec<f64> {
-        self.0.weights_vec()
+}
+
+#[wasm_bindgen]
+impl WasmFIRFilter {
+    pub fn new_from_coeffs(coeffs: Vec<f64>) -> WasmFIRFilter {
+        WasmFIRFilter(FIRFilter::new_from_coeffs(coeffs))
+    }
+    pub fn new_from_coeffs_with_fs(coeffs: Vec<f64>, fs: f64) -> WasmFIRFilter {
+        WasmFIRFilter(FIRFilter::new_from_coeffs_with_fs(coeffs, fs))
+    }
+    pub fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+    pub fn apply(&self, x: &WasmSignal) -> WasmSignal {
+        WasmSignal(self.0.apply(x.inner()))
     }
 }
 
@@ -516,18 +419,51 @@ impl WasmSignal {
 
 #[wasm_bindgen]
 impl WasmSignal {
-    pub fn dft(&self) -> WasmSpectrum {
-        WasmSpectrum(self.0.dft())
+    pub fn from_image_grayscale(
+        path: &str,
+        sample_rate: f64,
+    ) -> std::result::Result<WasmSignal, JsError> {
+        Signal::from_image_grayscale(path, sample_rate)
+            .map(WasmSignal)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
-    pub fn convolve(&self, h: &WasmSignal) -> WasmSignal {
-        WasmSignal(self.0.convolve(h.inner()))
+    pub fn from_image_rgb(
+        path: &str,
+        sample_rate: f64,
+    ) -> std::result::Result<WasmSignal, JsError> {
+        Signal::from_image_rgb(path, sample_rate)
+            .map(WasmSignal)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
-}
-
-#[wasm_bindgen]
-impl WasmSpectrum {
-    pub fn ift(&self) -> WasmSignal {
-        WasmSignal(self.0.ift())
+    pub fn from_wav_mono(path: &str) -> std::result::Result<WasmSignal, JsError> {
+        Signal::from_wav_mono(path)
+            .map(WasmSignal)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn save_wav_mono(&self, path: &str) -> std::result::Result<(), JsError> {
+        self.0
+            .save_wav_mono(path)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn save_image_grayscale(
+        &self,
+        path: &str,
+        width: u32,
+        height: u32,
+    ) -> std::result::Result<(), JsError> {
+        self.0
+            .save_image_grayscale(path, width, height)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn save_image_rgb(
+        &self,
+        path: &str,
+        width: u32,
+        height: u32,
+    ) -> std::result::Result<(), JsError> {
+        self.0
+            .save_image_rgb(path, width, height)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
 }
 
@@ -542,17 +478,81 @@ impl WasmSignal {
 }
 
 #[wasm_bindgen]
-impl WasmFIRFilter {
-    pub fn new_from_coeffs(coeffs: Vec<f64>) -> WasmFIRFilter {
-        WasmFIRFilter(FIRFilter::new_from_coeffs(coeffs))
-    }
-    pub fn new_from_coeffs_with_fs(coeffs: Vec<f64>, fs: f64) -> WasmFIRFilter {
-        WasmFIRFilter(FIRFilter::new_from_coeffs_with_fs(coeffs, fs))
+impl WasmSignal {
+    pub fn new(data: Vec<f64>, sample_rate: f64) -> WasmSignal {
+        WasmSignal(Signal::new(data, sample_rate))
     }
     pub fn is_empty(&self) -> bool {
         self.0.is_empty()
     }
-    pub fn apply(&self, x: &WasmSignal) -> WasmSignal {
-        WasmSignal(self.0.apply(x.inner()))
+    pub fn sample_rate(&self) -> f64 {
+        self.0.sample_rate()
+    }
+    pub fn duration(&self) -> f64 {
+        self.0.duration()
+    }
+    pub fn save_svg(
+        &self,
+        path: &str,
+        width: u32,
+        height: u32,
+    ) -> std::result::Result<(), JsError> {
+        self.0
+            .save_svg(path, width, height)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn save_svg_with_axes(
+        &self,
+        path: &str,
+        width: u32,
+        height: u32,
+        label: &str,
+    ) -> std::result::Result<(), JsError> {
+        self.0
+            .save_svg_with_axes(path, width, height, label)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn apply_fir_filter(&self, filter: &WasmFIRFilter) -> WasmSignal {
+        WasmSignal(self.0.apply_fir_filter(filter.inner()))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmSpectrum {
+    pub fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+    pub fn sample_rate(&self) -> f64 {
+        self.0.sample_rate()
+    }
+    pub fn bin_hz(&self, k: usize) -> f64 {
+        self.0.bin_hz(k)
+    }
+    pub fn magnitude(&self, k: usize) -> f64 {
+        self.0.magnitude(k)
+    }
+    pub fn magnitudes(&self) -> Vec<f64> {
+        self.0.magnitudes()
+    }
+    pub fn save_svg_magnitude_db(
+        &self,
+        path: &str,
+        width: u32,
+        height: u32,
+    ) -> std::result::Result<(), JsError> {
+        self.0
+            .save_svg_magnitude_db(path, width, height)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn save_svg_magnitude_db_with_axes(
+        &self,
+        path: &str,
+        width: u32,
+        height: u32,
+        label: &str,
+    ) -> std::result::Result<(), JsError> {
+        self.0
+            .save_svg_magnitude_db_with_axes(path, width, height, label)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
 }

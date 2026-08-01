@@ -21,13 +21,13 @@ function getWasm(): LinalgModule {
     return wasm;
 }
 
-export type RationalValueDto = 
+export type RationalValueDto =
   {
     numer: number | string;
     denom: number | string;
   };
 
-export type RationalMatrixValueDto = 
+export type RationalMatrixValueDto =
   {
     values: RationalValueDto[][];
   };

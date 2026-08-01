@@ -66,6 +66,210 @@ where
 }
 
 #[wasm_bindgen]
+pub struct WasmStatisticsApi(pub(crate) StatisticsApi);
+
+impl WasmStatisticsApi {
+    pub fn inner(&self) -> &StatisticsApi {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmStatisticsApi {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(StatisticsApi).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmChiSquare(pub(crate) ChiSquare);
+
+impl WasmChiSquare {
+    pub fn inner(&self) -> &ChiSquare {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmChiSquare {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(ChiSquare).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmExponential(pub(crate) Exponential);
+
+impl WasmExponential {
+    pub fn inner(&self) -> &Exponential {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmExponential {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Exponential).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmF(pub(crate) F);
+
+impl WasmF {
+    pub fn inner(&self) -> &F {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmF {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(F).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmGamma(pub(crate) Gamma);
+
+impl WasmGamma {
+    pub fn inner(&self) -> &Gamma {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmGamma {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Gamma).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmNormal(pub(crate) Normal);
+
+impl WasmNormal {
+    pub fn inner(&self) -> &Normal {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmNormal {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Normal).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmT(pub(crate) T);
+
+impl WasmT {
+    pub fn inner(&self) -> &T {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmT {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(T).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmUniform(pub(crate) Uniform);
+
+impl WasmUniform {
+    pub fn inner(&self) -> &Uniform {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmUniform {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Uniform).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmBernoulli(pub(crate) Bernoulli);
+
+impl WasmBernoulli {
+    pub fn inner(&self) -> &Bernoulli {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmBernoulli {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Bernoulli).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmBinomial(pub(crate) Binomial);
+
+impl WasmBinomial {
+    pub fn inner(&self) -> &Binomial {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmBinomial {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Binomial).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmCategorical(pub(crate) Categorical);
+
+impl WasmCategorical {
+    pub fn inner(&self) -> &Categorical {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmCategorical {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Categorical).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmPoisson(pub(crate) Poisson);
+
+impl WasmPoisson {
+    pub fn inner(&self) -> &Poisson {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmPoisson {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Poisson).to_string()
+    }
+}
+
+#[wasm_bindgen]
 pub struct WasmDirichlet(pub(crate) Dirichlet);
 
 impl WasmDirichlet {
@@ -117,193 +321,6 @@ impl WasmMultivariateT {
 }
 
 #[wasm_bindgen]
-pub struct WasmPoisson(pub(crate) Poisson);
-
-impl WasmPoisson {
-    pub fn inner(&self) -> &Poisson {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmPoisson {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Poisson).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmCategorical(pub(crate) Categorical);
-
-impl WasmCategorical {
-    pub fn inner(&self) -> &Categorical {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmCategorical {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Categorical).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmBernoulli(pub(crate) Bernoulli);
-
-impl WasmBernoulli {
-    pub fn inner(&self) -> &Bernoulli {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmBernoulli {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Bernoulli).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmBinomial(pub(crate) Binomial);
-
-impl WasmBinomial {
-    pub fn inner(&self) -> &Binomial {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmBinomial {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Binomial).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmExponential(pub(crate) Exponential);
-
-impl WasmExponential {
-    pub fn inner(&self) -> &Exponential {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmExponential {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Exponential).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmF(pub(crate) F);
-
-impl WasmF {
-    pub fn inner(&self) -> &F {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmF {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(F).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmUniform(pub(crate) Uniform);
-
-impl WasmUniform {
-    pub fn inner(&self) -> &Uniform {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmUniform {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Uniform).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmGamma(pub(crate) Gamma);
-
-impl WasmGamma {
-    pub fn inner(&self) -> &Gamma {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmGamma {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Gamma).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmNormal(pub(crate) Normal);
-
-impl WasmNormal {
-    pub fn inner(&self) -> &Normal {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmNormal {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Normal).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmChiSquare(pub(crate) ChiSquare);
-
-impl WasmChiSquare {
-    pub fn inner(&self) -> &ChiSquare {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmChiSquare {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(ChiSquare).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmT(pub(crate) T);
-
-impl WasmT {
-    pub fn inner(&self) -> &T {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmT {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(T).to_string()
-    }
-}
-
-#[wasm_bindgen]
 pub struct WasmMultinomial(pub(crate) Multinomial);
 
 impl WasmMultinomial {
@@ -321,23 +338,6 @@ impl WasmMultinomial {
 }
 
 #[wasm_bindgen]
-pub struct WasmStatisticsApi(pub(crate) StatisticsApi);
-
-impl WasmStatisticsApi {
-    pub fn inner(&self) -> &StatisticsApi {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmStatisticsApi {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(StatisticsApi).to_string()
-    }
-}
-
-#[wasm_bindgen]
 pub struct WasmKalmanFilter(pub(crate) KalmanFilter);
 
 impl WasmKalmanFilter {
@@ -351,105 +351,6 @@ impl WasmKalmanFilter {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
         stringify!(KalmanFilter).to_string()
-    }
-}
-
-#[wasm_bindgen]
-impl WasmPoisson {
-    pub fn new(lambda: f64) -> std::result::Result<WasmPoisson, JsError> {
-        Poisson::new(lambda)
-            .map(WasmPoisson)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmCategorical {
-    pub fn new(probs: Vec<f64>) -> std::result::Result<WasmCategorical, JsError> {
-        Categorical::new(probs)
-            .map(WasmCategorical)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmBernoulli {
-    pub fn new(p: f64) -> std::result::Result<WasmBernoulli, JsError> {
-        Bernoulli::new(p)
-            .map(WasmBernoulli)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmBinomial {
-    pub fn new(n: u64, p: f64) -> std::result::Result<WasmBinomial, JsError> {
-        Binomial::new(n, p)
-            .map(WasmBinomial)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmExponential {
-    pub fn new(lambda: f64) -> std::result::Result<WasmExponential, JsError> {
-        Exponential::new(lambda)
-            .map(WasmExponential)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmF {
-    pub fn new(m: usize, n: usize) -> std::result::Result<WasmF, JsError> {
-        F::new(m, n)
-            .map(WasmF)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmUniform {
-    pub fn new(min: f64, max: f64) -> std::result::Result<WasmUniform, JsError> {
-        Uniform::new(min, max)
-            .map(WasmUniform)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmGamma {
-    pub fn new(shape: f64, rate: f64) -> std::result::Result<WasmGamma, JsError> {
-        Gamma::new(shape, rate)
-            .map(WasmGamma)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmNormal {
-    pub fn new(mu: f64, sigma: f64) -> std::result::Result<WasmNormal, JsError> {
-        Normal::new(mu, sigma)
-            .map(WasmNormal)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmChiSquare {
-    pub fn new(k: usize) -> std::result::Result<WasmChiSquare, JsError> {
-        ChiSquare::new(k)
-            .map(WasmChiSquare)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmT {
-    pub fn new(nu: usize) -> std::result::Result<WasmT, JsError> {
-        T::new(nu)
-            .map(WasmT)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
 }
 
@@ -809,6 +710,105 @@ impl WasmStatisticsApi {
         height: u32,
     ) -> std::result::Result<String, JsError> {
         StatisticsApi::get_poisson_pmf_svg(lambda, width, height)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmChiSquare {
+    pub fn new(k: usize) -> std::result::Result<WasmChiSquare, JsError> {
+        ChiSquare::new(k)
+            .map(WasmChiSquare)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmExponential {
+    pub fn new(lambda: f64) -> std::result::Result<WasmExponential, JsError> {
+        Exponential::new(lambda)
+            .map(WasmExponential)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmF {
+    pub fn new(m: usize, n: usize) -> std::result::Result<WasmF, JsError> {
+        F::new(m, n)
+            .map(WasmF)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmGamma {
+    pub fn new(shape: f64, rate: f64) -> std::result::Result<WasmGamma, JsError> {
+        Gamma::new(shape, rate)
+            .map(WasmGamma)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmNormal {
+    pub fn new(mu: f64, sigma: f64) -> std::result::Result<WasmNormal, JsError> {
+        Normal::new(mu, sigma)
+            .map(WasmNormal)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmT {
+    pub fn new(nu: usize) -> std::result::Result<WasmT, JsError> {
+        T::new(nu)
+            .map(WasmT)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmUniform {
+    pub fn new(min: f64, max: f64) -> std::result::Result<WasmUniform, JsError> {
+        Uniform::new(min, max)
+            .map(WasmUniform)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmBernoulli {
+    pub fn new(p: f64) -> std::result::Result<WasmBernoulli, JsError> {
+        Bernoulli::new(p)
+            .map(WasmBernoulli)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmBinomial {
+    pub fn new(n: u64, p: f64) -> std::result::Result<WasmBinomial, JsError> {
+        Binomial::new(n, p)
+            .map(WasmBinomial)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmCategorical {
+    pub fn new(probs: Vec<f64>) -> std::result::Result<WasmCategorical, JsError> {
+        Categorical::new(probs)
+            .map(WasmCategorical)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmPoisson {
+    pub fn new(lambda: f64) -> std::result::Result<WasmPoisson, JsError> {
+        Poisson::new(lambda)
+            .map(WasmPoisson)
             .map_err(|e| JsError::new(&format!("{:?}", e)))
     }
 }

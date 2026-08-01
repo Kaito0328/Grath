@@ -3,15 +3,14 @@
 // --- Auto-generated TypeScript Wrapper (DTO-only) ---
 
 
-export type RationalDto = 
+export type SymbolicComplexDto =
   {
-    numer: number | string;
-    denom: number | string;
-    dirty: boolean;
+    re: SymbolicExprDto;
+    im: SymbolicExprDto;
   };
 
 
-export type SymbolicExprDto = 
+export type SymbolicExprDto =
   | { kind: "Rational"; value: RationalDto }
   | { kind: "Symbol"; value: string }
   | { kind: "Add"; value: SymbolicExprDto[] }
@@ -20,10 +19,11 @@ export type SymbolicExprDto =
 ;
 
 
-export type SymbolicComplexDto = 
+export type RationalDto =
   {
-    re: SymbolicExprDto;
-    im: SymbolicExprDto;
+    numer: number | string;
+    denom: number | string;
+    dirty: boolean;
   };
 
 

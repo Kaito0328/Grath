@@ -48,7 +48,11 @@ fn find_rs_files(dir: &Path) -> Result<Vec<PathBuf>> {
     if !dir.exists() {
         return Ok(out);
     }
-    for entry in walkdir::WalkDir::new(dir).into_iter().flatten() {
+    for entry in walkdir::WalkDir::new(dir)
+        .sort_by_file_name()
+        .into_iter()
+        .flatten()
+    {
         let p = entry.path();
         if entry.file_type().is_file() {
             if p.extension().and_then(|x| x.to_str()) == Some("rs") {

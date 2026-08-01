@@ -1,6 +1,44 @@
 {
   "structs": [
     {
+      "name": "ConcreteMathApi",
+      "crate_name": "concrete-math",
+      "doc": "",
+      "fields": [],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "ConcreteMathError",
+      "crate_name": "concrete-math",
+      "doc": "",
+      "fields": [
+        "InvalidArgument {...}",
+        "NotImplemented"
+      ],
+      "enum_variants": [
+        {
+          "name": "InvalidArgument",
+          "fields": {
+            "Named": [
+              {
+                "name": "text",
+                "rust_type": "String",
+                "is_receiver": false
+              }
+            ]
+          }
+        },
+        {
+          "name": "NotImplemented",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
       "name": "GeneralTerm",
       "crate_name": "concrete-math",
       "doc": "",
@@ -59,860 +97,9 @@
       "enum_variants": [],
       "dto_candidate": false,
       "dto_enabled": false
-    },
-    {
-      "name": "ConcreteMathApi",
-      "crate_name": "concrete-math",
-      "doc": "",
-      "fields": [],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "ConcreteMathError",
-      "crate_name": "concrete-math",
-      "doc": "",
-      "fields": [
-        "InvalidArgument {...}",
-        "NotImplemented"
-      ],
-      "enum_variants": [
-        {
-          "name": "InvalidArgument",
-          "fields": {
-            "Named": [
-              {
-                "name": "text",
-                "rust_type": "String",
-                "is_receiver": false
-              }
-            ]
-          }
-        },
-        {
-          "name": "NotImplemented",
-          "fields": "Unit"
-        }
-      ],
-      "dto_candidate": false,
-      "dto_enabled": false
     }
   ],
   "impl_blocks": [
-    {
-      "crate_name": "concrete-math",
-      "target_struct": "ClosedForm",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "terms : Vec < GeneralTerm >"
-          ],
-          "return_type": "Self",
-          "doc": "",
-          "source_code": "pub fn new (terms : Vec < GeneralTerm >) -> Self { let mut cf = ClosedForm { terms } ; cf . simplify () ; cf }",
-          "typed_args": [
-            {
-              "name": "terms",
-              "rust_type": {
-                "Vec": {
-                  "Path": {
-                    "segments": [
-                      "GeneralTerm"
-                    ],
-                    "args": []
-                  }
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "Self"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Vec": {
-                  "Path": {
-                    "segments": [
-                      "GeneralTerm"
-                    ],
-                    "args": []
-                  }
-                }
-              },
-              "supported": false,
-              "mode": null,
-              "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
-              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "Self"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "term",
-          "visibility": "pub",
-          "args": [
-            "& self",
-            "n : u32"
-          ],
-          "return_type": "Complex < f64 >",
-          "doc": "",
-          "source_code": "pub fn term (& self , n : u32) -> Complex < f64 > { let n_complex = Complex :: new (n as f64 , 0.0) ; const EPSILON : f64 = 1e-15 ; self . terms . iter () . map (| term | { let poly_val = term . polynomial . eval (n_complex) ; if (term . base - 1.0) . norm () < EPSILON { poly_val } else { poly_val * term . base . powu (n) } }) . sum () }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            },
-            {
-              "name": "n",
-              "rust_type": {
-                "Primitive": "U32"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "Complex"
-              ],
-              "args": [
-                {
-                  "Primitive": "F64"
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "U32"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "Complex"
-                ],
-                "args": [
-                  {
-                    "Primitive": "F64"
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: Complex<f64>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        },
-        {
-          "name": "zero",
-          "visibility": "pub",
-          "args": [],
-          "return_type": "Self",
-          "doc": "",
-          "source_code": "pub fn zero () -> Self { ClosedForm { terms : Vec :: new () } }",
-          "typed_args": [],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "Self"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "Self"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "single",
-          "visibility": "pub",
-          "args": [
-            "polynomial : Polynomial < Complex < f64 > >",
-            "base : Complex < f64 >"
-          ],
-          "return_type": "Self",
-          "doc": "",
-          "source_code": "pub fn single (polynomial : Polynomial < Complex < f64 > > , base : Complex < f64 >) -> Self { ClosedForm :: new (vec ! [GeneralTerm { polynomial , base }]) }",
-          "typed_args": [
-            {
-              "name": "polynomial",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Polynomial"
-                  ],
-                  "args": [
-                    {
-                      "Path": {
-                        "segments": [
-                          "Complex"
-                        ],
-                        "args": [
-                          {
-                            "Primitive": "F64"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "base",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Complex"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "Self"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Polynomial"
-                  ],
-                  "args": [
-                    {
-                      "Path": {
-                        "segments": [
-                          "Complex"
-                        ],
-                        "args": [
-                          {
-                            "Primitive": "F64"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Complex"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": false,
-              "mode": null,
-              "reason": "custom type is not registered for string boundary: Complex<f64>",
-              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "Self"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "is_zero",
-          "visibility": "pub",
-          "args": [
-            "& self"
-          ],
-          "return_type": "bool",
-          "doc": "",
-          "source_code": "pub fn is_zero (& self) -> bool { self . terms . is_empty () || self . terms . iter () . all (| t | t . polynomial . is_zero ()) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            }
-          ],
-          "typed_return": {
-            "Primitive": "Bool"
-          },
-          "codec_args": [],
-          "codec_return": {
-            "rust_type": {
-              "Primitive": "Bool"
-            },
-            "supported": true,
-            "mode": "native",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "simplify",
-          "visibility": "pub",
-          "args": [
-            "& mut self"
-          ],
-          "return_type": "()",
-          "doc": "",
-          "source_code": "pub fn simplify (& mut self) { const EPS : f64 = 1e-12 ; let mut acc : Vec < GeneralTerm > = Vec :: new () ; for t in self . terms . drain (..) { if t . polynomial . is_zero () { continue ; } if let Some (existing) = acc . iter_mut () . find (| u | (u . base - t . base) . norm () < EPS) { existing . polynomial = & existing . polynomial + & t . polynomial ; } else { acc . push (t) ; } } acc . retain (| t | ! t . polynomial . is_zero ()) ; self . terms = acc ; }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            }
-          ],
-          "typed_return": "Unit",
-          "codec_args": [],
-          "codec_return": {
-            "rust_type": "Unit",
-            "supported": true,
-            "mode": "native",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "simplified",
-          "visibility": "pub",
-          "args": [
-            "mut self"
-          ],
-          "return_type": "Self",
-          "doc": "",
-          "source_code": "pub fn simplified (mut self) -> Self { self . simplify () ; self }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "Self"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "Self"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "try_div_scalar",
-          "visibility": "pub",
-          "args": [
-            "& self",
-            "scalar : Complex < f64 >"
-          ],
-          "return_type": "ConcreteMathResult < ClosedForm >",
-          "doc": "Checked division by a complex scalar. Returns an error on zero divisor.",
-          "source_code": "# [doc = \" Checked division by a complex scalar. Returns an error on zero divisor.\"] pub fn try_div_scalar (& self , scalar : Complex < f64 >) -> ConcreteMathResult < ClosedForm > { if scalar == Complex :: new (0.0 , 0.0) { return Err (ConcreteMathError :: InvalidArgument { text : \"division by zero scalar\" . into () , }) ; } Ok (ClosedForm :: new (self . terms . iter () . cloned () . map (| mut t | { t . polynomial = & t . polynomial / scalar ; t }) . collect () ,)) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            },
-            {
-              "name": "scalar",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Complex"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "ConcreteMathResult"
-              ],
-              "args": [
-                {
-                  "Path": {
-                    "segments": [
-                      "ClosedForm"
-                    ],
-                    "args": []
-                  }
-                }
-              ]
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Complex"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": false,
-              "mode": null,
-              "reason": "custom type is not registered for string boundary: Complex<f64>",
-              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "ConcreteMathResult"
-                ],
-                "args": [
-                  {
-                    "Path": {
-                      "segments": [
-                        "ClosedForm"
-                      ],
-                      "args": []
-                    }
-                  }
-                ]
-              }
-            },
-            "supported": false,
-            "mode": null,
-            "reason": "custom type is not registered for string boundary: ConcreteMathResult<ClosedForm>",
-            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "concrete-math",
-      "target_struct": "GeneralTerm",
-      "functions": []
-    },
-    {
-      "crate_name": "concrete-math",
-      "target_struct": "ClosedForm",
-      "functions": []
-    },
-    {
-      "crate_name": "concrete-math",
-      "target_struct": "ClosedForm",
-      "functions": [
-        {
-          "name": "display",
-          "visibility": "pub",
-          "args": [
-            "& self"
-          ],
-          "return_type": "ClosedFormDisplay < '_ >",
-          "doc": "表示ラッパ（変数名: 既定は \"n\"）",
-          "source_code": "# [doc = \" 表示ラッパ（変数名: 既定は \\\"n\\\"）\"] pub fn display (& self) -> ClosedFormDisplay < '_ > { ClosedFormDisplay :: new (self , \"n\") }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "ClosedFormDisplay"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "ClosedFormDisplay"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "display_with",
-          "visibility": "pub",
-          "args": [
-            "& self",
-            "var : & 'static str"
-          ],
-          "return_type": "ClosedFormDisplay < '_ >",
-          "doc": "変数名指定付き表示ラッパ",
-          "source_code": "# [doc = \" 変数名指定付き表示ラッパ\"] pub fn display_with (& self , var : & 'static str) -> ClosedFormDisplay < '_ > { ClosedFormDisplay :: new (self , var) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            },
-            {
-              "name": "var",
-              "rust_type": {
-                "Reference": {
-                  "mutable": false,
-                  "inner": "Str"
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "ClosedFormDisplay"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": "Str",
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "ClosedFormDisplay"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "concrete-math",
-      "target_struct": "ClosedForm",
-      "functions": []
-    },
-    {
-      "crate_name": "concrete-math",
-      "target_struct": "RecurrenceRelation",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "coeffs : Vec < f64 >",
-            "non_homogeneous : Vec < GeneralTerm >",
-            "initial_values : Vec < f64 >"
-          ],
-          "return_type": "Self",
-          "doc": "",
-          "source_code": "pub fn new (coeffs : Vec < f64 > , non_homogeneous : Vec < GeneralTerm > , initial_values : Vec < f64 > ,) -> Self { RecurrenceRelation { coeffs , non_homogeneous , initial_values , } }",
-          "typed_args": [
-            {
-              "name": "coeffs",
-              "rust_type": {
-                "Vec": {
-                  "Primitive": "F64"
-                }
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "non_homogeneous",
-              "rust_type": {
-                "Vec": {
-                  "Path": {
-                    "segments": [
-                      "GeneralTerm"
-                    ],
-                    "args": []
-                  }
-                }
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "initial_values",
-              "rust_type": {
-                "Vec": {
-                  "Primitive": "F64"
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "Self"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Vec": {
-                  "Primitive": "F64"
-                }
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Vec": {
-                  "Path": {
-                    "segments": [
-                      "GeneralTerm"
-                    ],
-                    "args": []
-                  }
-                }
-              },
-              "supported": false,
-              "mode": null,
-              "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
-              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
-            },
-            {
-              "rust_type": {
-                "Vec": {
-                  "Primitive": "F64"
-                }
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "Self"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        },
-        {
-          "name": "solve",
-          "visibility": "pub",
-          "args": [
-            "& self"
-          ],
-          "return_type": "ClosedForm",
-          "doc": "",
-          "source_code": "pub fn solve (& self) -> ClosedForm { let k = self . coeffs . len () ; if k == 0 { return ClosedForm :: zero () ; } let mut d = vec ! [0.0f64 ; k + 1] ; d [0] = 1.0 ; for i in 0 .. k { d [i + 1] = - self . coeffs [i] ; } let den = Polynomial :: new (d) ; let mut p = vec ! [0.0f64 ; k] ; let mut a = self . initial_values . clone () ; if a . len () < k { a . resize (k , 0.0) ; } if k >= 1 { p [0] = a [0] ; for j in 1 .. k { let mut v = a [j] ; for i in 1 ..= j { v -= self . coeffs [i - 1] * a [j - i] ; } p [j] = v ; } } let num = Polynomial :: new (p) ; let den_poly = den . clone () ; let rf = RationalFunction :: new (num , den) ; let mut rf_total = rf ; for term in & self . non_homogeneous { if let Some (gx) = Self :: general_term_generating_function (term) { let prefix = Self :: prefix_polynomial (term , k) ; let adj = & gx - & RationalFunction :: new (prefix , Polynomial :: one ()) ; rf_total = & rf_total + & adj . div_poly (& den_poly) ; } } Self :: rational_function_to_closed_form (rf_total) }",
-          "typed_args": [
-            {
-              "name": "self",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "is_receiver": true
-            }
-          ],
-          "typed_return": {
-            "Path": {
-              "segments": [
-                "ClosedForm"
-              ],
-              "args": []
-            }
-          },
-          "codec_args": [],
-          "codec_return": {
-            "rust_type": {
-              "Path": {
-                "segments": [
-                  "ClosedForm"
-                ],
-                "args": []
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
     {
       "crate_name": "concrete-math",
       "target_struct": "ConcreteMathApi",
@@ -1801,6 +988,819 @@
             },
             "supported": true,
             "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "concrete-math",
+      "target_struct": "ClosedForm",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "terms : Vec < GeneralTerm >"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn new (terms : Vec < GeneralTerm >) -> Self { let mut cf = ClosedForm { terms } ; cf . simplify () ; cf }",
+          "typed_args": [
+            {
+              "name": "terms",
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "GeneralTerm"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "GeneralTerm"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "term",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "n : u32"
+          ],
+          "return_type": "Complex < f64 >",
+          "doc": "",
+          "source_code": "pub fn term (& self , n : u32) -> Complex < f64 > { let n_complex = Complex :: new (n as f64 , 0.0) ; const EPSILON : f64 = 1e-15 ; self . terms . iter () . map (| term | { let poly_val = term . polynomial . eval (n_complex) ; if (term . base - 1.0) . norm () < EPSILON { poly_val } else { poly_val * term . base . powu (n) } }) . sum () }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "U32"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Complex"
+              ],
+              "args": [
+                {
+                  "Primitive": "F64"
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "U32"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Complex"
+                ],
+                "args": [
+                  {
+                    "Primitive": "F64"
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: Complex<f64>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        },
+        {
+          "name": "zero",
+          "visibility": "pub",
+          "args": [],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn zero () -> Self { ClosedForm { terms : Vec :: new () } }",
+          "typed_args": [],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "single",
+          "visibility": "pub",
+          "args": [
+            "polynomial : Polynomial < Complex < f64 > >",
+            "base : Complex < f64 >"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn single (polynomial : Polynomial < Complex < f64 > > , base : Complex < f64 >) -> Self { ClosedForm :: new (vec ! [GeneralTerm { polynomial , base }]) }",
+          "typed_args": [
+            {
+              "name": "polynomial",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Polynomial"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "Complex"
+                        ],
+                        "args": [
+                          {
+                            "Primitive": "F64"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "base",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Complex"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Polynomial"
+                  ],
+                  "args": [
+                    {
+                      "Path": {
+                        "segments": [
+                          "Complex"
+                        ],
+                        "args": [
+                          {
+                            "Primitive": "F64"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Complex"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Complex<f64>",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "is_zero",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "bool",
+          "doc": "",
+          "source_code": "pub fn is_zero (& self) -> bool { self . terms . is_empty () || self . terms . iter () . all (| t | t . polynomial . is_zero ()) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Primitive": "Bool"
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Primitive": "Bool"
+            },
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "simplify",
+          "visibility": "pub",
+          "args": [
+            "& mut self"
+          ],
+          "return_type": "()",
+          "doc": "",
+          "source_code": "pub fn simplify (& mut self) { const EPS : f64 = 1e-12 ; let mut acc : Vec < GeneralTerm > = Vec :: new () ; for t in self . terms . drain (..) { if t . polynomial . is_zero () { continue ; } if let Some (existing) = acc . iter_mut () . find (| u | (u . base - t . base) . norm () < EPS) { existing . polynomial = & existing . polynomial + & t . polynomial ; } else { acc . push (t) ; } } acc . retain (| t | ! t . polynomial . is_zero ()) ; self . terms = acc ; }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": "Unit",
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": "Unit",
+            "supported": true,
+            "mode": "native",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "simplified",
+          "visibility": "pub",
+          "args": [
+            "mut self"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn simplified (mut self) -> Self { self . simplify () ; self }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "try_div_scalar",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "scalar : Complex < f64 >"
+          ],
+          "return_type": "ConcreteMathResult < ClosedForm >",
+          "doc": "Checked division by a complex scalar. Returns an error on zero divisor.",
+          "source_code": "# [doc = \" Checked division by a complex scalar. Returns an error on zero divisor.\"] pub fn try_div_scalar (& self , scalar : Complex < f64 >) -> ConcreteMathResult < ClosedForm > { if scalar == Complex :: new (0.0 , 0.0) { return Err (ConcreteMathError :: InvalidArgument { text : \"division by zero scalar\" . into () , }) ; } Ok (ClosedForm :: new (self . terms . iter () . cloned () . map (| mut t | { t . polynomial = & t . polynomial / scalar ; t }) . collect () ,)) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "scalar",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Complex"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "ConcreteMathResult"
+              ],
+              "args": [
+                {
+                  "Path": {
+                    "segments": [
+                      "ClosedForm"
+                    ],
+                    "args": []
+                  }
+                }
+              ]
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Complex"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "custom type is not registered for string boundary: Complex<f64>",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "ConcreteMathResult"
+                ],
+                "args": [
+                  {
+                    "Path": {
+                      "segments": [
+                        "ClosedForm"
+                      ],
+                      "args": []
+                    }
+                  }
+                ]
+              }
+            },
+            "supported": false,
+            "mode": null,
+            "reason": "custom type is not registered for string boundary: ConcreteMathResult<ClosedForm>",
+            "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "concrete-math",
+      "target_struct": "GeneralTerm",
+      "functions": []
+    },
+    {
+      "crate_name": "concrete-math",
+      "target_struct": "ClosedForm",
+      "functions": []
+    },
+    {
+      "crate_name": "concrete-math",
+      "target_struct": "ClosedForm",
+      "functions": [
+        {
+          "name": "display",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "ClosedFormDisplay < '_ >",
+          "doc": "表示ラッパ（変数名: 既定は \"n\"）",
+          "source_code": "# [doc = \" 表示ラッパ（変数名: 既定は \\\"n\\\"）\"] pub fn display (& self) -> ClosedFormDisplay < '_ > { ClosedFormDisplay :: new (self , \"n\") }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "ClosedFormDisplay"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "ClosedFormDisplay"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "display_with",
+          "visibility": "pub",
+          "args": [
+            "& self",
+            "var : & 'static str"
+          ],
+          "return_type": "ClosedFormDisplay < '_ >",
+          "doc": "変数名指定付き表示ラッパ",
+          "source_code": "# [doc = \" 変数名指定付き表示ラッパ\"] pub fn display_with (& self , var : & 'static str) -> ClosedFormDisplay < '_ > { ClosedFormDisplay :: new (self , var) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            },
+            {
+              "name": "var",
+              "rust_type": {
+                "Reference": {
+                  "mutable": false,
+                  "inner": "Str"
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "ClosedFormDisplay"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": "Str",
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "ClosedFormDisplay"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "concrete-math",
+      "target_struct": "ClosedForm",
+      "functions": []
+    },
+    {
+      "crate_name": "concrete-math",
+      "target_struct": "RecurrenceRelation",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "coeffs : Vec < f64 >",
+            "non_homogeneous : Vec < GeneralTerm >",
+            "initial_values : Vec < f64 >"
+          ],
+          "return_type": "Self",
+          "doc": "",
+          "source_code": "pub fn new (coeffs : Vec < f64 > , non_homogeneous : Vec < GeneralTerm > , initial_values : Vec < f64 > ,) -> Self { RecurrenceRelation { coeffs , non_homogeneous , initial_values , } }",
+          "typed_args": [
+            {
+              "name": "coeffs",
+              "rust_type": {
+                "Vec": {
+                  "Primitive": "F64"
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "non_homogeneous",
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "GeneralTerm"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "initial_values",
+              "rust_type": {
+                "Vec": {
+                  "Primitive": "F64"
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "Self"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Vec": {
+                  "Primitive": "F64"
+                }
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Vec": {
+                  "Path": {
+                    "segments": [
+                      "GeneralTerm"
+                    ],
+                    "args": []
+                  }
+                }
+              },
+              "supported": false,
+              "mode": null,
+              "reason": "Vec<custom type> boundaries are not supported yet; expose a dedicated string or DTO API instead",
+              "recommendation": "derive serde::Serialize and serde::Deserialize on a public DTO, then expose it through the DTO boundary; alternatively expose an explicit string facade"
+            },
+            {
+              "rust_type": {
+                "Vec": {
+                  "Primitive": "F64"
+                }
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "Self"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        },
+        {
+          "name": "solve",
+          "visibility": "pub",
+          "args": [
+            "& self"
+          ],
+          "return_type": "ClosedForm",
+          "doc": "",
+          "source_code": "pub fn solve (& self) -> ClosedForm { let k = self . coeffs . len () ; if k == 0 { return ClosedForm :: zero () ; } let mut d = vec ! [0.0f64 ; k + 1] ; d [0] = 1.0 ; for i in 0 .. k { d [i + 1] = - self . coeffs [i] ; } let den = Polynomial :: new (d) ; let mut p = vec ! [0.0f64 ; k] ; let mut a = self . initial_values . clone () ; if a . len () < k { a . resize (k , 0.0) ; } if k >= 1 { p [0] = a [0] ; for j in 1 .. k { let mut v = a [j] ; for i in 1 ..= j { v -= self . coeffs [i - 1] * a [j - i] ; } p [j] = v ; } } let num = Polynomial :: new (p) ; let den_poly = den . clone () ; let rf = RationalFunction :: new (num , den) ; let mut rf_total = rf ; for term in & self . non_homogeneous { if let Some (gx) = Self :: general_term_generating_function (term) { let prefix = Self :: prefix_polynomial (term , k) ; let adj = & gx - & RationalFunction :: new (prefix , Polynomial :: one ()) ; rf_total = & rf_total + & adj . div_poly (& den_poly) ; } } Self :: rational_function_to_closed_form (rf_total) }",
+          "typed_args": [
+            {
+              "name": "self",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "is_receiver": true
+            }
+          ],
+          "typed_return": {
+            "Path": {
+              "segments": [
+                "ClosedForm"
+              ],
+              "args": []
+            }
+          },
+          "codec_args": [],
+          "codec_return": {
+            "rust_type": {
+              "Path": {
+                "segments": [
+                  "ClosedForm"
+                ],
+                "args": []
+              }
+            },
+            "supported": true,
+            "mode": "string",
             "reason": null,
             "recommendation": null
           }

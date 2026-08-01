@@ -195,7 +195,7 @@ fn rust_type_to_ts(ty: &str, known_structs: &HashSet<String>) -> String {
 fn generate_ts_type_def(s: &StructInfo, known_structs: &HashSet<String>) -> String {
     let ts_name = dto_ts_name(&s.name);
     if !s.enum_variants.is_empty() {
-        let mut out = format!("export type {} = \n", ts_name);
+        let mut out = format!("export type {} =\n", ts_name);
         for variant in &s.enum_variants {
             match &variant.fields {
                 EnumVariantFields::Unit => {
@@ -236,7 +236,7 @@ fn generate_ts_type_def(s: &StructInfo, known_structs: &HashSet<String>) -> Stri
         .iter()
         .any(|f| !f.contains(":") || f.contains("(") || f.contains("{"));
 
-    let mut out = format!("export type {} = \n", ts_name);
+    let mut out = format!("export type {} =\n", ts_name);
 
     if is_enum {
         for (i, f) in s.fields.iter().enumerate() {

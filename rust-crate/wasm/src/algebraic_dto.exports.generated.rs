@@ -2,40 +2,41 @@
 // This file is included from wasm/src/algebraic_dto.rs.
 // Do not edit by hand.
 
-#[wasm_bindgen(js_name = rationalNewDto)]
-pub fn rational_new_dto(numer: &str, denom: &str) -> Result<JsValue, JsError> {
-    serde_wasm_bindgen::to_value(&rational_to_dto(&Rational::new(
-        i64_from_str(numer)?,
-        i64_from_str(denom)?,
-    )))
-    .map_err(js_error_from_serde)
+#[wasm_bindgen(js_name = symbolicComplexFromLatexDto)]
+pub fn symbolic_complex_from_latex_dto(latex: &str) -> Result<JsValue, JsError> {
+    {
+        let out =
+            SymbolicComplex::from_latex(latex).map_err(|e| js_error_from_to_app_error(e, None))?;
+        serde_wasm_bindgen::to_value(&symbolic_complex_to_dto(&out)).map_err(js_error_from_serde)
+    }
 }
 
-#[wasm_bindgen(js_name = rationalNumerDto)]
-pub fn rational_numer_dto(self_value: JsValue) -> Result<String, JsError> {
-    let self_dto: RationalDto =
+#[wasm_bindgen(js_name = symbolicComplexToLatexDto)]
+pub fn symbolic_complex_to_latex_dto(self_value: JsValue) -> Result<String, JsError> {
+    let self_dto: SymbolicComplexDto =
         serde_wasm_bindgen::from_value(self_value).map_err(js_error_from_serde)?;
-    let self_rust = rational_from_dto(&self_dto)?;
+    let self_rust = symbolic_complex_from_dto(&self_dto)?;
 
-    Ok(self_rust.numer().to_string())
+    Ok(self_rust.to_latex())
 }
 
-#[wasm_bindgen(js_name = rationalDenomDto)]
-pub fn rational_denom_dto(self_value: JsValue) -> Result<String, JsError> {
-    let self_dto: RationalDto =
+#[wasm_bindgen(js_name = symbolicComplexConjDto)]
+pub fn symbolic_complex_conj_dto(self_value: JsValue) -> Result<JsValue, JsError> {
+    let self_dto: SymbolicComplexDto =
         serde_wasm_bindgen::from_value(self_value).map_err(js_error_from_serde)?;
-    let self_rust = rational_from_dto(&self_dto)?;
+    let self_rust = symbolic_complex_from_dto(&self_dto)?;
 
-    Ok(self_rust.denom().to_string())
+    serde_wasm_bindgen::to_value(&symbolic_complex_to_dto(&self_rust.conj()))
+        .map_err(js_error_from_serde)
 }
 
-#[wasm_bindgen(js_name = rationalSimplifiedDto)]
-pub fn rational_simplified_dto(self_value: JsValue) -> Result<JsValue, JsError> {
-    let self_dto: RationalDto =
+#[wasm_bindgen(js_name = symbolicComplexExpandDto)]
+pub fn symbolic_complex_expand_dto(self_value: JsValue) -> Result<JsValue, JsError> {
+    let self_dto: SymbolicComplexDto =
         serde_wasm_bindgen::from_value(self_value).map_err(js_error_from_serde)?;
-    let self_rust = rational_from_dto(&self_dto)?;
+    let self_rust = symbolic_complex_from_dto(&self_dto)?;
 
-    serde_wasm_bindgen::to_value(&rational_to_dto(&self_rust.simplified()))
+    serde_wasm_bindgen::to_value(&symbolic_complex_to_dto(&self_rust.expand()))
         .map_err(js_error_from_serde)
 }
 
@@ -95,40 +96,39 @@ pub fn symbolic_expr_substitute_dto(
         .map_err(js_error_from_serde)
 }
 
-#[wasm_bindgen(js_name = symbolicComplexFromLatexDto)]
-pub fn symbolic_complex_from_latex_dto(latex: &str) -> Result<JsValue, JsError> {
-    {
-        let out =
-            SymbolicComplex::from_latex(latex).map_err(|e| js_error_from_to_app_error(e, None))?;
-        serde_wasm_bindgen::to_value(&symbolic_complex_to_dto(&out)).map_err(js_error_from_serde)
-    }
+#[wasm_bindgen(js_name = rationalNewDto)]
+pub fn rational_new_dto(numer: &str, denom: &str) -> Result<JsValue, JsError> {
+    serde_wasm_bindgen::to_value(&rational_to_dto(&Rational::new(
+        i64_from_str(numer)?,
+        i64_from_str(denom)?,
+    )))
+    .map_err(js_error_from_serde)
 }
 
-#[wasm_bindgen(js_name = symbolicComplexToLatexDto)]
-pub fn symbolic_complex_to_latex_dto(self_value: JsValue) -> Result<String, JsError> {
-    let self_dto: SymbolicComplexDto =
+#[wasm_bindgen(js_name = rationalNumerDto)]
+pub fn rational_numer_dto(self_value: JsValue) -> Result<String, JsError> {
+    let self_dto: RationalDto =
         serde_wasm_bindgen::from_value(self_value).map_err(js_error_from_serde)?;
-    let self_rust = symbolic_complex_from_dto(&self_dto)?;
+    let self_rust = rational_from_dto(&self_dto)?;
 
-    Ok(self_rust.to_latex())
+    Ok(self_rust.numer().to_string())
 }
 
-#[wasm_bindgen(js_name = symbolicComplexConjDto)]
-pub fn symbolic_complex_conj_dto(self_value: JsValue) -> Result<JsValue, JsError> {
-    let self_dto: SymbolicComplexDto =
+#[wasm_bindgen(js_name = rationalDenomDto)]
+pub fn rational_denom_dto(self_value: JsValue) -> Result<String, JsError> {
+    let self_dto: RationalDto =
         serde_wasm_bindgen::from_value(self_value).map_err(js_error_from_serde)?;
-    let self_rust = symbolic_complex_from_dto(&self_dto)?;
+    let self_rust = rational_from_dto(&self_dto)?;
 
-    serde_wasm_bindgen::to_value(&symbolic_complex_to_dto(&self_rust.conj()))
-        .map_err(js_error_from_serde)
+    Ok(self_rust.denom().to_string())
 }
 
-#[wasm_bindgen(js_name = symbolicComplexExpandDto)]
-pub fn symbolic_complex_expand_dto(self_value: JsValue) -> Result<JsValue, JsError> {
-    let self_dto: SymbolicComplexDto =
+#[wasm_bindgen(js_name = rationalSimplifiedDto)]
+pub fn rational_simplified_dto(self_value: JsValue) -> Result<JsValue, JsError> {
+    let self_dto: RationalDto =
         serde_wasm_bindgen::from_value(self_value).map_err(js_error_from_serde)?;
-    let self_rust = symbolic_complex_from_dto(&self_dto)?;
+    let self_rust = rational_from_dto(&self_dto)?;
 
-    serde_wasm_bindgen::to_value(&symbolic_complex_to_dto(&self_rust.expand()))
+    serde_wasm_bindgen::to_value(&rational_to_dto(&self_rust.simplified()))
         .map_err(js_error_from_serde)
 }

@@ -67,19 +67,19 @@ where
 }
 
 #[wasm_bindgen]
-pub struct WasmRational(pub(crate) Rational);
+pub struct WasmSymbolicComplex(pub(crate) SymbolicComplex);
 
-impl WasmRational {
-    pub fn inner(&self) -> &Rational {
+impl WasmSymbolicComplex {
+    pub fn inner(&self) -> &SymbolicComplex {
         &self.0
     }
 }
 
 #[wasm_bindgen]
-impl WasmRational {
+impl WasmSymbolicComplex {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
-        stringify!(Rational).to_string()
+        stringify!(SymbolicComplex).to_string()
     }
 }
 
@@ -101,19 +101,125 @@ impl WasmSymbolicExpr {
 }
 
 #[wasm_bindgen]
-pub struct WasmSymbolicComplex(pub(crate) SymbolicComplex);
+pub struct WasmRational(pub(crate) Rational);
 
-impl WasmSymbolicComplex {
-    pub fn inner(&self) -> &SymbolicComplex {
+impl WasmRational {
+    pub fn inner(&self) -> &Rational {
         &self.0
     }
 }
 
 #[wasm_bindgen]
-impl WasmSymbolicComplex {
+impl WasmRational {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
-        stringify!(SymbolicComplex).to_string()
+        stringify!(Rational).to_string()
+    }
+}
+
+#[wasm_bindgen]
+impl WasmSymbolicComplex {
+    pub fn from_latex(latex: &str) -> std::result::Result<WasmSymbolicComplex, JsError> {
+        SymbolicComplex::from_latex(latex)
+            .map(WasmSymbolicComplex)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn to_latex(&self) -> String {
+        self.0.to_latex()
+    }
+}
+
+#[wasm_bindgen]
+impl WasmSymbolicComplex {
+    pub fn new(re: WasmSymbolicExpr, im: WasmSymbolicExpr) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(SymbolicComplex::new(re.inner().clone(), im.inner().clone()))
+    }
+    pub fn from_real(re: WasmSymbolicExpr) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(SymbolicComplex::from_real(re.inner().clone()))
+    }
+    pub fn i() -> WasmSymbolicComplex {
+        WasmSymbolicComplex(SymbolicComplex::i())
+    }
+    pub fn zero() -> WasmSymbolicComplex {
+        WasmSymbolicComplex(SymbolicComplex::zero())
+    }
+    pub fn is_real(&self) -> bool {
+        self.0.is_real()
+    }
+    pub fn is_imag_pure(&self) -> bool {
+        self.0.is_imag_pure()
+    }
+    pub fn neg(&self) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(self.0.neg())
+    }
+    pub fn add(&self, other: &WasmSymbolicComplex) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(self.0.add(other.inner()))
+    }
+    pub fn sub(&self, other: &WasmSymbolicComplex) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(self.0.sub(other.inner()))
+    }
+    pub fn mul(&self, other: &WasmSymbolicComplex) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(self.0.mul(other.inner()))
+    }
+    pub fn conj(&self) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(self.0.conj())
+    }
+    pub fn sqrt_rational(n: i64, d: i64) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(SymbolicComplex::sqrt_rational(n, d))
+    }
+    pub fn simplify(&self) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(self.0.simplify())
+    }
+    pub fn expand(&self) -> WasmSymbolicComplex {
+        WasmSymbolicComplex(self.0.expand())
+    }
+}
+
+#[wasm_bindgen]
+impl WasmSymbolicExpr {
+    pub fn to_latex(&self) -> String {
+        self.0.to_latex()
+    }
+}
+
+#[wasm_bindgen]
+impl WasmSymbolicExpr {
+    pub fn from_latex(latex: &str) -> std::result::Result<WasmSymbolicExpr, JsError> {
+        SymbolicExpr::from_latex(latex)
+            .map(WasmSymbolicExpr)
+            .map_err(|e| JsError::new(&format!("{:?}", e)))
+    }
+    pub fn rational(n: i64, d: i64) -> WasmSymbolicExpr {
+        WasmSymbolicExpr(SymbolicExpr::rational(n, d))
+    }
+    pub fn int(n: i64) -> WasmSymbolicExpr {
+        WasmSymbolicExpr(SymbolicExpr::int(n))
+    }
+    pub fn add(terms: &str) -> std::result::Result<WasmSymbolicExpr, JsError> {
+        let terms_vec: Vec<SymbolicExpr> = parse_csv_to_vec::<SymbolicExpr>(terms)?;
+        Ok(WasmSymbolicExpr(SymbolicExpr::add(terms_vec)))
+    }
+    pub fn mul(factors: &str) -> std::result::Result<WasmSymbolicExpr, JsError> {
+        let factors_vec: Vec<SymbolicExpr> = parse_csv_to_vec::<SymbolicExpr>(factors)?;
+        Ok(WasmSymbolicExpr(SymbolicExpr::mul(factors_vec)))
+    }
+    pub fn pow(base: WasmSymbolicExpr, exp: WasmSymbolicExpr) -> WasmSymbolicExpr {
+        WasmSymbolicExpr(SymbolicExpr::pow(base.inner().clone(), exp.inner().clone()))
+    }
+    pub fn sqrt(self) -> WasmSymbolicExpr {
+        WasmSymbolicExpr(self.0.sqrt())
+    }
+    pub fn sqrt2() -> WasmSymbolicExpr {
+        WasmSymbolicExpr(SymbolicExpr::sqrt2())
+    }
+    pub fn expand(self) -> WasmSymbolicExpr {
+        WasmSymbolicExpr(self.0.expand())
+    }
+    pub fn simplify(self) -> WasmSymbolicExpr {
+        WasmSymbolicExpr(self.0.simplify())
+    }
+    pub fn substitute(self, sym: &str, val: &WasmSymbolicExpr) -> WasmSymbolicExpr {
+        WasmSymbolicExpr(self.0.substitute(sym, val.inner()))
     }
 }
 
@@ -179,111 +285,5 @@ impl WasmRational {
             .checked_div(rhs.0)
             .map(WasmRational)
             .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSymbolicExpr {
-    pub fn to_latex(&self) -> String {
-        self.0.to_latex()
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSymbolicExpr {
-    pub fn from_latex(latex: &str) -> std::result::Result<WasmSymbolicExpr, JsError> {
-        SymbolicExpr::from_latex(latex)
-            .map(WasmSymbolicExpr)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn rational(n: i64, d: i64) -> WasmSymbolicExpr {
-        WasmSymbolicExpr(SymbolicExpr::rational(n, d))
-    }
-    pub fn int(n: i64) -> WasmSymbolicExpr {
-        WasmSymbolicExpr(SymbolicExpr::int(n))
-    }
-    pub fn add(terms: &str) -> std::result::Result<WasmSymbolicExpr, JsError> {
-        let terms_vec: Vec<SymbolicExpr> = parse_csv_to_vec::<SymbolicExpr>(terms)?;
-        Ok(WasmSymbolicExpr(SymbolicExpr::add(terms_vec)))
-    }
-    pub fn mul(factors: &str) -> std::result::Result<WasmSymbolicExpr, JsError> {
-        let factors_vec: Vec<SymbolicExpr> = parse_csv_to_vec::<SymbolicExpr>(factors)?;
-        Ok(WasmSymbolicExpr(SymbolicExpr::mul(factors_vec)))
-    }
-    pub fn pow(base: WasmSymbolicExpr, exp: WasmSymbolicExpr) -> WasmSymbolicExpr {
-        WasmSymbolicExpr(SymbolicExpr::pow(base.inner().clone(), exp.inner().clone()))
-    }
-    pub fn sqrt(self) -> WasmSymbolicExpr {
-        WasmSymbolicExpr(self.0.sqrt())
-    }
-    pub fn sqrt2() -> WasmSymbolicExpr {
-        WasmSymbolicExpr(SymbolicExpr::sqrt2())
-    }
-    pub fn expand(self) -> WasmSymbolicExpr {
-        WasmSymbolicExpr(self.0.expand())
-    }
-    pub fn simplify(self) -> WasmSymbolicExpr {
-        WasmSymbolicExpr(self.0.simplify())
-    }
-    pub fn substitute(self, sym: &str, val: &WasmSymbolicExpr) -> WasmSymbolicExpr {
-        WasmSymbolicExpr(self.0.substitute(sym, val.inner()))
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSymbolicComplex {
-    pub fn from_latex(latex: &str) -> std::result::Result<WasmSymbolicComplex, JsError> {
-        SymbolicComplex::from_latex(latex)
-            .map(WasmSymbolicComplex)
-            .map_err(|e| JsError::new(&format!("{:?}", e)))
-    }
-    pub fn to_latex(&self) -> String {
-        self.0.to_latex()
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSymbolicComplex {
-    pub fn new(re: WasmSymbolicExpr, im: WasmSymbolicExpr) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(SymbolicComplex::new(re.inner().clone(), im.inner().clone()))
-    }
-    pub fn from_real(re: WasmSymbolicExpr) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(SymbolicComplex::from_real(re.inner().clone()))
-    }
-    pub fn i() -> WasmSymbolicComplex {
-        WasmSymbolicComplex(SymbolicComplex::i())
-    }
-    pub fn zero() -> WasmSymbolicComplex {
-        WasmSymbolicComplex(SymbolicComplex::zero())
-    }
-    pub fn is_real(&self) -> bool {
-        self.0.is_real()
-    }
-    pub fn is_imag_pure(&self) -> bool {
-        self.0.is_imag_pure()
-    }
-    pub fn neg(&self) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(self.0.neg())
-    }
-    pub fn add(&self, other: &WasmSymbolicComplex) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(self.0.add(other.inner()))
-    }
-    pub fn sub(&self, other: &WasmSymbolicComplex) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(self.0.sub(other.inner()))
-    }
-    pub fn mul(&self, other: &WasmSymbolicComplex) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(self.0.mul(other.inner()))
-    }
-    pub fn conj(&self) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(self.0.conj())
-    }
-    pub fn sqrt_rational(n: i64, d: i64) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(SymbolicComplex::sqrt_rational(n, d))
-    }
-    pub fn simplify(&self) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(self.0.simplify())
-    }
-    pub fn expand(&self) -> WasmSymbolicComplex {
-        WasmSymbolicComplex(self.0.expand())
     }
 }

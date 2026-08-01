@@ -1,59 +1,12 @@
 {
   "structs": [
     {
-      "name": "GFExt",
-      "crate_name": "finite-field",
-      "doc": "",
-      "fields": [
-        "px: Arc < Vec < F > >",
-        "coeffs: Vec < F >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "GFExtStyle",
-      "crate_name": "finite-field",
-      "doc": "",
-      "fields": [
-        "unicode_superscript: bool"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "GFExtDisplay",
-      "crate_name": "finite-field",
-      "doc": "",
-      "fields": [
-        "elem: & 'a GFExt < F >",
-        "var: & 'static str",
-        "style: GFExtStyle"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
       "name": "FiniteFieldApi",
       "crate_name": "finite-field",
       "doc": "",
       "fields": [],
       "enum_variants": [],
       "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "GFp",
-      "crate_name": "finite-field",
-      "doc": "",
-      "fields": [
-        "u16"
-      ],
-      "enum_variants": [],
-      "dto_candidate": true,
       "dto_enabled": false
     },
     {
@@ -138,6 +91,53 @@
       ],
       "enum_variants": [],
       "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "GFExt",
+      "crate_name": "finite-field",
+      "doc": "",
+      "fields": [
+        "px: Arc < Vec < F > >",
+        "coeffs: Vec < F >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "GFExtStyle",
+      "crate_name": "finite-field",
+      "doc": "",
+      "fields": [
+        "unicode_superscript: bool"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "GFExtDisplay",
+      "crate_name": "finite-field",
+      "doc": "",
+      "fields": [
+        "elem: & 'a GFExt < F >",
+        "var: & 'static str",
+        "style: GFExtStyle"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "GFp",
+      "crate_name": "finite-field",
+      "doc": "",
+      "fields": [
+        "u16"
+      ],
+      "enum_variants": [],
+      "dto_candidate": true,
       "dto_enabled": false
     }
   ],

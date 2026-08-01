@@ -1,6 +1,142 @@
 {
   "structs": [
     {
+      "name": "StatisticsApi",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "ChiSquare",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "k: usize"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Exponential",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "lambda: f64"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "F",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "m: usize",
+        "n: usize"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Gamma",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "shape: f64",
+        "rate: f64"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Normal",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "mu: f64",
+        "sigma: f64",
+        "sample_cache: Option < f64 >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "T",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "nu: usize"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Uniform",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "min: f64",
+        "max: f64"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Bernoulli",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "p: f64"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Binomial",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "n: u64",
+        "p: f64"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Categorical",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "probs: Vec < f64 >"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Poisson",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "lambda: f64"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
       "name": "Dirichlet",
       "crate_name": "statistics",
       "doc": "",
@@ -39,212 +175,12 @@
       "dto_enabled": false
     },
     {
-      "name": "Poisson",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "lambda: f64"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Categorical",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "probs: Vec < f64 >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Bernoulli",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "p: f64"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Binomial",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "n: u64",
-        "p: f64"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Exponential",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "lambda: f64"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "F",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "m: usize",
-        "n: usize"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Uniform",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "min: f64",
-        "max: f64"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Gamma",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "shape: f64",
-        "rate: f64"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Normal",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "mu: f64",
-        "sigma: f64",
-        "sample_cache: Option < f64 >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "ChiSquare",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "k: usize"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "T",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "nu: usize"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
       "name": "Multinomial",
       "crate_name": "statistics",
       "doc": "",
       "fields": [
         "trials: usize",
         "probabilities: Vector < f64 >"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "StatisticsApi",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "SvgOptions",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "bg: & 'static str",
-        "axes: & 'static str",
-        "grid: & 'static str",
-        "show_grid: bool",
-        "line: & 'static str",
-        "bar: & 'static str",
-        "x_range: Option < (f64 , f64) >",
-        "samples: usize"
-      ],
-      "enum_variants": [],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "Tail",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "TwoSided",
-        "Less",
-        "Greater"
-      ],
-      "enum_variants": [
-        {
-          "name": "TwoSided",
-          "fields": "Unit"
-        },
-        {
-          "name": "Less",
-          "fields": "Unit"
-        },
-        {
-          "name": "Greater",
-          "fields": "Unit"
-        }
-      ],
-      "dto_candidate": false,
-      "dto_enabled": false
-    },
-    {
-      "name": "TestResult",
-      "crate_name": "statistics",
-      "doc": "",
-      "fields": [
-        "stat: f64",
-        "p_value: f64",
-        "df1: Option < f64 >",
-        "df2: Option < f64 >",
-        "ci: Option < (f64 , f64) >",
-        "effect: Option < f64 >",
-        "n1: usize",
-        "n2: Option < usize >",
-        "method: & 'static str",
-        "tail: Tail"
       ],
       "enum_variants": [],
       "dto_candidate": false,
@@ -314,6 +250,52 @@
           "fields": "Unit"
         }
       ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "Tail",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "TwoSided",
+        "Less",
+        "Greater"
+      ],
+      "enum_variants": [
+        {
+          "name": "TwoSided",
+          "fields": "Unit"
+        },
+        {
+          "name": "Less",
+          "fields": "Unit"
+        },
+        {
+          "name": "Greater",
+          "fields": "Unit"
+        }
+      ],
+      "dto_candidate": false,
+      "dto_enabled": false
+    },
+    {
+      "name": "TestResult",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "stat: f64",
+        "p_value: f64",
+        "df1: Option < f64 >",
+        "df2: Option < f64 >",
+        "ci: Option < (f64 , f64) >",
+        "effect: Option < f64 >",
+        "n1: usize",
+        "n2: Option < usize >",
+        "method: & 'static str",
+        "tail: Tail"
+      ],
+      "enum_variants": [],
       "dto_candidate": false,
       "dto_enabled": false
     },
@@ -422,1369 +404,27 @@
       "enum_variants": [],
       "dto_candidate": false,
       "dto_enabled": false
+    },
+    {
+      "name": "SvgOptions",
+      "crate_name": "statistics",
+      "doc": "",
+      "fields": [
+        "bg: & 'static str",
+        "axes: & 'static str",
+        "grid: & 'static str",
+        "show_grid: bool",
+        "line: & 'static str",
+        "bar: & 'static str",
+        "x_range: Option < (f64 , f64) >",
+        "samples: usize"
+      ],
+      "enum_variants": [],
+      "dto_candidate": false,
+      "dto_enabled": false
     }
   ],
   "impl_blocks": [
-    {
-      "crate_name": "statistics",
-      "target_struct": "Dirichlet",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "alpha : Vector < f64 >"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (alpha : Vector < f64 >) -> Result < Self > { if alpha . iter () . any (| & a | ! a . is_finite () || a <= 0.0) { return Err (StatisticsError :: InvalidParameter { what : \"Dirichlet::alpha\" , value : format ! (\"{:?}\" , alpha . as_slice ()) , }) ; } if alpha . len () < 2 { return Err (StatisticsError :: InvalidParameter { what : \"Dirichlet::k\" , value : alpha . len () . to_string () , }) ; } Ok (Self { alpha }) }",
-          "typed_args": [
-            {
-              "name": "alpha",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Dirichlet",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "MultivariateNormal",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "mean : Vector < f64 >",
-            "covariance : Matrix < f64 >"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (mean : Vector < f64 > , covariance : Matrix < f64 >) -> Result < Self > { let dim = mean . len () ; if covariance . rows != dim || covariance . cols != dim { return Err (StatisticsError :: InvalidParameter { what : \"MultivariateNormal::covariance\" , value : format ! (\"{}x{}\" , covariance . rows , covariance . cols) , }) ; } let chol_attempt = catch_unwind (AssertUnwindSafe (| | covariance . cholesky ())) ; match chol_attempt { Ok (Ok (l)) => { let log_det_cov = 2.0 * (0 .. dim) . map (| i | l [(i , i)] . ln ()) . sum :: < f64 > () ; Ok (Self { mean , cholesky_l : l , log_det_cov , }) } _ => Err (StatisticsError :: DomainError { what : \"MultivariateNormal::covariance\" , details : \"matrix must be positive-definite\" , }) , } }",
-          "typed_args": [
-            {
-              "name": "mean",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "covariance",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Matrix"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Matrix"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "MultivariateNormal",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "MultivariateT",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "nu : f64",
-            "mu : Vector < f64 >",
-            "sigma : Matrix < f64 >"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (nu : f64 , mu : Vector < f64 > , sigma : Matrix < f64 >) -> Result < Self > { let dim = mu . len () ; if sigma . rows != dim || sigma . cols != dim { return Err (StatisticsError :: InvalidParameter { what : \"MultivariateT::sigma\" , value : format ! (\"{}x{}\" , sigma . rows , sigma . cols) , }) ; } if nu <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"MultivariateT::nu\" , value : nu . to_string () , }) ; } let chol_attempt = catch_unwind (AssertUnwindSafe (| | sigma . cholesky ())) ; match chol_attempt { Ok (Ok (l)) => { let log_det_cov = 2.0 * (0 .. dim) . map (| i | l [(i , i)] . ln ()) . sum :: < f64 > () ; Ok (Self { nu , mu , cholesky_l : l , log_det_cov , }) } _ => Err (StatisticsError :: DomainError { what : \"MultivariateT::sigma\" , details : \"matrix must be positive-definite\" , }) , } }",
-          "typed_args": [
-            {
-              "name": "nu",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "mu",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "sigma",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Matrix"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Matrix"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "MultivariateT",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Poisson",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "lambda : f64"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (lambda : f64) -> Result < Self > { if ! (lambda . is_finite ()) || lambda <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Poisson::lambda\" , value : lambda . to_string () , }) ; } Ok (Self { lambda }) }",
-          "typed_args": [
-            {
-              "name": "lambda",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Poisson",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Categorical",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "mut probs : Vec < f64 >"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (mut probs : Vec < f64 >) -> Result < Self > { if probs . is_empty () { return Err (StatisticsError :: EmptyInput) ; } if ! probs . iter () . all (| & p | p . is_finite () && p >= 0.0) { return Err (StatisticsError :: InvalidParameter { what : \"Categorical::probs\" , value : format ! (\"{probs:?}\") , }) ; } let sum : f64 = probs . iter () . sum () ; if sum <= 0.0 { return Err (StatisticsError :: DomainError { what : \"Categorical::probs\" , details : \"sum must be > 0\" , }) ; } for p in & mut probs { * p /= sum ; } Ok (Self { probs }) }",
-          "typed_args": [
-            {
-              "name": "mut probs",
-              "rust_type": {
-                "Vec": {
-                  "Primitive": "F64"
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Vec": {
-                  "Primitive": "F64"
-                }
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Categorical",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Bernoulli",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "p : f64"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (p : f64) -> Result < Self > { if ! (0.0 ..= 1.0) . contains (& p) || p . is_nan () { return Err (StatisticsError :: InvalidParameter { what : \"Bernoulli::p\" , value : p . to_string () , }) ; } Ok (Self { p }) }",
-          "typed_args": [
-            {
-              "name": "p",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Bernoulli",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Binomial",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "n : u64",
-            "p : f64"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (n : u64 , p : f64) -> Result < Self > { if n == 0 || ! (0.0 ..= 1.0) . contains (& p) || p . is_nan () { return Err (StatisticsError :: InvalidParameter { what : \"Binomial::(n,p)\" , value : format ! (\"({n},{p})\") , }) ; } Ok (Self { n , p }) }",
-          "typed_args": [
-            {
-              "name": "n",
-              "rust_type": {
-                "Primitive": "U64"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "p",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "U64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Binomial",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Exponential",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "lambda : f64"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (lambda : f64) -> Result < Self > { if ! (lambda . is_finite ()) || lambda <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Exponential::lambda\" , value : lambda . to_string () , }) ; } Ok (Self { lambda }) }",
-          "typed_args": [
-            {
-              "name": "lambda",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Exponential",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "F",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "m : usize",
-            "n : usize"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (m : usize , n : usize) -> Result < Self > { if m == 0 || n == 0 { return Err (StatisticsError :: InvalidParameter { what : \"F::(m,n)\" , value : format ! (\"({m},{n})\") , }) ; } Ok (F { m , n }) }",
-          "typed_args": [
-            {
-              "name": "m",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "n",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "F",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Uniform",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "min : f64",
-            "max : f64"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (min : f64 , max : f64) -> Result < Self > { if ! (min . is_finite () && max . is_finite () && (min < max)) { return Err (StatisticsError :: InvalidParameter { what : \"Uniform::(min,max)\" , value : format ! (\"({min},{max})\") , }) ; } Ok (Self { min , max }) }",
-          "typed_args": [
-            {
-              "name": "min",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "max",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Uniform",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Gamma",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "shape : f64",
-            "rate : f64"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (shape : f64 , rate : f64) -> Result < Self > { if ! (shape . is_finite () && rate . is_finite ()) || shape <= 0.0 || rate <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Gamma::(shape,rate)\" , value : format ! (\"({shape},{rate})\") , }) ; } Ok (Gamma { shape , rate }) }",
-          "typed_args": [
-            {
-              "name": "shape",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "rate",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Gamma",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Normal",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "mu : f64",
-            "sigma : f64"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (mu : f64 , sigma : f64) -> Result < Self > { if ! (mu . is_finite () && sigma . is_finite ()) || sigma <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Normal::sigma\" , value : sigma . to_string () , }) ; } Ok (Self { mu , sigma , sample_cache : None , }) }",
-          "typed_args": [
-            {
-              "name": "mu",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "sigma",
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Primitive": "F64"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Normal",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "ChiSquare",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "k : usize"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (k : usize) -> Result < Self > { if k == 0 { return Err (StatisticsError :: InvalidParameter { what : \"ChiSquare::k\" , value : k . to_string () , }) ; } Ok (Self { k }) }",
-          "typed_args": [
-            {
-              "name": "k",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "ChiSquare",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "T",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "nu : usize"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (nu : usize) -> Result < Self > { if nu == 0 { return Err (StatisticsError :: InvalidParameter { what : \"T::nu\" , value : nu . to_string () , }) ; } Ok (T { nu }) }",
-          "typed_args": [
-            {
-              "name": "nu",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "T",
-      "functions": []
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Multinomial",
-      "functions": [
-        {
-          "name": "new",
-          "visibility": "pub",
-          "args": [
-            "trials : usize",
-            "probabilities : Vector < f64 >"
-          ],
-          "return_type": "Result < Self >",
-          "doc": "",
-          "source_code": "pub fn new (trials : usize , probabilities : Vector < f64 >) -> Result < Self > { if probabilities . is_empty () { return Err (StatisticsError :: EmptyInput) ; } let sum : f64 = probabilities . iter () . sum () ; if (sum - 1.0) . abs () > 1e-9 { return Err (StatisticsError :: DomainError { what : \"Multinomial::probabilities\" , details : \"Probabilities must sum to 1\" , }) ; } Ok (Self { trials , probabilities , }) }",
-          "typed_args": [
-            {
-              "name": "trials",
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "is_receiver": false
-            },
-            {
-              "name": "probabilities",
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "is_receiver": false
-            }
-          ],
-          "typed_return": {
-            "Result": {
-              "ok": {
-                "Path": {
-                  "segments": [
-                    "Self"
-                  ],
-                  "args": []
-                }
-              },
-              "err": null
-            }
-          },
-          "codec_args": [
-            {
-              "rust_type": {
-                "Primitive": "USize"
-              },
-              "supported": true,
-              "mode": "native",
-              "reason": null,
-              "recommendation": null
-            },
-            {
-              "rust_type": {
-                "Path": {
-                  "segments": [
-                    "Vector"
-                  ],
-                  "args": [
-                    {
-                      "Primitive": "F64"
-                    }
-                  ]
-                }
-              },
-              "supported": true,
-              "mode": "string",
-              "reason": null,
-              "recommendation": null
-            }
-          ],
-          "codec_return": {
-            "rust_type": {
-              "Result": {
-                "ok": {
-                  "Path": {
-                    "segments": [
-                      "Self"
-                    ],
-                    "args": []
-                  }
-                },
-                "err": null
-              }
-            },
-            "supported": true,
-            "mode": "string",
-            "reason": null,
-            "recommendation": null
-          }
-        }
-      ]
-    },
-    {
-      "crate_name": "statistics",
-      "target_struct": "Multinomial",
-      "functions": []
-    },
     {
       "crate_name": "statistics",
       "target_struct": "StatisticsApi",
@@ -5438,7 +4078,1362 @@
     },
     {
       "crate_name": "statistics",
-      "target_struct": "SvgOptions",
+      "target_struct": "ChiSquare",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "k : usize"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (k : usize) -> Result < Self > { if k == 0 { return Err (StatisticsError :: InvalidParameter { what : \"ChiSquare::k\" , value : k . to_string () , }) ; } Ok (Self { k }) }",
+          "typed_args": [
+            {
+              "name": "k",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "ChiSquare",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Exponential",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "lambda : f64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (lambda : f64) -> Result < Self > { if ! (lambda . is_finite ()) || lambda <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Exponential::lambda\" , value : lambda . to_string () , }) ; } Ok (Self { lambda }) }",
+          "typed_args": [
+            {
+              "name": "lambda",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Exponential",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "F",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "m : usize",
+            "n : usize"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (m : usize , n : usize) -> Result < Self > { if m == 0 || n == 0 { return Err (StatisticsError :: InvalidParameter { what : \"F::(m,n)\" , value : format ! (\"({m},{n})\") , }) ; } Ok (F { m , n }) }",
+          "typed_args": [
+            {
+              "name": "m",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "F",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Gamma",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "shape : f64",
+            "rate : f64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (shape : f64 , rate : f64) -> Result < Self > { if ! (shape . is_finite () && rate . is_finite ()) || shape <= 0.0 || rate <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Gamma::(shape,rate)\" , value : format ! (\"({shape},{rate})\") , }) ; } Ok (Gamma { shape , rate }) }",
+          "typed_args": [
+            {
+              "name": "shape",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "rate",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Gamma",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Normal",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "mu : f64",
+            "sigma : f64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (mu : f64 , sigma : f64) -> Result < Self > { if ! (mu . is_finite () && sigma . is_finite ()) || sigma <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Normal::sigma\" , value : sigma . to_string () , }) ; } Ok (Self { mu , sigma , sample_cache : None , }) }",
+          "typed_args": [
+            {
+              "name": "mu",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "sigma",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Normal",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "T",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "nu : usize"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (nu : usize) -> Result < Self > { if nu == 0 { return Err (StatisticsError :: InvalidParameter { what : \"T::nu\" , value : nu . to_string () , }) ; } Ok (T { nu }) }",
+          "typed_args": [
+            {
+              "name": "nu",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "T",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Uniform",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "min : f64",
+            "max : f64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (min : f64 , max : f64) -> Result < Self > { if ! (min . is_finite () && max . is_finite () && (min < max)) { return Err (StatisticsError :: InvalidParameter { what : \"Uniform::(min,max)\" , value : format ! (\"({min},{max})\") , }) ; } Ok (Self { min , max }) }",
+          "typed_args": [
+            {
+              "name": "min",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "max",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Uniform",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Bernoulli",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "p : f64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (p : f64) -> Result < Self > { if ! (0.0 ..= 1.0) . contains (& p) || p . is_nan () { return Err (StatisticsError :: InvalidParameter { what : \"Bernoulli::p\" , value : p . to_string () , }) ; } Ok (Self { p }) }",
+          "typed_args": [
+            {
+              "name": "p",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Bernoulli",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Binomial",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "n : u64",
+            "p : f64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (n : u64 , p : f64) -> Result < Self > { if n == 0 || ! (0.0 ..= 1.0) . contains (& p) || p . is_nan () { return Err (StatisticsError :: InvalidParameter { what : \"Binomial::(n,p)\" , value : format ! (\"({n},{p})\") , }) ; } Ok (Self { n , p }) }",
+          "typed_args": [
+            {
+              "name": "n",
+              "rust_type": {
+                "Primitive": "U64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "p",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "U64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Binomial",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Categorical",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "mut probs : Vec < f64 >"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (mut probs : Vec < f64 >) -> Result < Self > { if probs . is_empty () { return Err (StatisticsError :: EmptyInput) ; } if ! probs . iter () . all (| & p | p . is_finite () && p >= 0.0) { return Err (StatisticsError :: InvalidParameter { what : \"Categorical::probs\" , value : format ! (\"{probs:?}\") , }) ; } let sum : f64 = probs . iter () . sum () ; if sum <= 0.0 { return Err (StatisticsError :: DomainError { what : \"Categorical::probs\" , details : \"sum must be > 0\" , }) ; } for p in & mut probs { * p /= sum ; } Ok (Self { probs }) }",
+          "typed_args": [
+            {
+              "name": "mut probs",
+              "rust_type": {
+                "Vec": {
+                  "Primitive": "F64"
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Vec": {
+                  "Primitive": "F64"
+                }
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Categorical",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Poisson",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "lambda : f64"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (lambda : f64) -> Result < Self > { if ! (lambda . is_finite ()) || lambda <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"Poisson::lambda\" , value : lambda . to_string () , }) ; } Ok (Self { lambda }) }",
+          "typed_args": [
+            {
+              "name": "lambda",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Poisson",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Dirichlet",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "alpha : Vector < f64 >"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (alpha : Vector < f64 >) -> Result < Self > { if alpha . iter () . any (| & a | ! a . is_finite () || a <= 0.0) { return Err (StatisticsError :: InvalidParameter { what : \"Dirichlet::alpha\" , value : format ! (\"{:?}\" , alpha . as_slice ()) , }) ; } if alpha . len () < 2 { return Err (StatisticsError :: InvalidParameter { what : \"Dirichlet::k\" , value : alpha . len () . to_string () , }) ; } Ok (Self { alpha }) }",
+          "typed_args": [
+            {
+              "name": "alpha",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Dirichlet",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "MultivariateNormal",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "mean : Vector < f64 >",
+            "covariance : Matrix < f64 >"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (mean : Vector < f64 > , covariance : Matrix < f64 >) -> Result < Self > { let dim = mean . len () ; if covariance . rows != dim || covariance . cols != dim { return Err (StatisticsError :: InvalidParameter { what : \"MultivariateNormal::covariance\" , value : format ! (\"{}x{}\" , covariance . rows , covariance . cols) , }) ; } let chol_attempt = catch_unwind (AssertUnwindSafe (| | covariance . cholesky ())) ; match chol_attempt { Ok (Ok (l)) => { let log_det_cov = 2.0 * (0 .. dim) . map (| i | l [(i , i)] . ln ()) . sum :: < f64 > () ; Ok (Self { mean , cholesky_l : l , log_det_cov , }) } _ => Err (StatisticsError :: DomainError { what : \"MultivariateNormal::covariance\" , details : \"matrix must be positive-definite\" , }) , } }",
+          "typed_args": [
+            {
+              "name": "mean",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "covariance",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Matrix"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Matrix"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "MultivariateNormal",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "MultivariateT",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "nu : f64",
+            "mu : Vector < f64 >",
+            "sigma : Matrix < f64 >"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (nu : f64 , mu : Vector < f64 > , sigma : Matrix < f64 >) -> Result < Self > { let dim = mu . len () ; if sigma . rows != dim || sigma . cols != dim { return Err (StatisticsError :: InvalidParameter { what : \"MultivariateT::sigma\" , value : format ! (\"{}x{}\" , sigma . rows , sigma . cols) , }) ; } if nu <= 0.0 { return Err (StatisticsError :: InvalidParameter { what : \"MultivariateT::nu\" , value : nu . to_string () , }) ; } let chol_attempt = catch_unwind (AssertUnwindSafe (| | sigma . cholesky ())) ; match chol_attempt { Ok (Ok (l)) => { let log_det_cov = 2.0 * (0 .. dim) . map (| i | l [(i , i)] . ln ()) . sum :: < f64 > () ; Ok (Self { nu , mu , cholesky_l : l , log_det_cov , }) } _ => Err (StatisticsError :: DomainError { what : \"MultivariateT::sigma\" , details : \"matrix must be positive-definite\" , }) , } }",
+          "typed_args": [
+            {
+              "name": "nu",
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "mu",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "sigma",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Matrix"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "F64"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Matrix"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "MultivariateT",
+      "functions": []
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Multinomial",
+      "functions": [
+        {
+          "name": "new",
+          "visibility": "pub",
+          "args": [
+            "trials : usize",
+            "probabilities : Vector < f64 >"
+          ],
+          "return_type": "Result < Self >",
+          "doc": "",
+          "source_code": "pub fn new (trials : usize , probabilities : Vector < f64 >) -> Result < Self > { if probabilities . is_empty () { return Err (StatisticsError :: EmptyInput) ; } let sum : f64 = probabilities . iter () . sum () ; if (sum - 1.0) . abs () > 1e-9 { return Err (StatisticsError :: DomainError { what : \"Multinomial::probabilities\" , details : \"Probabilities must sum to 1\" , }) ; } Ok (Self { trials , probabilities , }) }",
+          "typed_args": [
+            {
+              "name": "trials",
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "is_receiver": false
+            },
+            {
+              "name": "probabilities",
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "is_receiver": false
+            }
+          ],
+          "typed_return": {
+            "Result": {
+              "ok": {
+                "Path": {
+                  "segments": [
+                    "Self"
+                  ],
+                  "args": []
+                }
+              },
+              "err": null
+            }
+          },
+          "codec_args": [
+            {
+              "rust_type": {
+                "Primitive": "USize"
+              },
+              "supported": true,
+              "mode": "native",
+              "reason": null,
+              "recommendation": null
+            },
+            {
+              "rust_type": {
+                "Path": {
+                  "segments": [
+                    "Vector"
+                  ],
+                  "args": [
+                    {
+                      "Primitive": "F64"
+                    }
+                  ]
+                }
+              },
+              "supported": true,
+              "mode": "string",
+              "reason": null,
+              "recommendation": null
+            }
+          ],
+          "codec_return": {
+            "rust_type": {
+              "Result": {
+                "ok": {
+                  "Path": {
+                    "segments": [
+                      "Self"
+                    ],
+                    "args": []
+                  }
+                },
+                "err": null
+              }
+            },
+            "supported": true,
+            "mode": "string",
+            "reason": null,
+            "recommendation": null
+          }
+        }
+      ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "Multinomial",
       "functions": []
     },
     {
@@ -5954,6 +5949,11 @@
           }
         }
       ]
+    },
+    {
+      "crate_name": "statistics",
+      "target_struct": "SvgOptions",
+      "functions": []
     }
   ],
   "crate_apis": [

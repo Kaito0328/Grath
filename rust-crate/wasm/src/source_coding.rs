@@ -66,23 +66,6 @@ where
 }
 
 #[wasm_bindgen]
-pub struct WasmJonesCode(pub(crate) JonesCode);
-
-impl WasmJonesCode {
-    pub fn inner(&self) -> &JonesCode {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmJonesCode {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(JonesCode).to_string()
-    }
-}
-
-#[wasm_bindgen]
 pub struct WasmArithmeticCode(pub(crate) ArithmeticCode);
 
 impl WasmArithmeticCode {
@@ -96,23 +79,6 @@ impl WasmArithmeticCode {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
         stringify!(ArithmeticCode).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmMarkov(pub(crate) Markov);
-
-impl WasmMarkov {
-    pub fn inner(&self) -> &Markov {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmMarkov {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Markov).to_string()
     }
 }
 
@@ -134,19 +100,36 @@ impl WasmHuffmanCode {
 }
 
 #[wasm_bindgen]
-pub struct WasmLz78Code(pub(crate) Lz78Code);
+pub struct WasmBlockHuffmanTree(pub(crate) BlockHuffmanTree);
 
-impl WasmLz78Code {
-    pub fn inner(&self) -> &Lz78Code {
+impl WasmBlockHuffmanTree {
+    pub fn inner(&self) -> &BlockHuffmanTree {
         &self.0
     }
 }
 
 #[wasm_bindgen]
-impl WasmLz78Code {
+impl WasmBlockHuffmanTree {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
-        stringify!(Lz78Code).to_string()
+        stringify!(BlockHuffmanTree).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmJonesCode(pub(crate) JonesCode);
+
+impl WasmJonesCode {
+    pub fn inner(&self) -> &JonesCode {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmJonesCode {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(JonesCode).to_string()
     }
 }
 
@@ -168,19 +151,36 @@ impl WasmSourceCodingApi {
 }
 
 #[wasm_bindgen]
-pub struct WasmBlockHuffmanTree(pub(crate) BlockHuffmanTree);
+pub struct WasmLz78Code(pub(crate) Lz78Code);
 
-impl WasmBlockHuffmanTree {
-    pub fn inner(&self) -> &BlockHuffmanTree {
+impl WasmLz78Code {
+    pub fn inner(&self) -> &Lz78Code {
         &self.0
     }
 }
 
 #[wasm_bindgen]
-impl WasmBlockHuffmanTree {
+impl WasmLz78Code {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
-        stringify!(BlockHuffmanTree).to_string()
+        stringify!(Lz78Code).to_string()
+    }
+}
+
+#[wasm_bindgen]
+pub struct WasmMarkov(pub(crate) Markov);
+
+impl WasmMarkov {
+    pub fn inner(&self) -> &Markov {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmMarkov {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Markov).to_string()
     }
 }
 

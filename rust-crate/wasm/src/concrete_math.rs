@@ -67,6 +67,23 @@ where
 }
 
 #[wasm_bindgen]
+pub struct WasmConcreteMathApi(pub(crate) ConcreteMathApi);
+
+impl WasmConcreteMathApi {
+    pub fn inner(&self) -> &ConcreteMathApi {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmConcreteMathApi {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(ConcreteMathApi).to_string()
+    }
+}
+
+#[wasm_bindgen]
 pub struct WasmClosedForm(pub(crate) ClosedForm);
 
 impl WasmClosedForm {
@@ -97,46 +114,6 @@ impl WasmRecurrenceRelation {
     #[wasm_bindgen(js_name = toString)]
     pub fn to_string(&self) -> String {
         stringify!(RecurrenceRelation).to_string()
-    }
-}
-
-#[wasm_bindgen]
-pub struct WasmConcreteMathApi(pub(crate) ConcreteMathApi);
-
-impl WasmConcreteMathApi {
-    pub fn inner(&self) -> &ConcreteMathApi {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmConcreteMathApi {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(ConcreteMathApi).to_string()
-    }
-}
-
-#[wasm_bindgen]
-impl WasmClosedForm {
-    pub fn zero() -> WasmClosedForm {
-        WasmClosedForm(ClosedForm::zero())
-    }
-    pub fn is_zero(&self) -> bool {
-        self.0.is_zero()
-    }
-    pub fn simplify(&mut self) -> () {
-        self.0.simplify()
-    }
-    pub fn simplified(self) -> WasmClosedForm {
-        WasmClosedForm(self.0.simplified())
-    }
-}
-
-#[wasm_bindgen]
-impl WasmRecurrenceRelation {
-    pub fn solve(&self) -> WasmClosedForm {
-        WasmClosedForm(self.0.solve())
     }
 }
 
@@ -192,5 +169,28 @@ impl WasmConcreteMathApi {
     }
     pub fn sf_regularized_gamma(s: f64, x: f64) -> f64 {
         ConcreteMathApi::sf_regularized_gamma(s, x)
+    }
+}
+
+#[wasm_bindgen]
+impl WasmClosedForm {
+    pub fn zero() -> WasmClosedForm {
+        WasmClosedForm(ClosedForm::zero())
+    }
+    pub fn is_zero(&self) -> bool {
+        self.0.is_zero()
+    }
+    pub fn simplify(&mut self) -> () {
+        self.0.simplify()
+    }
+    pub fn simplified(self) -> WasmClosedForm {
+        WasmClosedForm(self.0.simplified())
+    }
+}
+
+#[wasm_bindgen]
+impl WasmRecurrenceRelation {
+    pub fn solve(&self) -> WasmClosedForm {
+        WasmClosedForm(self.0.solve())
     }
 }

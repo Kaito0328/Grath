@@ -7,25 +7,25 @@ import { requireTrimmed, withReady } from "./runtime";
 
 // DTOs (serializable shapes). The classes below store these DTOs internally.
 
-export type JonesCodeDTO = W.JonesCodeDto;
-
 export type SymbolPrDTO = W.SymbolPrDto;
 
 export type SymbolRangeDTO = W.SymbolRangeDto;
 
 export type ArithmeticCodeDTO = W.ArithmeticCodeDto;
 
-export type MarkovDTO = W.MarkovDto;
-
 export type HuffmanCodeDTO = W.HuffmanCodeDto;
-
-export type Lz78CodeDTO = W.Lz78CodeDto;
-
-export type SourceCodingApiDTO = W.SourceCodingApiDto;
 
 export type SymbolsPrDTO = W.SymbolsPrDto;
 
 export type BlockHuffmanTreeDTO = W.BlockHuffmanTreeDto;
+
+export type JonesCodeDTO = W.JonesCodeDto;
+
+export type SourceCodingApiDTO = W.SourceCodingApiDto;
+
+export type Lz78CodeDTO = W.Lz78CodeDto;
+
+export type MarkovDTO = W.MarkovDto;
 
 
 // Shared helpers
@@ -34,32 +34,6 @@ function requireSafeInteger(n: number, name: string) {
   return String(Math.floor(n));
 }
 
-
-export class JonesCode {
-  private readonly _dto: JonesCodeDTO;
-
-  private constructor(dto: JonesCodeDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: JonesCodeDTO) {
-    return new JonesCode(dto);
-  }
-
-  toDTO(): JonesCodeDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
 
 export class SymbolPr {
   private readonly _dto: SymbolPrDTO;
@@ -139,32 +113,6 @@ export class ArithmeticCode {
 
 }
 
-export class Markov {
-  private readonly _dto: MarkovDTO;
-
-  private constructor(dto: MarkovDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: MarkovDTO) {
-    return new Markov(dto);
-  }
-
-  toDTO(): MarkovDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
 export class HuffmanCode {
   private readonly _dto: HuffmanCodeDTO;
 
@@ -177,58 +125,6 @@ export class HuffmanCode {
   }
 
   toDTO(): HuffmanCodeDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class Lz78Code {
-  private readonly _dto: Lz78CodeDTO;
-
-  private constructor(dto: Lz78CodeDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: Lz78CodeDTO) {
-    return new Lz78Code(dto);
-  }
-
-  toDTO(): Lz78CodeDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class SourceCodingApi {
-  private readonly _dto: SourceCodingApiDTO;
-
-  private constructor(dto: SourceCodingApiDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: SourceCodingApiDTO) {
-    return new SourceCodingApi(dto);
-  }
-
-  toDTO(): SourceCodingApiDTO {
     return this._dto;
   }
 
@@ -281,6 +177,110 @@ export class BlockHuffmanTree {
   }
 
   toDTO(): BlockHuffmanTreeDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class JonesCode {
+  private readonly _dto: JonesCodeDTO;
+
+  private constructor(dto: JonesCodeDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: JonesCodeDTO) {
+    return new JonesCode(dto);
+  }
+
+  toDTO(): JonesCodeDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class SourceCodingApi {
+  private readonly _dto: SourceCodingApiDTO;
+
+  private constructor(dto: SourceCodingApiDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: SourceCodingApiDTO) {
+    return new SourceCodingApi(dto);
+  }
+
+  toDTO(): SourceCodingApiDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class Lz78Code {
+  private readonly _dto: Lz78CodeDTO;
+
+  private constructor(dto: Lz78CodeDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: Lz78CodeDTO) {
+    return new Lz78Code(dto);
+  }
+
+  toDTO(): Lz78CodeDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
+
+export class Markov {
+  private readonly _dto: MarkovDTO;
+
+  private constructor(dto: MarkovDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: MarkovDTO) {
+    return new Markov(dto);
+  }
+
+  toDTO(): MarkovDTO {
     return this._dto;
   }
 

@@ -7,6 +7,8 @@ import { requireTrimmed, withReady } from "./runtime";
 
 // DTOs (serializable shapes). The classes below store these DTOs internally.
 
+export type ConcreteMathApiDTO = W.ConcreteMathApiDto;
+
 export type GeneralTermDTO = W.GeneralTermDto;
 
 export type ClosedFormDTO = W.ClosedFormDto;
@@ -17,8 +19,6 @@ export type ClosedFormDisplayDTO = W.ClosedFormDisplayDto;
 
 export type RecurrenceRelationDTO = W.RecurrenceRelationDto;
 
-export type ConcreteMathApiDTO = W.ConcreteMathApiDto;
-
 
 // Shared helpers
 function requireSafeInteger(n: number, name: string) {
@@ -26,6 +26,32 @@ function requireSafeInteger(n: number, name: string) {
   return String(Math.floor(n));
 }
 
+
+export class ConcreteMathApi {
+  private readonly _dto: ConcreteMathApiDTO;
+
+  private constructor(dto: ConcreteMathApiDTO) {
+    this._dto = dto;
+  }
+
+  static fromDTO(dto: ConcreteMathApiDTO) {
+    return new ConcreteMathApi(dto);
+  }
+
+  toDTO(): ConcreteMathApiDTO {
+    return this._dto;
+  }
+
+  toString(): string {
+
+    return JSON.stringify(this._dto);
+
+  }
+
+
+
+
+}
 
 export class GeneralTerm {
   private readonly _dto: GeneralTermDTO;
@@ -143,32 +169,6 @@ export class RecurrenceRelation {
   }
 
   toDTO(): RecurrenceRelationDTO {
-    return this._dto;
-  }
-
-  toString(): string {
-
-    return JSON.stringify(this._dto);
-
-  }
-
-
-
-
-}
-
-export class ConcreteMathApi {
-  private readonly _dto: ConcreteMathApiDTO;
-
-  private constructor(dto: ConcreteMathApiDTO) {
-    this._dto = dto;
-  }
-
-  static fromDTO(dto: ConcreteMathApiDTO) {
-    return new ConcreteMathApi(dto);
-  }
-
-  toDTO(): ConcreteMathApiDTO {
     return this._dto;
   }
 

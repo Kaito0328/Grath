@@ -66,23 +66,6 @@ where
 }
 
 #[wasm_bindgen]
-pub struct WasmSvd(pub(crate) Svd);
-
-impl WasmSvd {
-    pub fn inner(&self) -> &Svd {
-        &self.0
-    }
-}
-
-#[wasm_bindgen]
-impl WasmSvd {
-    #[wasm_bindgen(js_name = toString)]
-    pub fn to_string(&self) -> String {
-        stringify!(Svd).to_string()
-    }
-}
-
-#[wasm_bindgen]
 pub struct WasmLinalgApi(pub(crate) LinalgApi);
 
 impl WasmLinalgApi {
@@ -134,9 +117,19 @@ impl WasmRationalMatrixDtoApi {
 }
 
 #[wasm_bindgen]
+pub struct WasmSvd(pub(crate) Svd);
+
 impl WasmSvd {
-    pub fn sort(&mut self) -> std::result::Result<(), JsError> {
-        self.0.sort().map_err(|e| JsError::new(&format!("{:?}", e)))
+    pub fn inner(&self) -> &Svd {
+        &self.0
+    }
+}
+
+#[wasm_bindgen]
+impl WasmSvd {
+    #[wasm_bindgen(js_name = toString)]
+    pub fn to_string(&self) -> String {
+        stringify!(Svd).to_string()
     }
 }
 
@@ -263,6 +256,13 @@ impl WasmLinalgApi {
     }
     pub fn conj_transpose_symbolic(a: String) -> std::result::Result<String, JsError> {
         LinalgApi::conj_transpose_symbolic(a).map_err(|e| js_error_from_to_app_error(e, None))
+    }
+}
+
+#[wasm_bindgen]
+impl WasmSvd {
+    pub fn sort(&mut self) -> std::result::Result<(), JsError> {
+        self.0.sort().map_err(|e| JsError::new(&format!("{:?}", e)))
     }
 }
 
