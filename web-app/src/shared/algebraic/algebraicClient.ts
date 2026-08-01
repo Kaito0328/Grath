@@ -27,7 +27,8 @@ function requireSafeInteger(n: number, name: string) {
   return n;
 }
 
-function dtoIntToNumberSafe(text: string, name: string) {
+function dtoIntToNumberSafe(value: string | number, name: string) {
+  const text = String(value);
   let b: bigint;
   try {
     b = BigInt(text);

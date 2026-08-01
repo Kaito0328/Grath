@@ -392,6 +392,10 @@ async fn main() -> Result<()> {
             fs::create_dir_all(&final_output_dir)?;
 
             for target in targets.iter().cloned() {
+                if !is_real_crate(&target) {
+                    println!("Skipping TS wrapper for {}: not a crates/ member", target);
+                    continue;
+                }
                 let json_path = Path::new(&specs_dir).join(format!("{}.json", target));
                 let ts_path =
                     Path::new(&final_output_dir).join(format!("{}.ts", to_ts_ident(&target)));
@@ -408,6 +412,11 @@ async fn main() -> Result<()> {
                     )?;
                 }
             }
+
+            if let Some(sdk_root) = sdk_root_from_generated_dir(Path::new(&final_output_dir)) {
+                sync_sdk_wasm_bindings(&sdk_root)?;
+                sync_sdk_type_api_exports(&sdk_root)?;
+            }
         }
 
         Commands::TsApi {
@@ -421,6 +430,8 @@ async fn main() -> Result<()> {
 
             if let Some(sdk_root) = sdk_root_from_generated_dir(Path::new(&final_output_dir)) {
                 sync_static_sdk(&sdk_root)?;
+                sync_sdk_wasm_bindings(&sdk_root)?;
+                sync_sdk_type_api_exports(&sdk_root)?;
             }
 
             fs::create_dir_all(&final_output_dir)?;
@@ -429,6 +440,10 @@ async fn main() -> Result<()> {
             ts_api_gen::generate_ts_api_runtime(&final_output_dir)?;
 
             for target in targets.iter().cloned() {
+                if !is_real_crate(&target) {
+                    println!("Skipping TS safe API for {}: not a crates/ member", target);
+                    continue;
+                }
                 let json_path = Path::new(&specs_dir).join(format!("{}.json", target));
                 if json_path.exists() {
                     let content = fs::read_to_string(&json_path)?;
@@ -443,6 +458,8 @@ async fn main() -> Result<()> {
 
             if let Some(sdk_root) = sdk_root_from_generated_dir(Path::new(&final_output_dir)) {
                 sync_static_sdk(&sdk_root)?;
+                sync_sdk_wasm_bindings(&sdk_root)?;
+                sync_sdk_type_api_exports(&sdk_root)?;
             }
         }
 
@@ -521,7 +538,15 @@ fn static_sdk_should_overwrite(rel_path: &Path) -> bool {
     rel == "package.json"
         || rel == "src/index.ts"
         || (rel.starts_with("src/api/") && rel.ends_with(".ts"))
-        || rel == "src/wrappers/algebraicDto.ts"
+}
+
+const STATIC_SDK_NO_CHECK: &str = "// @ts-nocheck\n";
+
+/// Static SDK files are intentionally incomplete: they reference generated
+/// wrappers and `wasm-lib`. Keep editor support for their `.ts` source files
+/// while removing this static-only diagnostic directive from generated output.
+fn static_sdk_content_for_output(content: &str) -> &str {
+    content.strip_prefix(STATIC_SDK_NO_CHECK).unwrap_or(content)
 }
 
 fn copy_static_sdk_recursive(src: &Path, dst: &Path, rel: &Path) -> Result<()> {
@@ -532,18 +557,27 @@ fn copy_static_sdk_recursive(src: &Path, dst: &Path, rel: &Path) -> Result<()> {
     for entry in fs::read_dir(src)? {
         let entry = entry?;
         let src_path = entry.path();
-        let dst_path = dst.join(entry.file_name());
         let child_rel = rel.join(entry.file_name());
         if entry.file_type()?.is_dir() {
-            copy_static_sdk_recursive(&src_path, &dst_path, &child_rel)?;
+            copy_static_sdk_recursive(&src_path, &dst.join(entry.file_name()), &child_rel)?;
         } else {
+            let dst_path = dst.join(entry.file_name());
             if dst_path.exists() && !static_sdk_should_overwrite(&child_rel) {
                 continue;
             }
             if let Some(parent) = dst_path.parent() {
                 fs::create_dir_all(parent)?;
             }
-            fs::copy(&src_path, &dst_path)?;
+            if src_path
+                .extension()
+                .and_then(|extension| extension.to_str())
+                == Some("ts")
+            {
+                let content = fs::read_to_string(&src_path)?;
+                fs::write(&dst_path, static_sdk_content_for_output(&content))?;
+            } else {
+                fs::copy(&src_path, &dst_path)?;
+            }
         }
     }
     Ok(())
@@ -565,6 +599,7 @@ fn sync_static_sdk(root: &Path) -> Result<()> {
         .join("static-sdk/client-sdk")
         .canonicalize()?;
     copy_static_sdk_recursive(&static_root, root, Path::new(""))?;
+    sync_sdk_generated_api_exports(root)?;
     Ok(())
 }
 
@@ -576,6 +611,8 @@ const GENERATED_BIND_CALLS_BEGIN: &str = "\t// <inspector:wasm-bind-calls>";
 const GENERATED_BIND_CALLS_END: &str = "\t// </inspector:wasm-bind-calls>";
 const GENERATED_TYPE_API_EXPORTS_BEGIN: &str = "// <inspector:type-api-exports>";
 const GENERATED_TYPE_API_EXPORTS_END: &str = "// </inspector:type-api-exports>";
+const GENERATED_SAFE_API_EXPORTS_BEGIN: &str = "// <inspector:generated-api-exports>";
+const GENERATED_SAFE_API_EXPORTS_END: &str = "// </inspector:generated-api-exports>";
 
 fn replace_generated_block(content: &str, begin: &str, end: &str, body: &str) -> Result<String> {
     let start = content
@@ -592,6 +629,42 @@ fn replace_generated_block(content: &str, begin: &str, end: &str, body: &str) ->
         body,
         &content[finish..]
     ))
+}
+
+/// Re-export generated safe APIs from the package root without making the
+/// static SDK template depend on files that only exist after generation.
+fn sync_sdk_generated_api_exports(sdk_root: &Path) -> Result<()> {
+    let path = sdk_root.join("src/index.ts");
+    let content = fs::read_to_string(&path)?;
+    let api_dir = sdk_root.join("src/api");
+    let generated_exports = [
+        (
+            "algebraicApi.ts",
+            "export * as algebraicClasses from \"./api/algebraicApi\";",
+        ),
+        (
+            "runtime.ts",
+            "export * as apiRuntime from \"./api/runtime\";",
+        ),
+    ];
+    let exports = generated_exports
+        .iter()
+        .filter_map(|(file_name, export)| api_dir.join(file_name).exists().then_some(*export))
+        .collect::<Vec<_>>();
+    let body = if exports.is_empty() {
+        "\n".to_string()
+    } else {
+        format!("\n{}\n", exports.join("\n"))
+    };
+    let updated = replace_generated_block(
+        &content,
+        GENERATED_SAFE_API_EXPORTS_BEGIN,
+        GENERATED_SAFE_API_EXPORTS_END,
+        &body,
+    )?;
+    fs::write(&path, updated)?;
+    println!("Synchronized generated SDK API exports at {:?}", path);
+    Ok(())
 }
 
 /// Synchronize only inspector-owned dependency entries. Existing hand-written
@@ -805,6 +878,13 @@ fn sync_sdk_type_api_exports(sdk_root: &Path) -> Result<()> {
     Ok(())
 }
 
+fn is_real_crate(target: &str) -> bool {
+    Path::new(DEFAULT_CRATES_DIR)
+        .join(target)
+        .join("Cargo.toml")
+        .exists()
+}
+
 async fn run_pipeline(
     targets: &[String],
     dispatcher_targets: &[String],
@@ -816,13 +896,6 @@ async fn run_pipeline(
 
     fs::create_dir_all(specs_dir)?;
     fs::create_dir_all(runner_dir)?;
-
-    let is_real_crate = |target: &str| -> bool {
-        Path::new(DEFAULT_CRATES_DIR)
-            .join(target)
-            .join("Cargo.toml")
-            .exists()
-    };
 
     if targets.len() == 1 && targets[0] != "test-cases" && !is_real_crate(&targets[0]) {
         anyhow::bail!(
@@ -1190,4 +1263,40 @@ async fn run_pipeline(
     }
 
     Ok(())
+}
+
+#[cfg(test)]
+mod static_sdk_tests {
+    use super::*;
+
+    #[test]
+    fn strips_static_only_typecheck_directive() {
+        assert_eq!(
+            static_sdk_content_for_output("// @ts-nocheck\nexport const value = 1;\n"),
+            "export const value = 1;\n"
+        );
+        assert_eq!(
+            static_sdk_content_for_output("export const value = 1;\n"),
+            "export const value = 1;\n"
+        );
+    }
+
+    #[test]
+    fn replaces_generated_api_export_block_without_touching_static_exports() {
+        let content = concat!(
+            "// <inspector:generated-api-exports>\n",
+            "// </inspector:generated-api-exports>\n",
+            "export { LinalgApi } from \"./api/linalgApi\";\n"
+        );
+        let updated = replace_generated_block(
+            content,
+            GENERATED_SAFE_API_EXPORTS_BEGIN,
+            GENERATED_SAFE_API_EXPORTS_END,
+            "\nexport * as algebraicClasses from \"./api/algebraicApi\";\n",
+        )
+        .expect("markers are present");
+
+        assert!(updated.contains("export * as algebraicClasses"));
+        assert!(updated.contains("export { LinalgApi }"));
+    }
 }

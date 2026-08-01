@@ -1,8 +1,9 @@
+// @ts-nocheck
 /* eslint-disable */
 /* tslint:disable */
 
 import { requireTrimmed, withReady } from "./runtime";
-import * as W from "../wrappers/algebraicDto";
+import * as W from "../wrappers/algebraic";
 
 export type RationalDTO = W.RationalDto;
 export type SymbolicExprDTO = W.SymbolicExprDto;

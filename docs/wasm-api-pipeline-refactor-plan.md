@@ -728,7 +728,12 @@ SDK の責務境界を整理し、static SDK scaffold が生成 wrapper/test/was
 
 - `docs/client-sdk-boundary.md` を追加し、`web-app/generated/client-sdk` の責務を明文化した。
 - `sync_static_sdk` は static scaffold の全ファイルを無条件上書きしない。
-- static scaffold が所有するものは `package.json`, `src/index.ts`, `src/api/*.ts`, `src/wrappers/algebraicDto.ts` に限定した。
+- 当時は static scaffold が所有するものを `package.json`, `src/index.ts`,
+  `src/api/*.ts`, `src/wrappers/algebraicDto.ts` に限定した。後に
+  `algebraicDto.ts` は廃止し、algebraic の DTO binding も Inspector 生成の
+  `src/wrappers/algebraic.ts` に統合した。static 側の TypeScript は
+  `// @ts-nocheck` を付けたまま保管し、Inspector は生成先へのコピー時に
+  この static 専用 directive を除去する。
 - それ以外の static file は、生成先に存在しない場合だけ補完する。
 - `LinalgApi` は現在の string-boundary Web UI 用 compatibility facade であり、新規 API は typed marker API を優先する旨を Rust doc に追記した。
 - `tools/inspector/src/type_model.rs` と `tools/inspector/src/codec_registry.rs` を `tools/inspector/src/codec/` 配下に移し、Rust 型モデル・境界 codec・typed API 用 helper を同じディレクトリに集約した。

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as W from "../wrappers/signalProcessing";
 import { withReady } from "./runtime";
 

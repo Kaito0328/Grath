@@ -35,10 +35,7 @@ import { setWasmFromWasmLib as setSourceCodingWasmFromWasmLib } from "./wrappers
 import { setWasmFromWasmLib as setStatisticsWasmFromWasmLib } from "./wrappers/statistics";
 // </inspector:wasm-bindings>
 
-import { setWasmFromWasmLib as setAlgebraicDtoWasmFromWasmLib } from "./wrappers/algebraicDto";
-
 export function bindWasmFromWasmLib(wasmLib: unknown) {
-	setAlgebraicDtoWasmFromWasmLib(wasmLib);
 	// <inspector:wasm-bind-calls>
 	setAlgebraicWasmFromWasmLib(wasmLib);
 	setCodingWasmFromWasmLib(wasmLib);
@@ -60,8 +57,10 @@ export { RationalMatrix, RationalMatrixDto } from "./wrappers/linalg";
 export type { RationalValueDto, RationalMatrixValueDto } from "./wrappers/linalg";
 // </inspector:type-api-exports>
 
+// <inspector:generated-api-exports>
 export * as algebraicClasses from "./api/algebraicApi";
 export * as apiRuntime from "./api/runtime";
+// </inspector:generated-api-exports>
 export { PolynomialSolverHelper } from "./api/polynomialSolver";
 export { LinalgApi } from "./api/linalgApi";
 export { FiniteFieldApi } from "./api/finiteFieldApi";

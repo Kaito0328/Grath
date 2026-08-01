@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as W from "../wrappers/sourceCoding";
 import { withReady } from "./runtime";
 

@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { withReady } from "./runtime";
-import { RationalDto, SymbolicExprDto } from "../wrappers/algebraicDto";
+import { RationalDto, SymbolicExprDto } from "../wrappers/algebraic";
 import * as CW from "../wrappers/concreteMath";
 
 const getWasm = async () => {

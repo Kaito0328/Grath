@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { SymbolicComplex } from "./algebraicApi";
 import { withReady } from "./runtime";
 

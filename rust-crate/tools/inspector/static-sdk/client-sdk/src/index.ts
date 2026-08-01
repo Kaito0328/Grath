@@ -1,3 +1,4 @@
+// @ts-nocheck
 export async function initWasm(args?: unknown) {
 	const wasm = (await import("wasm-lib")) as unknown as Record<string, unknown>;
 	const maybeInit = wasm["default"];
@@ -14,10 +15,7 @@ export * from "./api/statisticsApi";
 // <inspector:wasm-bindings>
 // </inspector:wasm-bindings>
 
-import { setWasmFromWasmLib as setAlgebraicDtoWasmFromWasmLib } from "./wrappers/algebraicDto";
-
 export function bindWasmFromWasmLib(wasmLib: unknown) {
-	setAlgebraicDtoWasmFromWasmLib(wasmLib);
 	// <inspector:wasm-bind-calls>
 	// </inspector:wasm-bind-calls>
 }
@@ -25,8 +23,8 @@ export function bindWasmFromWasmLib(wasmLib: unknown) {
 // <inspector:type-api-exports>
 // </inspector:type-api-exports>
 
-export * as algebraicClasses from "./api/algebraicApi";
-export * as apiRuntime from "./api/runtime";
+// <inspector:generated-api-exports>
+// </inspector:generated-api-exports>
 export { PolynomialSolverHelper } from "./api/polynomialSolver";
 export { LinalgApi } from "./api/linalgApi";
 export { FiniteFieldApi } from "./api/finiteFieldApi";
