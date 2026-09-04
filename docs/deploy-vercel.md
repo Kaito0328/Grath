@@ -1,12 +1,22 @@
 # Vercel デプロイ手順（monorepo / Next.js / wasm-pkg 同梱）
 
-このリポジトリの web-app は `web-app/generated/client-sdk/wasm-pkg`（生成済み WASM 成果物）を同梱してビルドできます。
+このリポジトリの web-app は `web-app/generated/client-sdk/wasm-pkg`（生成済み WASM 成果物）を Git 管理して同梱し、ビルドできます。
 Vercel 環境では通常 Rust / wasm-pack が無いため、**WASM を再生成しない**前提でデプロイします。
 
 ## 前提
 
 - `web-app/generated/client-sdk/wasm-pkg` が配布対象に含まれること（特に `wasm_lib_bg.wasm`）
 - `web-app` は `file:./generated/client-sdk` 依存
+
+Inspector は `wasm-pack` が出力する `wasm-pkg/.gitignore` を生成後に削除します。
+これにより WASM 成果物を通常の生成物として commit できます。
+
+```bash
+cd rust-crate
+cargo run -p inspector -- dev
+cd ..
+git add web-app/generated/client-sdk/wasm-pkg
+```
 
 ## Vercel 設定（推奨）
 

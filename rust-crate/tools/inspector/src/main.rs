@@ -373,6 +373,7 @@ async fn main() -> Result<()> {
             if !status.success() {
                 anyhow::bail!("wasm-pack build failed");
             }
+            remove_wasm_pkg_gitignore(Path::new(&final_out_dir))?;
             println!("Wasm build complete! Output: {}", final_out_dir);
         }
 
@@ -600,6 +601,18 @@ fn sync_static_sdk(root: &Path) -> Result<()> {
         .canonicalize()?;
     copy_static_sdk_recursive(&static_root, root, Path::new(""))?;
     sync_sdk_generated_api_exports(root)?;
+    Ok(())
+}
+
+/// `wasm-pack` writes a `.gitignore` containing `*` into its output directory.
+/// The browser deployment consumes this generated package directly, so retain
+/// it as a normal tracked artifact rather than silently ignoring every file.
+fn remove_wasm_pkg_gitignore(output_dir: &Path) -> Result<()> {
+    let ignore_path = output_dir.join(".gitignore");
+    if ignore_path.exists() {
+        fs::remove_file(&ignore_path)?;
+        println!("Removed wasm-pack ignore file at {:?}", ignore_path);
+    }
     Ok(())
 }
 
@@ -1115,6 +1128,7 @@ async fn run_pipeline(
         if !status.success() {
             anyhow::bail!("wasm-pack build failed");
         }
+        remove_wasm_pkg_gitignore(Path::new(&final_out_dir))?;
         println!("Wasm build complete! Output: {}", final_out_dir);
     }
 
@@ -1278,6 +1292,14 @@ mod static_sdk_tests {
         assert_eq!(
             static_sdk_content_for_output("export const value = 1;\n"),
             "export const value = 1;\n"
+        );
+    }
+
+    #[test]
+    fn finds_wasm_pack_ignore_file_inside_output_directory() {
+        assert_eq!(
+            Path::new("web-app/generated/client-sdk/wasm-pkg").join(".gitignore"),
+            PathBuf::from("web-app/generated/client-sdk/wasm-pkg/.gitignore")
         );
     }
 
